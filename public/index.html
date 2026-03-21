@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Copa Imperial 60+</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700;800&display=swap');
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', system-ui, sans-serif; background: #fafaf8; color: #1a1a1a; }
+
+.hero { background: #fafaf8; padding: 5rem 1.5rem 3rem; text-align: center; position: relative; overflow: hidden; border-bottom: 1px solid #eee; }
+.hero-bg-text { position: absolute; font-family: ‘Playfair Display’, serif; font-size: clamp(120px, 25vw, 220px); font-weight: 800; color: rgba(0,0,0,0.04); top: 50%; left: 50%; transform: translate(-50%, -50%); white-space: nowrap; pointer-events: none; line-height: 1; z-index: 0; }
+.hero-inner { position: relative; z-index: 1; }
+.hero-badge { display: inline-flex; align-items: center; gap: 6px; background: #fff; border: 1px solid #e0e0e0; color: #555; font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 99px; margin-bottom: 2rem; letter-spacing: 0.05em; }
+.hero-badge span { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; display: inline-block; }
+.hero-title { font-family: ‘Playfair Display’, serif; font-size: clamp(3rem, 10vw, 6rem); font-weight: 800; line-height: 0.95; letter-spacing: -0.02em; margin-bottom: 1.75rem; }
+.hero-title .line1 { display: block; color: #1a1a1a; }
+.hero-title .line2 { display: block; color: #16a34a; }
+.hero-title .line3 { display: block; color: #f59e0b; font-size: clamp(4rem, 14vw, 8rem); }
+.hero-location-box { display: inline-flex; align-items: center; gap: 10px; background: #fff; border: 1px solid #e0e0e0; border-radius: 12px; padding: 10px 20px; font-size: 14px; font-weight: 600; color: #1a1a1a; }
+.hero-location-box span { color: #aaa; font-weight: 400; }
+
+.about-strip { background: #16a34a; color: #fff; padding: 2.5rem 1.5rem; text-align: center; }
+.about-strip p { max-width: 560px; margin: 0 auto; font-size: 15px; line-height: 1.8; opacity: 0.92; }
+
+.vagas-strip { background: #fffbeb; border-top: 1px solid #fde68a; border-bottom: 1px solid #fde68a; padding: 0.75rem 1.5rem; text-align: center; font-size: 13px; font-weight: 600; color: #92400e; }
+
+.info-section { padding: 2.5rem 1.5rem; max-width: 640px; margin: 0 auto; }
+.info-section h2 { font-family: ‘Playfair Display’, serif; font-size: 1.5rem; font-weight: 800; margin-bottom: 1.25rem; color: #fff; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.info-card { background: #fff; border: 1px solid #eee; border-radius: 14px; padding: 1.25rem; display: flex; align-items: flex-start; gap: 14px; }
+.info-card-icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.ic-green { background: #dcfce7; }
+.ic-blue { background: #dbeafe; }
+.ic-orange { background: #ffedd5; }
+.info-card-label { font-size: 11px; color: #aaa; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 3px; }
+.info-card-value { font-size: 14px; font-weight: 600; color: #1a1a1a; line-height: 1.4; }
+.info-card-sub { font-size: 12px; color: #aaa; margin-top: 2px; line-height: 1.4; }
+
+.register-section { padding: 2.5rem 1.5rem 5rem; max-width: 600px; margin: 0 auto; }
+.register-section h2 { font-family: ‘Playfair Display’, serif; font-size: 1.5rem; font-weight: 800; margin-bottom: 0.4rem; color: #fff; }
+.register-section .sub { font-size: 14px; color: #ccc; margin-bottom: 2rem; }
+
+.section-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #aaa; margin-bottom: 1rem; margin-top: 1.75rem; }
+.steps { display: flex; align-items: center; gap: 6px; margin-bottom: 2rem; }
+.step { font-size: 12px; font-weight: 500; color: #ccc; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
+.step.active { color: #16a34a; }
+.step.done { color: #bbb; }
+.step-dot { width: 8px; height: 8px; border-radius: 50%; background: #e0e0e0; flex-shrink: 0; }
+.step.active .step-dot { background: #16a34a; }
+.step.done .step-dot { background: #bbb; }
+.step-divider { flex: 1; height: 1px; background: #e8e8e8; min-width: 8px; }
+
+.age-notice { background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 10px 14px; font-size: 13px; color: #92400e; margin-bottom: 1.25rem; display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
+
+.field { margin-bottom: 12px; }
+.field label { display: block; font-size: 13px; color: #555; margin-bottom: 5px; font-weight: 500; }
+.field input, .field select { width: 100%; padding: 11px 13px; font-size: 14px; border: 1px solid #e0e0e0; border-radius: 10px; background: #fff; outline: none; transition: border-color 0.15s; appearance: none; color: #1a1a1a; }
+.field input:focus, .field select:focus { border-color: #16a34a; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+.discount-banner { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 10px 14px; font-size: 13px; color: #166534; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; font-weight: 500; }
+
+.cat-card { background: #fff; border: 1.5px solid #e8e8e8; border-radius: 14px; padding: 1rem 1.25rem; margin-bottom: 10px; cursor: pointer; transition: all 0.15s; }
+.cat-card:hover { border-color: #bbb; transform: translateY(-1px); }
+.cat-card.selected { border-color: #16a34a; box-shadow: 0 0 0 3px rgba(22,163,74,0.08); }
+.cat-header { display: flex; align-items: center; gap: 12px; }
+.cat-check { width: 22px; height: 22px; border: 1.5px solid #ddd; border-radius: 6px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: #f5f5f3; transition: all 0.15s; }
+.cat-card.selected .cat-check { background: #16a34a; border-color: #16a34a; }
+.cat-check-inner { width: 6px; height: 10px; border: 2px solid #fff; border-top: none; border-left: none; transform: rotate(45deg) translateY(-1px); display: none; }
+.cat-card.selected .cat-check-inner { display: block; }
+.cat-info { flex: 1; }
+.cat-name { font-size: 15px; font-weight: 600; }
+.cat-desc { font-size: 12px; color: #aaa; margin-top: 2px; }
+.cat-price-col { text-align: right; }
+.cat-price { font-size: 15px; font-weight: 700; color: #1a1a1a; }
+.cat-price-orig { font-size: 12px; color: #bbb; text-decoration: line-through; }
+.cat-badge { display: inline-block; background: #fef3c7; color: #92400e; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 99px; margin-top: 3px; }
+
+.summary { background: #f9fafb; border: 1px solid #e8e8e8; border-radius: 14px; padding: 1rem 1.25rem; margin-top: 1.25rem; }
+.summary-row { display: flex; justify-content: space-between; font-size: 14px; padding: 4px 0; color: #555; }
+.summary-divider { border: none; border-top: 1px solid #eee; margin: 8px 0; }
+.summary-total { display: flex; justify-content: space-between; font-size: 16px; font-weight: 700; color: #1a1a1a; }
+
+.btn { width: 100%; margin-top: 16px; padding: 15px; font-size: 15px; font-weight: 700; background: #16a34a; color: #fff; border: none; border-radius: 12px; cursor: pointer; transition: background 0.15s; font-family: ‘Inter’, sans-serif; }
+.btn:hover { background: #15803d; }
+.btn:disabled { background: #e0e0e0; color: #aaa; cursor: default; }
+.btn-sec { background: transparent; color: #666; border: 1px solid #e0e0e0; margin-top: 8px; }
+.btn-sec:hover { background: #f5f5f3; color: #1a1a1a; }
+
+.player-card { background: #fff; border: 1px solid #e8e8e8; border-radius: 14px; padding: 1rem 1.25rem; margin-bottom: 12px; }
+.player-card-title { font-size: 13px; font-weight: 700; color: #16a34a; margin-bottom: 12px; }
+.player-slot { margin-bottom: 12px; }
+.player-slot-label { font-size: 12px; color: #aaa; margin-bottom: 6px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.player-options { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+.player-opt { padding: 7px 13px; font-size: 13px; border: 1px solid #e0e0e0; border-radius: 99px; cursor: pointer; background: #fff; transition: all 0.12s; font-weight: 500; }
+.player-opt:hover { border-color: #aaa; }
+.player-opt.active { background: #16a34a; color: #fff; border-color: #16a34a; }
+.player-opt.disabled { opacity: 0.3; cursor: default; pointer-events: none; }
+.player-input { width: 100%; padding: 9px 12px; font-size: 13px; border: 1px solid #e0e0e0; border-radius: 10px; outline: none; margin-top: 4px; font-family: ‘Inter’, sans-serif; }
+.player-input:focus { border-color: #16a34a; }
+
+.success { text-align: center; padding: 4rem 1.5rem; }
+.success-icon { font-size: 64px; margin-bottom: 1.25rem; }
+.success h2 { font-family: ‘Playfair Display’, serif; font-size: 2rem; font-weight: 800; margin-bottom: 0.75rem; }
+.success p { color: #666; font-size: 15px; line-height: 1.7; }
+
+footer { text-align: center; padding: 2rem 1rem; font-size: 12px; color: #bbb; border-top: 1px solid #eee; background: #fff; }
+
+@media (max-width: 480px) {
+.info-grid { grid-template-columns: 1fr; }
+.field-row { grid-template-columns: 1fr; }
+}
+</style>
+
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-bg-text">PICKLEBALL</div>
+  <div class="hero-inner">
+    <div class="hero-badge"><span></span> Inscrições abertas</div>
+    <div class="hero-title">
+      <span class="line1">Copa</span>
+      <span class="line2">Imperial</span>
+      <span class="line3">60+</span>
+    </div>
+    <p style="font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(1rem,2.5vw,1.2rem); color:#555; margin-bottom:1.75rem;">Dois dias de pickleball, amizade e muita alegria.</p>
+    <div class="hero-location-box">📍 Petrópolis <span>·</span> 2 e 3 de maio de 2026</div>
+  </div>
+</div>
+
+<div class="about-strip">
+  <p>A Copa Imperial 60+ é um torneio que celebra simplicidade, organização e a alegria de jogar. Venha mostrar que o melhor ainda está por vir!</p>
+</div>
+
+<div class="vagas-strip">🔔 Vagas limitadas — garanta a sua!</div>
+
+<div class="info-wrap">
+<div class="info-section">
+  <h2>Informações do evento</h2>
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="info-card-icon ic-green">📅</div>
+      <div><div class="info-card-label">Data</div><div class="info-card-value">2 e 3 de maio de 2026</div></div>
+    </div>
+None
+    <div class="info-card" style="grid-column: 1 / -1;">
+      <div class="info-card-icon ic-blue">📌</div>
+      <div><div class="info-card-label">Endereço</div><div class="info-card-value">Paróquia Santa Clara</div><div class="info-card-sub">R. Cel. Veiga, 1130 — Cohab · Cel. Veiga · Petrópolis</div></div>
+    </div>
+    <div class="info-card" style="grid-column: 1 / -1; display: block; padding: 1.25rem;">
+      <div style="display:flex; align-items:flex-start; gap:14px; margin-bottom:14px;">
+        <div class="info-card-icon ic-orange" style="flex-shrink:0;">📋</div>
+        <div><div class="info-card-label">Programação</div></div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+        <div style="background:#f9fafb; border-radius:10px; padding:12px;">
+          <div style="font-size:12px; font-weight:700; color:#888; margin-bottom:6px;">01/05 · 13h–20h</div>
+          <div style="font-size:13px; font-weight:700; color:#1a1a1a; margin-bottom:6px;">Open Play</div>
+          <div style="font-size:12px; color:#888; line-height:1.6;">Reconhecimento da quadra — aberto a todos os participantes</div>
+        </div>
+        <div style="background:#f9fafb; border-radius:10px; padding:12px;">
+          <div style="font-size:12px; font-weight:700; color:#16a34a; margin-bottom:6px;">02/05 · a partir das 8h</div>
+          <ul style="font-size:13px; color:#444; line-height:1.9; padding-left:16px;">
+            <li>Single masculino</li>
+            <li>Dupla masculina</li>
+            <li>Dupla feminina</li>
+          </ul>
+          <div style="font-size:11px; color:#aaa; margin-top:8px;">Previsão de término: 18h</div>
+        </div>
+        <div style="background:#f9fafb; border-radius:10px; padding:12px;">
+          <div style="font-size:12px; font-weight:700; color:#16a34a; margin-bottom:6px;">03/05 · a partir das 10h</div>
+          <ul style="font-size:13px; color:#444; line-height:1.9; padding-left:16px;">
+            <li>Dupla mista</li>
+            <li>Quarteto</li>
+          </ul>
+          <div style="font-size:11px; color:#aaa; margin-top:8px;">Previsão de término: 14h</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="vagas-strip" style="border-top: 1px solid #fde68a;">⚠️ Evento exclusivo para participantes com 60 anos ou mais</div>
+
+<div class="register-wrap">
+<div class="register-section">
+  <h2>Inscreva-se</h2>
+  <p class="sub">Rápido e fácil — menos de 2 minutos.</p>
+  <div id="app"></div>
+</div>
+</div>
+
+<footer>Copa Imperial 60+ &nbsp;·&nbsp; 2 e 3 de maio de 2026 &nbsp;·&nbsp; Paróquia Santa Clara · Centro · Petrópolis</footer>
+
+<script>
+const CATS = [
+  { id: 'sm', label: 'Single masculino', price: 80, slots: 1, genders: ['M'], priceLabel: 'por jogador' },
+  { id: 'dm', label: 'Dupla masculina', price: 200, slots: 2, genders: ['M','M'], priceLabel: 'por equipe' },
+  { id: 'df', label: 'Dupla feminina', price: 200, slots: 2, genders: ['F','F'], priceLabel: 'por equipe' },
+  { id: 'mix', label: 'Dupla mista', price: 200, slots: 2, genders: ['M','F'], priceLabel: 'por equipe' },
+  { id: 'q', label: 'Quarteto', price: 320, slots: 4, genders: ['*','*','*','*'], priceLabel: 'por equipe' },
+];
+
+const state = { step: 1, selectedCats: [], principal: { name: '', email: '', gender: '' }, players: {} };
+
+function fmt(v) { return 'R$ ' + v.toLocaleString('pt-BR'); }
+function isDupla(id) { return CATS.find(c => c.id === id)?.slots === 2; }
+
+function calcPrice(idx) {
+  const cat = CATS.find(c => c.id === state.selectedCats[idx]);
+  if (!cat) return 0;
+  if (!isDupla(cat.id)) return cat.price;
+  const duplasBefore = state.selectedCats.slice(0, idx).filter(id => isDupla(id)).length;
+  return duplasBefore === 1 ? Math.round(cat.price * 0.5) : cat.price;
+}
+
+function totalPrice() { return state.selectedCats.reduce((s, _, i) => s + calcPrice(i), 0); }
+
+function stepsHtml(active) {
+  const steps = ['Categorias', 'Dados', 'Jogadores', 'Pagamento'];
+  return '<div class="steps">' + steps.map((s, i) => {
+    const n = i + 1, cls = n === active ? 'active' : n < active ? 'done' : '';
+    return (i > 0 ? '<div class="step-divider"></div>' : '') +
+      `<div class="step ${cls}"><div class="step-dot"></div>${s}</div>`;
+  }).join('') + '</div>';
+}
+
+function renderStep1() {
+  const sel = state.selectedCats;
+  const duplasSelected = sel.filter(id => isDupla(id)).length;
+  const showDiscountBanner = duplasSelected >= 1;
+
+  const catsHtml = CATS.map(c => {
+    const idx = sel.indexOf(c.id);
+    const isSelected = idx !== -1;
+    const isDiscount = isSelected && calcPrice(idx) < c.price;
+    const showDiscount = !isSelected && isDupla(c.id) && duplasSelected === 1;
+    const displayPrice = isSelected ? calcPrice(idx) : (showDiscount ? Math.round(c.price * 0.5) : c.price);
+    return `<div class="cat-card ${isSelected ? 'selected' : ''}" data-catid="${c.id}">
+      <div class="cat-header">
+        <div class="cat-check"><div class="cat-check-inner"></div></div>
+        <div class="cat-info">
+          <div class="cat-name">${c.label}</div>
+          <div class="cat-desc">${c.priceLabel}</div>
+        </div>
+        <div class="cat-price-col">
+          ${isDiscount || showDiscount ? `<div class="cat-price-orig">${fmt(c.price)}</div>` : ''}
+          <div class="cat-price">${fmt(displayPrice)}</div>
+          ${isDiscount ? '<div class="cat-badge">50% off</div>' : ''}
+          ${showDiscount && !isSelected ? '<div class="cat-badge">50% off</div>' : ''}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  let summaryHtml = '';
+  if (sel.length > 0) {
+    const lines = sel.map((id, i) => {
+      const c = CATS.find(x => x.id === id);
+      const disc = calcPrice(i) < c.price;
+      return `<div class="summary-row"><span>${c.label}${disc ? ' <span style="font-size:11px;color:#16a34a;font-weight:600">50% off</span>' : ''}</span><span>${fmt(calcPrice(i))}</span></div>`;
+    }).join('');
+    summaryHtml = `<div class="summary">${lines}<hr class="summary-divider"><div class="summary-total"><span>Total estimado</span><span>${fmt(totalPrice())}</span></div></div>`;
+  }
+
+  return stepsHtml(1) + `
+    ${showDiscountBanner ? '<div class="discount-banner">🎉 Inscreva mais de uma categoria de dupla → 50% OFF na segunda!</div>' : ''}
+    <div class="section-title">Escolha suas categorias</div>
+    ${catsHtml}${summaryHtml}
+    <button class="btn" id="btn-to2" ${sel.length > 0 ? '' : 'disabled'}>Garantir vaga →</button>`;
+}
+
+function renderStep2() {
+  const p = state.principal;
+  const valid = p.name && p.email && p.gender;
+  return stepsHtml(2) + `
+    <div class="age-notice">⚠️ <span>Este evento é <strong>exclusivo para participantes com 60 anos ou mais.</strong> Ao se inscrever, você confirma que você e seus parceiros atendem a este requisito.</span></div>
+    <div class="section-title">Responsável pela inscrição</div>
+    <div class="field"><label>Nome completo</label><input id="inp-name" type="text" placeholder="Seu nome completo" value="${p.name}"></div>
+    <div class="field-row">
+      <div class="field"><label>Email</label><input id="inp-email" type="email" placeholder="seu@email.com" value="${p.email}"></div>
+      <div class="field"><label>Gênero</label><select id="inp-gender"><option value="" ${!p.gender?'selected':''}>Selecione</option><option value="M" ${p.gender==='M'?'selected':''}>Masculino</option><option value="F" ${p.gender==='F'?'selected':''}>Feminino</option></select></div>
+    </div>
+    <button class="btn" id="btn-to3" ${valid?'':'disabled'}>Continuar →</button>
+    <button class="btn btn-sec" id="btn-back2">← Voltar</button>`;
+}
+
+function renderStep3() {
+  const p = state.principal;
+  const cardsHtml = state.selectedCats.map((id, catIdx) => {
+    const cat = CATS.find(c => c.id === id);
+    if (!state.players[id]) state.players[id] = Array.from({length: cat.slots}, () => ({ type: 'new', name: '' }));
+    const slots = state.players[id];
+    const slotsHtml = slots.map((slot, si) => {
+      const req = cat.genders[si];
+      const canUse = req === '*' || req === p.gender;
+      const isUsing = slot.type === 'principal';
+      const gLabel = req === 'M' ? 'Masculino' : req === 'F' ? 'Feminino' : 'Qualquer';
+      const useBtn = canUse
+        ? `<div class="player-opt ${isUsing ? 'active' : ''}" data-cat="${id}" data-slot="${si}" data-type="principal">${p.name.split(' ')[0]} (eu)</div>`
+        : `<div class="player-opt disabled">Você (incompatível)</div>`;
+      const nameInput = isUsing ? '' : `<input class="player-input" type="text" data-cat="${id}" data-slot="${si}" placeholder="Nome do jogador" value="${slot.name}">`;
+      return `<div class="player-slot">
+        <div class="player-slot-label">Jogador ${si+1} · ${gLabel}</div>
+        <div class="player-options">${useBtn}<div class="player-opt ${!isUsing?'active':''}" data-cat="${id}" data-slot="${si}" data-type="new">Outro jogador</div></div>
+        ${nameInput}
+      </div>`;
+    }).join('');
+    return `<div class="player-card"><div class="player-card-title">🏓 ${cat.label} — ${fmt(calcPrice(catIdx))}</div>${slotsHtml}</div>`;
+  }).join('');
+
+  const allFilled = state.selectedCats.every(id =>
+    (state.players[id] || []).every(s => s.type === 'principal' || s.name.trim() !== ''));
+
+  return stepsHtml(3) + `
+    <div class="section-title">Jogadores por categoria</div>
+    ${cardsHtml}
+    <button class="btn" id="btn-to4" ${allFilled?'':'disabled'}>Continuar →</button>
+    <button class="btn btn-sec" id="btn-back3">← Voltar</button>`;
+}
+
+function renderStep4() {
+  const lines = state.selectedCats.map((id, i) => {
+    const cat = CATS.find(c => c.id === id);
+    const names = (state.players[id]||[]).map(s => s.type==='principal' ? state.principal.name.split(' ')[0] : s.name).join(', ');
+    return `<div class="summary-row"><span>${cat.label} — ${names}</span><span>${fmt(calcPrice(i))}</span></div>`;
+  }).join('');
+  return stepsHtml(4) + `
+    <div class="section-title">Resumo final</div>
+    <div class="summary">
+      <div class="summary-row" style="font-weight:600;color:#1a1a1a"><span>Responsável</span><span>${state.principal.name}</span></div>
+      <hr class="summary-divider">${lines}<hr class="summary-divider">
+      <div class="summary-total"><span>Total</span><span>${fmt(totalPrice())}</span></div>
+    </div>
+    <button class="btn" id="btn-pay">Pagar ${fmt(totalPrice())} →</button>
+    <button class="btn btn-sec" id="btn-back4">← Voltar</button>`;
+}
+
+function renderSuccess() {
+  return `<div class="success"><div class="success-icon">🏆</div><h2>Vaga garantida!</h2><p>Email enviado para <strong>${state.principal.email}</strong><br><br>Nos vemos na quadra, <strong>${state.principal.name.split(' ')[0]}</strong>!</p></div>`;
+}
+
+function render() {
+  const app = document.getElementById('app');
+  if (!app) return;
+  if (state.step===1) app.innerHTML = renderStep1();
+  else if (state.step===2) app.innerHTML = renderStep2();
+  else if (state.step===3) app.innerHTML = renderStep3();
+  else if (state.step===4) app.innerHTML = renderStep4();
+  else app.innerHTML = renderSuccess();
+  bindEvents();
+}
+
+function checkStep2Valid() {
+  const btn = document.getElementById('btn-to3');
+  if (btn) btn.disabled = !(state.principal.name && state.principal.email && state.principal.gender);
+}
+
+function checkStep3Valid() {
+  const btn = document.getElementById('btn-to4');
+  if (!btn) return;
+  btn.disabled = !state.selectedCats.every(id => (state.players[id]||[]).every(s => s.type==='principal' || s.name.trim()!==''));
+}
+
+function bindEvents() {
+  document.querySelectorAll('.cat-card').forEach(card => {
+    card.onclick = () => {
+      const id = card.dataset.catid;
+      const idx = state.selectedCats.indexOf(id);
+      if (idx===-1) state.selectedCats.push(id); else state.selectedCats.splice(idx,1);
+      render();
+    };
+  });
+  const b1=document.getElementById('btn-to2'); if(b1) b1.onclick=()=>{state.step=2;render();};
+  const inN=document.getElementById('inp-name'); if(inN) inN.oninput=e=>{state.principal.name=e.target.value;checkStep2Valid();};
+  const inE=document.getElementById('inp-email'); if(inE) inE.oninput=e=>{state.principal.email=e.target.value;checkStep2Valid();};
+  const inG=document.getElementById('inp-gender'); if(inG) inG.onchange=e=>{state.principal.gender=e.target.value;checkStep2Valid();};
+  const b2=document.getElementById('btn-to3'); if(b2) b2.onclick=()=>{state.step=3;render();};
+  const bk2=document.getElementById('btn-back2'); if(bk2) bk2.onclick=()=>{state.step=1;render();};
+  document.querySelectorAll('.player-opt:not(.disabled)').forEach(opt => {
+    opt.onclick=()=>{ const{cat,slot,type}=opt.dataset; if(!state.players[cat])return; state.players[cat][+slot].type=type; if(type==='principal')state.players[cat][+slot].name=''; render(); };
+  });
+  document.querySelectorAll('.player-input').forEach(inp => {
+    inp.oninput=e=>{ const{cat,slot}=e.target.dataset; state.players[cat][+slot].name=e.target.value; checkStep3Valid(); };
+  });
+  const b3=document.getElementById('btn-to4'); if(b3) b3.onclick=()=>{state.step=4;render();};
+  const bk3=document.getElementById('btn-back3'); if(bk3) bk3.onclick=()=>{state.step=3;render();};
+  const bp=document.getElementById('btn-pay'); if(bp) bp.onclick=()=>{state.step=5;render();};
+  const bk4=document.getElementById('btn-back4'); if(bk4) bk4.onclick=()=>{state.step=3;render();};
+}
+
+render();
+</script>
+
+</body>
+</html>
