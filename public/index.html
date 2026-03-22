@@ -167,7 +167,8 @@ const CATS=[
   {id:'q',label:'Quarteto',price:320,slots:4,genders:['*','*','*','*'],priceLabel:'por equipe'},
 ];
 
-const state={step:1,selectedCats:[],principal:{name:'',email:'',gender:''},players:{},preferenceId:null};
+const COUPON='95OFF';
+const COUPON_DISCOUNT=0.95;
 
 function fmt(v){return'R$ '+v.toLocaleString('pt-BR');}
 function isDupla(id){return CATS.find(c=>c.id===id)?.slots===2;}
@@ -180,7 +181,10 @@ function calcPrice(idx){
   return before===1?Math.round(cat.price*0.5):cat.price;
 }
 
-function totalPrice(){return state.selectedCats.reduce((s,_,i)=>s+calcPrice(i),0);}
+function totalPrice(){
+  const base=state.selectedCats.reduce((s,_,i)=>s+calcPrice(i),0);
+  return state.couponApplied?Math.max(1,Math.round(base*(1-COUPON_DISCOUNT))):base;
+}
 
 function stepsHtml(active){
   const steps=['Categorias','Dados','Jogadores','Pagamento'];
@@ -281,6 +285,15 @@ function renderStep4(){
       <div class="summary-total"><span>Total</span><span>${fmt(totalPrice())}</span></div>
     </div>
     <button class="btn" id="btn-pay">Pagar ${fmt(totalPrice())} →</button>
+    <div style="margin-top:12px;">
+      ${state.couponApplied
+        ? `<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:10px 14px;font-size:13px;color:#166534;font-weight:500;">✓ Cupom 95OFF aplicado — 95% de desconto!</div>`
+        : `<div style="display:flex;gap:8px;margin-top:4px;">
+            <input id="inp-coupon" type="text" placeholder="Cupom de desconto" style="flex:1;padding:10px 12px;font-size:13px;border:1px solid #e0e0e0;border-radius:10px;outline:none;font-family:'Inter',sans-serif;">
+            <button id="btn-coupon" style="padding:10px 16px;font-size:13px;font-weight:600;background:#fff;border:1px solid #e0e0e0;border-radius:10px;cursor:pointer;">Aplicar</button>
+           </div>`
+      }
+    </div>
     <button class="btn btn-sec" id="btn-back4">← Voltar</button>`;
 }
 
@@ -418,6 +431,13 @@ function bindEvents(){
   if(b3)b3.onclick=()=>{state.step=4;render();};
   const bk3=document.getElementById('btn-back3');
   if(bk3)bk3.onclick=()=>{state.step=2;render();};
+
+  const bc=document.getElementById('btn-coupon');
+  if(bc)bc.onclick=()=>{
+    const val=document.getElementById('inp-coupon')?.value?.trim().toUpperCase();
+    if(val===COUPON){state.couponApplied=true;render();}
+    else alert('Cupom inválido.');
+  };
 
   const b4=document.getElementById('btn-back4');
   if(b4)b4.onclick=()=>{state.step=3;render();};
