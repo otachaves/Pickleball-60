@@ -439,6 +439,7 @@ render();
         body:JSON.stringify({name:state.principal.name,email:state.principal.email,categories})
       });
       const data=await res.json();
+      console.log('MP response:', JSON.stringify(data));
       if(data.preference_id){
         state.preferenceId=data.preference_id;
         state.step=5;
