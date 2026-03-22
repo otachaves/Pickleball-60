@@ -26,12 +26,14 @@ module.exports = async (req, res) => {
       body: {
         items,
         payer: { name, email },
-        back_urls: {
-          success: `${process.env.SITE_URL}/sucesso`,
-          failure: `${process.env.SITE_URL}/erro`,
-          pending: `${process.env.SITE_URL}/pendente`,
+        payment_methods: {
+          installments: 12,
         },
-        auto_return: "approved",
+        back_urls: {
+          success: `${process.env.SITE_URL}?status=success`,
+          failure: `${process.env.SITE_URL}?status=failure`,
+          pending: `${process.env.SITE_URL}?status=pending`,
+        },
         notification_url: `${process.env.SITE_URL}/api/webhook`,
         metadata: {
           name,
@@ -41,7 +43,9 @@ module.exports = async (req, res) => {
       },
     });
 
-    res.status(200).json({ init_point: result.init_point });
+    res.status(200).json({
+      preference_id: result.id,
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Erro ao criar pagamento" });
