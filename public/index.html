@@ -334,8 +334,10 @@ function renderSuccess() {
 function renderPayment() {
   return `
     <div style="padding:1rem 0">
-      <p style="font-size:13px;color:#888;margin-bottom:1rem;">Total: <strong style="color:#1a1a1a">${fmt(totalPrice())}</strong></p>
+      <p style="font-size:14px;color:#555;margin-bottom:1rem;">Total: <strong style="color:#1a1a1a;font-size:16px">${fmt(totalPrice())}</strong></p>
+      <div id="mp-loading" style="font-size:13px;color:#aaa;margin-bottom:1rem;">Carregando checkout...</div>
       <div id="mp-bricks"></div>
+      <button class="btn btn-sec" id="btn-back-pay" style="margin-top:12px">← Voltar</button>
     </div>
   `;
 }
@@ -370,25 +372,42 @@ function bindEvents() {
       const idx = state.selectedCats.indexOf(id);
       if (idx===-1) state.selectedCats.push(id); else state.selectedCats.splice(idx,1);
       function initBricks() {
+  const existing = document.getElementById('mp-sdk');
+  if (existing) { loadBricks(); return; }
   const script = document.createElement('script');
+  script.id = 'mp-sdk';
   script.src = 'https://sdk.mercadopago.com/js/v2';
-  script.onload = () => {
+  script.onload = () => loadBricks();
+  script.onerror = () => alert('Erro ao carregar SDK do Mercado Pago. Verifique sua conexão.');
+  document.head.appendChild(script);
+}
+
+function loadBricks() {
+  const container = document.getElementById('mp-bricks');
+  if (!container) return;
+  try {
     const mp = new MercadoPago('APP_USR-4b2344c1-9afe-4fa3-90b2-4e67da615fcb', { locale: 'pt-BR' });
-    const bricksBuilder = mp.bricks();
-    bricksBuilder.create('wallet', 'mp-bricks', {
+    mp.bricks().create('wallet', 'mp-bricks', {
       initialization: { preferenceId: state.preferenceId },
       customization: {
         texts: { valueProp: 'smart_option' },
-        visual: { hidePaymentButton: false },
       },
       callbacks: {
-        onReady: () => {},
+        onReady: () => {
+          const loading = document.getElementById('mp-loading');
+          if (loading) loading.style.display = 'none';
+        },
         onSubmit: () => {},
-        onError: (err) => { console.error(err); alert('Erro no pagamento. Tente novamente.'); },
+        onError: (err) => {
+          console.error('Bricks error:', err);
+          alert('Erro no checkout. Tente novamente.');
+        },
       },
     });
-  };
-  document.head.appendChild(script);
+  } catch(e) {
+    console.error('MP init error:', e);
+    alert('Erro ao iniciar pagamento. Tente novamente.');
+  }
 }
 
 render();
@@ -433,7 +452,7 @@ render();
       bp.disabled=false; bp.textContent=`Pagar ${fmt(totalPrice())} →`;
     }
   };
-  const bk4=document.getElementById('btn-back4'); if(bk4) bk4.onclick=()=>{state.step=3;render();};
+  const bkp=document.getElementById('btn-back-pay'); if(bkp) bkp.onclick=()=>{state.step=4;render();};
 }
 
 render();
