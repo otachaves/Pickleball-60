@@ -373,7 +373,28 @@ function bindEvents() {
   });
   const b3=document.getElementById('btn-to4'); if(b3) b3.onclick=()=>{state.step=4;render();};
   const bk3=document.getElementById('btn-back3'); if(bk3) bk3.onclick=()=>{state.step=3;render();};
-  const bp=document.getElementById('btn-pay'); if(bp) bp.onclick=()=>{state.step=5;render();};
+  const bp=document.getElementById('btn-pay');
+  if(bp) bp.onclick=async()=>{
+    bp.disabled=true; bp.textContent='Aguarde...';
+    try {
+      const categories=state.selectedCats.map((id,i)=>{
+        const cat=CATS.find(c=>c.id===id);
+        const players=(state.players[id]||[]).map(s=>s.name);
+        return{label:cat.label,price:calcPrice(i),players};
+      });
+      const res=await fetch('/api/create-payment',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({name:state.principal.name,email:state.principal.email,categories})
+      });
+      const data=await res.json();
+      if(data.init_point){ window.location.href=data.init_point; }
+      else{ alert('Erro ao iniciar pagamento. Tente novamente.'); bp.disabled=false; bp.textContent=`Pagar ${fmt(totalPrice())} →`; }
+    } catch(err){
+      alert('Erro ao conectar. Tente novamente.');
+      bp.disabled=false; bp.textContent=`Pagar ${fmt(totalPrice())} →`;
+    }
+  };
   const bk4=document.getElementById('btn-back4'); if(bk4) bk4.onclick=()=>{state.step=3;render();};
 }
 
