@@ -442,8 +442,11 @@ render();
       console.log('MP response:', JSON.stringify(data));
       if(data.preference_id){
         state.preferenceId=data.preference_id;
+        console.log('Setting step to 5, preferenceId:', state.preferenceId);
         state.step=5;
         render();
+        console.log('render() called, step:', state.step);
+      }
       } else {
         alert('Erro ao iniciar pagamento. Tente novamente.');
         bp.disabled=false; bp.textContent=`Pagar ${fmt(totalPrice())} →`;
