@@ -23,17 +23,15 @@ body{font-family:'Inter',system-ui,sans-serif;background:#fafaf8;color:#1a1a1a;}
 .about-strip{background:#16a34a;color:#fff;padding:2.5rem 1.5rem;text-align:center;}
 .about-strip p{max-width:560px;margin:0 auto;font-size:15px;line-height:1.8;opacity:.92;}
 .vagas-strip{background:#fffbeb;border-top:1px solid #fde68a;border-bottom:1px solid #fde68a;padding:.75rem 1.5rem;text-align:center;font-size:13px;font-weight:600;color:#92400e;}
-.info-wrap{background:#fafaf8;}
 .info-section{padding:2.5rem 1.5rem;max-width:640px;margin:0 auto;}
 .info-section h2{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:800;margin-bottom:1.25rem;color:#1a1a1a;}
 .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .info-card{background:#fff;border:1px solid #eee;border-radius:14px;padding:1.25rem;display:flex;align-items:flex-start;gap:14px;}
 .info-card-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
-.ic-green{background:#dcfce7;}.ic-blue{background:#dbeafe;}.ic-orange{background:#ffedd5;}
+.ic-blue{background:#dbeafe;}.ic-orange{background:#ffedd5;}
 .info-card-label{font-size:11px;color:#aaa;font-weight:600;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;}
 .info-card-value{font-size:14px;font-weight:600;color:#1a1a1a;line-height:1.4;}
 .info-card-sub{font-size:12px;color:#aaa;margin-top:2px;line-height:1.4;}
-.register-wrap{background:#fafaf8;}
 .register-section{padding:2.5rem 1.5rem 5rem;max-width:600px;margin:0 auto;}
 .register-section h2{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:800;margin-bottom:.4rem;color:#1a1a1a;}
 .register-section .sub{font-size:14px;color:#888;margin-bottom:2rem;}
@@ -52,10 +50,10 @@ body{font-family:'Inter',system-ui,sans-serif;background:#fafaf8;color:#1a1a1a;}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .discount-banner{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:10px 14px;font-size:13px;color:#166534;margin-bottom:1rem;display:flex;align-items:center;gap:8px;font-weight:500;}
 .cat-card{background:#fff;border:1.5px solid #e8e8e8;border-radius:14px;padding:1rem 1.25rem;margin-bottom:10px;cursor:pointer;transition:all .15s;}
-.cat-card:hover{border-color:#bbb;transform:translateY(-1px);}
+.cat-card:hover{border-color:#bbb;}
 .cat-card.selected{border-color:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,.08);}
 .cat-header{display:flex;align-items:center;gap:12px;}
-.cat-check{width:22px;height:22px;border:1.5px solid #ddd;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#f5f5f3;transition:all .15s;}
+.cat-check{width:22px;height:22px;border:1.5px solid #ddd;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#f5f5f3;}
 .cat-card.selected .cat-check{background:#16a34a;border-color:#16a34a;}
 .cat-check-inner{width:6px;height:10px;border:2px solid #fff;border-top:none;border-left:none;transform:rotate(45deg) translateY(-1px);display:none;}
 .cat-card.selected .cat-check-inner{display:block;}
@@ -77,6 +75,11 @@ body{font-family:'Inter',system-ui,sans-serif;background:#fafaf8;color:#1a1a1a;}
 .player-slot-label{font-size:12px;color:#aaa;margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;}
 .player-input{width:100%;padding:9px 12px;font-size:13px;border:1px solid #e0e0e0;border-radius:10px;outline:none;font-family:'Inter',sans-serif;}
 .player-input:focus{border-color:#16a34a;}
+.coupon-row{display:flex;gap:8px;margin-top:12px;}
+.coupon-row input{flex:1;padding:10px 12px;font-size:13px;border:1px solid #e0e0e0;border-radius:10px;outline:none;font-family:'Inter',sans-serif;}
+.coupon-row input:focus{border-color:#16a34a;}
+.coupon-row button{padding:10px 16px;font-size:13px;font-weight:600;background:#fff;border:1px solid #e0e0e0;border-radius:10px;cursor:pointer;}
+.coupon-applied{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:10px 14px;font-size:13px;color:#166534;font-weight:500;margin-top:12px;}
 .success{text-align:center;padding:4rem 1.5rem;}
 .success-icon{font-size:64px;margin-bottom:1.25rem;}
 .success h2{font-family:'Playfair Display',serif;font-size:2rem;font-weight:800;margin-bottom:.75rem;}
@@ -107,53 +110,49 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:#bbb;border-top:
 
 <div class="vagas-strip">🔔 Vagas limitadas — garanta a sua!</div>
 
-<div class="info-wrap">
 <div class="info-section">
   <h2>Informações do evento</h2>
   <div class="info-grid">
-    <div class="info-card">
+    <div class="info-card" style="grid-column:1/-1">
       <div class="info-card-icon ic-blue">📌</div>
       <div><div class="info-card-label">Endereço</div><div class="info-card-value">Paróquia Santa Clara</div><div class="info-card-sub">R. Cel. Veiga, 1130 — Cohab · Cel. Veiga · Petrópolis</div></div>
     </div>
-    <div class="info-card" style="grid-column:1/-1;display:block;padding:1.25rem;">
+    <div class="info-card" style="grid-column:1/-1;display:block;">
       <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:14px;">
-        <div class="info-card-icon ic-orange" style="flex-shrink:0;">📋</div>
+        <div class="info-card-icon ic-orange">📋</div>
         <div><div class="info-card-label">Programação</div></div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr;gap:12px;">
+      <div style="display:grid;gap:10px;">
         <div style="background:#f9fafb;border-radius:10px;padding:12px;">
           <div style="font-size:12px;font-weight:700;color:#888;margin-bottom:6px;">01/05 · 13h–20h</div>
-          <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:6px;">Open Play</div>
-          <div style="font-size:12px;color:#888;line-height:1.6;">Reconhecimento da quadra — aberto a todos os participantes</div>
+          <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:4px;">Open Play</div>
+          <div style="font-size:12px;color:#888;">Reconhecimento da quadra — aberto a todos os participantes</div>
         </div>
         <div style="background:#f9fafb;border-radius:10px;padding:12px;">
           <div style="font-size:12px;font-weight:700;color:#16a34a;margin-bottom:6px;">02/05 · a partir das 8h</div>
           <ul style="font-size:13px;color:#444;line-height:1.9;padding-left:16px;">
             <li>Single masculino</li><li>Dupla masculina</li><li>Dupla feminina</li>
           </ul>
-          <div style="font-size:11px;color:#aaa;margin-top:8px;">Previsão de término: 18h</div>
+          <div style="font-size:11px;color:#aaa;margin-top:6px;">Previsão de término: 18h</div>
         </div>
         <div style="background:#f9fafb;border-radius:10px;padding:12px;">
           <div style="font-size:12px;font-weight:700;color:#16a34a;margin-bottom:6px;">03/05 · a partir das 10h</div>
           <ul style="font-size:13px;color:#444;line-height:1.9;padding-left:16px;">
             <li>Dupla mista</li><li>Quarteto</li>
           </ul>
-          <div style="font-size:11px;color:#aaa;margin-top:8px;">Previsão de término: 14h</div>
+          <div style="font-size:11px;color:#aaa;margin-top:6px;">Previsão de término: 14h</div>
         </div>
       </div>
     </div>
   </div>
 </div>
-</div>
 
 <div class="vagas-strip" style="border-top:1px solid #fde68a;">⚠️ Evento exclusivo para participantes com 60 anos ou mais</div>
 
-<div class="register-wrap">
 <div class="register-section">
   <h2>Inscreva-se</h2>
   <p class="sub">Rápido e fácil — menos de 2 minutos.</p>
   <div id="app"></div>
-</div>
 </div>
 
 <footer>Copa Imperial 60+ &nbsp;·&nbsp; 2 e 3 de maio de 2026 &nbsp;·&nbsp; Paróquia Santa Clara · Centro · Petrópolis</footer>
@@ -166,9 +165,17 @@ const CATS=[
   {id:'mix',label:'Dupla mista',price:200,slots:2,genders:['M','F'],priceLabel:'por equipe'},
   {id:'q',label:'Quarteto',price:320,slots:4,genders:['*','*','*','*'],priceLabel:'por equipe'},
 ];
-
-const COUPON='95OFF';
+const COUPON_CODE='95OFF';
 const COUPON_DISCOUNT=0.95;
+
+const state={
+  step:1,
+  selectedCats:[],
+  principal:{name:'',email:'',gender:''},
+  players:{},
+  preferenceId:null,
+  couponApplied:false,
+};
 
 function fmt(v){return'R$ '+v.toLocaleString('pt-BR');}
 function isDupla(id){return CATS.find(c=>c.id===id)?.slots===2;}
@@ -181,8 +188,9 @@ function calcPrice(idx){
   return before===1?Math.round(cat.price*0.5):cat.price;
 }
 
+function baseTotal(){return state.selectedCats.reduce((s,_,i)=>s+calcPrice(i),0);}
 function totalPrice(){
-  const base=state.selectedCats.reduce((s,_,i)=>s+calcPrice(i),0);
+  const base=baseTotal();
   return state.couponApplied?Math.max(1,Math.round(base*(1-COUPON_DISCOUNT))):base;
 }
 
@@ -191,127 +199,129 @@ function stepsHtml(active){
   return '<div class="steps">'+steps.map((s,i)=>{
     const n=i+1,cls=n===active?'active':n<active?'done':'';
     return(i>0?'<div class="step-divider"></div>':'')+
-      `<div class="step ${cls}"><div class="step-dot"></div>${s}</div>`;
+      '<div class="step '+cls+'"><div class="step-dot"></div>'+s+'</div>';
   }).join('')+'</div>';
 }
 
 function renderStep1(){
   const sel=state.selectedCats;
   const duplasSelected=sel.filter(id=>isDupla(id)).length;
-  const catsHtml=CATS.map(c=>{
+  const catsHtml=CATS.map(function(c){
     const idx=sel.indexOf(c.id);
     const isSelected=idx!==-1;
     const isDiscount=isSelected&&calcPrice(idx)<c.price;
     const showDiscount=!isSelected&&isDupla(c.id)&&duplasSelected===1;
     const displayPrice=isSelected?calcPrice(idx):(showDiscount?Math.round(c.price*0.5):c.price);
-    return`<div class="cat-card ${isSelected?'selected':''}" data-catid="${c.id}">
-      <div class="cat-header">
-        <div class="cat-check"><div class="cat-check-inner"></div></div>
-        <div class="cat-info"><div class="cat-name">${c.label}</div><div class="cat-desc">${c.priceLabel}</div></div>
-        <div class="cat-price-col">
-          ${isDiscount||showDiscount?`<div class="cat-price-orig">${fmt(c.price)}</div>`:''}
-          <div class="cat-price">${fmt(displayPrice)}</div>
-          ${isDiscount?'<div class="cat-badge">50% off</div>':(showDiscount?'<div class="cat-badge">50% off</div>':'')}
-        </div>
-      </div>
-    </div>`;
+    return '<div class="cat-card '+(isSelected?'selected':'')+'" data-catid="'+c.id+'">'
+      +'<div class="cat-header">'
+      +'<div class="cat-check"><div class="cat-check-inner"></div></div>'
+      +'<div class="cat-info"><div class="cat-name">'+c.label+'</div><div class="cat-desc">'+c.priceLabel+'</div></div>'
+      +'<div class="cat-price-col">'
+      +(isDiscount||showDiscount?'<div class="cat-price-orig">'+fmt(c.price)+'</div>':'')
+      +'<div class="cat-price">'+fmt(displayPrice)+'</div>'
+      +((isDiscount||showDiscount)?'<div class="cat-badge">50% off</div>':'')
+      +'</div></div></div>';
   }).join('');
 
-  let summaryHtml='';
+  var summaryHtml='';
   if(sel.length>0){
-    const lines=sel.map((id,i)=>{
-      const c=CATS.find(x=>x.id===id);
-      const disc=calcPrice(i)<c.price;
-      return`<div class="summary-row"><span>${c.label}${disc?' <span style="font-size:11px;color:#16a34a;font-weight:600">50% off</span>':''}</span><span>${fmt(calcPrice(i))}</span></div>`;
+    var lines=sel.map(function(id,i){
+      var c=CATS.find(function(x){return x.id===id;});
+      var disc=calcPrice(i)<c.price;
+      return '<div class="summary-row"><span>'+c.label+(disc?' <span style="font-size:11px;color:#16a34a;font-weight:600">50% off</span>':'')+'</span><span>'+fmt(calcPrice(i))+'</span></div>';
     }).join('');
-    summaryHtml=`<div class="summary">${lines}<hr class="summary-divider"><div class="summary-total"><span>Total estimado</span><span>${fmt(totalPrice())}</span></div></div>`;
+    summaryHtml='<div class="summary">'+lines+'<hr class="summary-divider"><div class="summary-total"><span>Total estimado</span><span>'+fmt(totalPrice())+'</span></div></div>';
   }
 
-  return stepsHtml(1)+
-    (duplasSelected>=1?'<div class="discount-banner">🎉 Inscreva mais de uma categoria de dupla → 50% OFF na segunda!</div>':'')+
-    `<div class="section-title">Escolha suas categorias</div>${catsHtml}${summaryHtml}
-    <button class="btn" id="btn-to2" ${sel.length>0?'':'disabled'}>Garantir vaga →</button>`;
+  return stepsHtml(1)
+    +(duplasSelected>=1?'<div class="discount-banner">🎉 Inscreva mais de uma categoria de dupla → 50% OFF na segunda!</div>':'')
+    +'<div class="section-title">Escolha suas categorias</div>'
+    +catsHtml+summaryHtml
+    +'<button class="btn" id="btn-to2" '+(sel.length>0?'':'disabled')+'>Garantir vaga →</button>';
 }
 
 function renderStep2(){
-  const p=state.principal;
-  const valid=p.name&&p.email&&p.gender;
-  return stepsHtml(2)+`
-    <div class="age-notice">⚠️ <span>Este evento é <strong>exclusivo para participantes com 60 anos ou mais.</strong> Ao se inscrever, você confirma que você e seus parceiros atendem a este requisito.</span></div>
-    <div class="section-title">Responsável pela inscrição</div>
-    <div class="field"><label>Nome completo</label><input id="inp-name" type="text" placeholder="Seu nome completo" value="${p.name}"></div>
-    <div class="field-row">
-      <div class="field"><label>Email</label><input id="inp-email" type="email" placeholder="seu@email.com" value="${p.email}"></div>
-      <div class="field"><label>Gênero</label><select id="inp-gender"><option value="" ${!p.gender?'selected':''}>Selecione</option><option value="M" ${p.gender==='M'?'selected':''}>Masculino</option><option value="F" ${p.gender==='F'?'selected':''}>Feminino</option></select></div>
-    </div>
-    <button class="btn" id="btn-to3" ${valid?'':'disabled'}>Continuar →</button>
-    <button class="btn btn-sec" id="btn-back2">← Voltar</button>`;
+  var p=state.principal;
+  var valid=p.name&&p.email&&p.gender;
+  return stepsHtml(2)
+    +'<div class="age-notice">⚠️ <span>Este evento é <strong>exclusivo para participantes com 60 anos ou mais.</strong> Ao se inscrever, você confirma que você e seus parceiros atendem a este requisito.</span></div>'
+    +'<div class="section-title">Responsável pela inscrição</div>'
+    +'<div class="field"><label>Nome completo</label><input id="inp-name" type="text" placeholder="Seu nome completo" value="'+p.name+'"></div>'
+    +'<div class="field-row">'
+    +'<div class="field"><label>Email</label><input id="inp-email" type="email" placeholder="seu@email.com" value="'+p.email+'"></div>'
+    +'<div class="field"><label>Gênero</label><select id="inp-gender"><option value="" '+((!p.gender)?'selected':'')+'>Selecione</option><option value="M" '+(p.gender==='M'?'selected':'')+'>Masculino</option><option value="F" '+(p.gender==='F'?'selected':'')+'>Feminino</option></select></div>'
+    +'</div>'
+    +'<button class="btn" id="btn-to3" '+(valid?'':'disabled')+'>Continuar →</button>'
+    +'<button class="btn btn-sec" id="btn-back2">← Voltar</button>';
 }
 
 function renderStep3(){
-  const cardsHtml=state.selectedCats.map((id,catIdx)=>{
-    const cat=CATS.find(c=>c.id===id);
-    if(!state.players[id])state.players[id]=Array.from({length:cat.slots},()=>({name:''}));
-    const slotsHtml=state.players[id].map((slot,si)=>{
-      const req=cat.genders[si];
-      const gLabel=req==='M'?'Masculino':req==='F'?'Feminino':'Qualquer';
-      return`<div class="player-slot">
-        <div class="player-slot-label">Jogador ${si+1} · ${gLabel}</div>
-        <input class="player-input" type="text" data-cat="${id}" data-slot="${si}" placeholder="Nome completo" value="${slot.name}">
-      </div>`;
+  var cardsHtml=state.selectedCats.map(function(id,catIdx){
+    var cat=CATS.find(function(c){return c.id===id;});
+    if(!state.players[id])state.players[id]=Array.from({length:cat.slots},function(){return{name:''};});
+    var slotsHtml=state.players[id].map(function(slot,si){
+      var req=cat.genders[si];
+      var gLabel=req==='M'?'Masculino':req==='F'?'Feminino':'Qualquer';
+      return '<div class="player-slot">'
+        +'<div class="player-slot-label">Jogador '+(si+1)+' · '+gLabel+'</div>'
+        +'<input class="player-input" type="text" data-cat="'+id+'" data-slot="'+si+'" placeholder="Nome completo" value="'+slot.name+'">'
+        +'</div>';
     }).join('');
-    return`<div class="player-card"><div class="player-card-title">🏓 ${cat.label} — ${fmt(calcPrice(catIdx))}</div>${slotsHtml}</div>`;
+    return '<div class="player-card"><div class="player-card-title">🏓 '+cat.label+' — '+fmt(calcPrice(catIdx))+'</div>'+slotsHtml+'</div>';
   }).join('');
 
-  const allFilled=state.selectedCats.every(id=>(state.players[id]||[]).every(s=>s.name.trim()!==''));
-  return stepsHtml(3)+`
-    <div class="section-title">Jogadores por categoria</div>
-    ${cardsHtml}
-    <button class="btn" id="btn-to4" ${allFilled?'':'disabled'}>Continuar →</button>
-    <button class="btn btn-sec" id="btn-back3">← Voltar</button>`;
+  var allFilled=state.selectedCats.every(function(id){
+    return (state.players[id]||[]).every(function(s){return s.name.trim()!=='';});
+  });
+
+  return stepsHtml(3)
+    +'<div class="section-title">Jogadores por categoria</div>'
+    +cardsHtml
+    +'<button class="btn" id="btn-to4" '+(allFilled?'':'disabled')+'>Continuar →</button>'
+    +'<button class="btn btn-sec" id="btn-back3">← Voltar</button>';
 }
 
 function renderStep4(){
-  const lines=state.selectedCats.map((id,i)=>{
-    const cat=CATS.find(c=>c.id===id);
-    const names=(state.players[id]||[]).map(s=>s.name).join(', ');
-    return`<div class="summary-row"><span>${cat.label} — ${names}</span><span>${fmt(calcPrice(i))}</span></div>`;
+  var lines=state.selectedCats.map(function(id,i){
+    var cat=CATS.find(function(c){return c.id===id;});
+    var names=(state.players[id]||[]).map(function(s){return s.name;}).join(', ');
+    return '<div class="summary-row"><span>'+cat.label+' — '+names+'</span><span>'+fmt(calcPrice(i))+'</span></div>';
   }).join('');
-  return stepsHtml(4)+`
-    <div class="section-title">Resumo final</div>
-    <div class="summary">
-      <div class="summary-row" style="font-weight:600;color:#1a1a1a"><span>Responsável</span><span>${state.principal.name}</span></div>
-      <hr class="summary-divider">${lines}<hr class="summary-divider">
-      <div class="summary-total"><span>Total</span><span>${fmt(totalPrice())}</span></div>
-    </div>
-    <button class="btn" id="btn-pay">Pagar ${fmt(totalPrice())} →</button>
-    <div style="margin-top:12px;">
-      ${state.couponApplied
-        ? `<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:10px 14px;font-size:13px;color:#166534;font-weight:500;">✓ Cupom 95OFF aplicado — 95% de desconto!</div>`
-        : `<div style="display:flex;gap:8px;margin-top:4px;">
-            <input id="inp-coupon" type="text" placeholder="Cupom de desconto" style="flex:1;padding:10px 12px;font-size:13px;border:1px solid #e0e0e0;border-radius:10px;outline:none;font-family:'Inter',sans-serif;">
-            <button id="btn-coupon" style="padding:10px 16px;font-size:13px;font-weight:600;background:#fff;border:1px solid #e0e0e0;border-radius:10px;cursor:pointer;">Aplicar</button>
-           </div>`
-      }
-    </div>
-    <button class="btn btn-sec" id="btn-back4">← Voltar</button>`;
+
+  var couponHtml=state.couponApplied
+    ?'<div class="coupon-applied">✓ Cupom 95OFF aplicado — 95% de desconto!</div>'
+    +'<div class="summary-row" style="color:#16a34a;font-weight:600"><span>Desconto (95%)</span><span>− '+fmt(baseTotal()-totalPrice())+'</span></div>'
+    :'<div class="coupon-row"><input id="inp-coupon" type="text" placeholder="Cupom de desconto"><button id="btn-coupon">Aplicar</button></div>';
+
+  return stepsHtml(4)
+    +'<div class="section-title">Resumo final</div>'
+    +'<div class="summary">'
+    +'<div class="summary-row" style="font-weight:600;color:#1a1a1a"><span>Responsável</span><span>'+state.principal.name+'</span></div>'
+    +'<hr class="summary-divider">'+lines+'<hr class="summary-divider">'
+    +'<div class="summary-total"><span>Total</span><span>'+fmt(totalPrice())+'</span></div>'
+    +'</div>'
+    +couponHtml
+    +'<button class="btn" id="btn-pay">Pagar '+fmt(totalPrice())+' →</button>'
+    +'<button class="btn btn-sec" id="btn-back4">← Voltar</button>';
 }
 
 function renderPayment(){
-  return`<div style="padding:1rem 0">
-    <p style="font-size:14px;color:#555;margin-bottom:1rem;">Total: <strong style="color:#1a1a1a;font-size:16px">${fmt(totalPrice())}</strong></p>
-    <div id="mp-loading" style="font-size:13px;color:#aaa;margin-bottom:1rem;">Carregando checkout...</div>
-    <div id="mp-bricks"></div>
-    <button class="btn btn-sec" id="btn-back-pay" style="margin-top:12px">← Voltar</button>
-  </div>`;
+  return '<div style="padding:1rem 0">'
+    +'<p style="font-size:14px;color:#555;margin-bottom:1rem;">Total: <strong style="color:#1a1a1a;font-size:16px">'+fmt(totalPrice())+'</strong></p>'
+    +'<div id="mp-loading" style="font-size:13px;color:#aaa;margin-bottom:1rem;">Carregando checkout...</div>'
+    +'<div id="mp-bricks"></div>'
+    +'<button class="btn btn-sec" id="btn-back-pay" style="margin-top:12px">← Voltar</button>'
+    +'</div>';
 }
 
 function renderSuccess(){
-  return`<div class="success"><div class="success-icon">🏆</div><h2>Vaga garantida!</h2><p>Email enviado para <strong>${state.principal.email}</strong><br><br>Nos vemos na quadra, <strong>${state.principal.name.split(' ')[0]}</strong>!</p></div>`;
+  return '<div class="success"><div class="success-icon">🏆</div><h2>Vaga garantida!</h2>'
+    +'<p>Email enviado para <strong>'+state.principal.email+'</strong><br><br>'
+    +'Nos vemos na quadra, <strong>'+state.principal.name.split(' ')[0]+'</strong>!</p></div>';
 }
 
 function render(){
-  const app=document.getElementById('app');
+  var app=document.getElementById('app');
   if(!app)return;
   if(state.step===1)app.innerHTML=renderStep1();
   else if(state.step===2)app.innerHTML=renderStep2();
@@ -323,59 +333,45 @@ function render(){
 }
 
 function initBricks(){
-  const existing=document.getElementById('mp-sdk');
+  var existing=document.getElementById('mp-sdk');
   if(existing){loadBricks();return;}
-  const script=document.createElement('script');
+  var script=document.createElement('script');
   script.id='mp-sdk';
   script.src='https://sdk.mercadopago.com/js/v2';
-  script.onload=()=>loadBricks();
-  script.onerror=()=>alert('Erro ao carregar SDK do Mercado Pago.');
+  script.onload=function(){loadBricks();};
+  script.onerror=function(){alert('Erro ao carregar SDK do Mercado Pago.');};
   document.head.appendChild(script);
 }
 
 function loadBricks(){
-  const container=document.getElementById('mp-bricks');
+  var container=document.getElementById('mp-bricks');
   if(!container)return;
   try{
-    const mp=new MercadoPago('APP_USR-4b2344c1-9afe-4fa3-90b2-4e67da615fcb',{locale:'pt-BR'});
+    var mp=new MercadoPago('APP_USR-4b2344c1-9afe-4fa3-90b2-4e67da615fcb',{locale:'pt-BR'});
     mp.bricks().create('payment','mp-bricks',{
-      initialization:{
-        amount:totalPrice(),
-        preferenceId:state.preferenceId,
-      },
+      initialization:{amount:totalPrice(),preferenceId:state.preferenceId},
       customization:{
-        paymentMethods:{
-          creditCard:'all',
-          debitCard:'all',
-          ticket:'all',
-          bankTransfer:'all',
-          atm:'all',
-          maxInstallments:12,
-        },
-        visual:{
-          hideFormTitle:false,
-          hidePaymentButton:false,
-        }
+        paymentMethods:{creditCard:'all',debitCard:'all',ticket:'all',bankTransfer:'all',maxInstallments:12},
+        visual:{hideFormTitle:false,hidePaymentButton:false}
       },
       callbacks:{
-        onReady:()=>{const l=document.getElementById('mp-loading');if(l)l.style.display='none';},
-        onSubmit:({selectedPaymentMethod,formData})=>{
-          return new Promise((resolve,reject)=>{
+        onReady:function(){var l=document.getElementById('mp-loading');if(l)l.style.display='none';},
+        onSubmit:function(data){
+          return new Promise(function(resolve,reject){
             fetch('/api/process-payment',{
               method:'POST',
               headers:{'Content-Type':'application/json'},
-              body:JSON.stringify(formData)
+              body:JSON.stringify(data.formData)
             })
-            .then(r=>r.json())
-            .then(d=>{
-              if(d.status==='approved'||d.status==='pending'){
-                state.step=6;render();resolve();
-              }else{reject();}
+            .then(function(r){return r.json();})
+            .then(function(d){
+              if(d.status==='approved'||d.status==='pending'){state.step=6;render();resolve();}
+              else{reject();}
             })
-            .catch(()=>reject());
+            .catch(function(){reject();});
           });
         },
-        onError:(err)=>{console.error('Bricks error:',err);}
+        onError:function(err){console.error('Bricks error:',err);}
       }
     });
   }catch(e){
@@ -385,98 +381,101 @@ function loadBricks(){
 }
 
 function checkStep2Valid(){
-  const btn=document.getElementById('btn-to3');
+  var btn=document.getElementById('btn-to3');
   if(btn)btn.disabled=!(state.principal.name&&state.principal.email&&state.principal.gender);
 }
 
 function checkStep3Valid(){
-  const btn=document.getElementById('btn-to4');
+  var btn=document.getElementById('btn-to4');
   if(!btn)return;
-  btn.disabled=!state.selectedCats.every(id=>(state.players[id]||[]).every(s=>s.name.trim()!==''));
+  btn.disabled=!state.selectedCats.every(function(id){
+    return (state.players[id]||[]).every(function(s){return s.name.trim()!=='';});
+  });
 }
 
 function bindEvents(){
-  document.querySelectorAll('.cat-card').forEach(card=>{
-    card.onclick=()=>{
-      const id=card.dataset.catid;
-      const idx=state.selectedCats.indexOf(id);
-      if(idx===-1)state.selectedCats.push(id);else state.selectedCats.splice(idx,1);
+  document.querySelectorAll('.cat-card').forEach(function(card){
+    card.onclick=function(){
+      var id=card.dataset.catid;
+      var idx=state.selectedCats.indexOf(id);
+      if(idx===-1)state.selectedCats.push(id);
+      else state.selectedCats.splice(idx,1);
       render();
     };
   });
 
-  const b1=document.getElementById('btn-to2');
-  if(b1)b1.onclick=()=>{state.step=2;render();};
+  var b1=document.getElementById('btn-to2');
+  if(b1)b1.onclick=function(){state.step=2;render();};
 
-  const inN=document.getElementById('inp-name');
-  if(inN)inN.oninput=e=>{state.principal.name=e.target.value;checkStep2Valid();};
-  const inE=document.getElementById('inp-email');
-  if(inE)inE.oninput=e=>{state.principal.email=e.target.value;checkStep2Valid();};
-  const inG=document.getElementById('inp-gender');
-  if(inG)inG.onchange=e=>{state.principal.gender=e.target.value;checkStep2Valid();};
+  var inN=document.getElementById('inp-name');
+  if(inN)inN.oninput=function(e){state.principal.name=e.target.value;checkStep2Valid();};
+  var inE=document.getElementById('inp-email');
+  if(inE)inE.oninput=function(e){state.principal.email=e.target.value;checkStep2Valid();};
+  var inG=document.getElementById('inp-gender');
+  if(inG)inG.onchange=function(e){state.principal.gender=e.target.value;checkStep2Valid();};
 
-  const b2=document.getElementById('btn-to3');
-  if(b2)b2.onclick=()=>{state.step=3;render();};
-  const bk2=document.getElementById('btn-back2');
-  if(bk2)bk2.onclick=()=>{state.step=1;render();};
+  var b2=document.getElementById('btn-to3');
+  if(b2)b2.onclick=function(){state.step=3;render();};
+  var bk2=document.getElementById('btn-back2');
+  if(bk2)bk2.onclick=function(){state.step=1;render();};
 
-  document.querySelectorAll('.player-input').forEach(inp=>{
-    inp.oninput=e=>{
+  document.querySelectorAll('.player-input').forEach(function(inp){
+    inp.oninput=function(e){
       state.players[e.target.dataset.cat][+e.target.dataset.slot].name=e.target.value;
       checkStep3Valid();
     };
   });
 
-  const b3=document.getElementById('btn-to4');
-  if(b3)b3.onclick=()=>{state.step=4;render();};
-  const bk3=document.getElementById('btn-back3');
-  if(bk3)bk3.onclick=()=>{state.step=2;render();};
+  var b3=document.getElementById('btn-to4');
+  if(b3)b3.onclick=function(){state.step=4;render();};
+  var bk3=document.getElementById('btn-back3');
+  if(bk3)bk3.onclick=function(){state.step=2;render();};
 
-  const bc=document.getElementById('btn-coupon');
-  if(bc)bc.onclick=()=>{
-    const val=document.getElementById('inp-coupon')?.value?.trim().toUpperCase();
-    if(val===COUPON){state.couponApplied=true;render();}
-    else alert('Cupom inválido.');
+  var bc=document.getElementById('btn-coupon');
+  if(bc)bc.onclick=function(){
+    var val=document.getElementById('inp-coupon');
+    if(val&&val.value.trim().toUpperCase()===COUPON_CODE){
+      state.couponApplied=true;render();
+    }else{
+      alert('Cupom inválido.');
+    }
   };
 
-  const b4=document.getElementById('btn-back4');
-  if(b4)b4.onclick=()=>{state.step=3;render();};
+  var b4=document.getElementById('btn-back4');
+  if(b4)b4.onclick=function(){state.step=3;render();};
 
-  const bp=document.getElementById('btn-pay');
-  if(bp)bp.onclick=async()=>{
-    bp.disabled=true;
-    bp.textContent='Aguarde...';
+  var bp=document.getElementById('btn-pay');
+  if(bp)bp.onclick=async function(){
+    bp.disabled=true;bp.textContent='Aguarde...';
     try{
-      const categories=state.selectedCats.map((id,i)=>{
-        const cat=CATS.find(c=>c.id===id);
-        const players=(state.players[id]||[]).map(s=>s.name);
-        return{label:cat.label,price:calcPrice(i),players};
+      var categories=state.selectedCats.map(function(id,i){
+        var cat=CATS.find(function(c){return c.id===id;});
+        var players=(state.players[id]||[]).map(function(s){return s.name;});
+        return{label:cat.label,price:calcPrice(i),players:players};
       });
-      const res=await fetch('/api/create-payment',{
+      var res=await fetch('/api/create-payment',{
         method:'POST',
         headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({name:state.principal.name,email:state.principal.email,categories})
+        body:JSON.stringify({name:state.principal.name,email:state.principal.email,categories:categories})
       });
-      const data=await res.json();
+      var data=await res.json();
       if(data.preference_id){
         state.preferenceId=data.preference_id;
         state.step=5;
         render();
       }else{
         alert('Erro ao iniciar pagamento. Tente novamente.');
-        bp.disabled=false;
-        bp.textContent=`Pagar ${fmt(totalPrice())} →`;
+        bp.disabled=false;bp.textContent='Pagar '+fmt(totalPrice())+' →';
       }
     }catch(err){
       console.error('Fetch error:',err);
       alert('Erro ao conectar. Tente novamente.');
-      bp.disabled=false;
-      bp.textContent=`Pagar ${fmt(totalPrice())} →`;
+      bp.disabled=false;bp.textContent='Pagar '+fmt(totalPrice())+' →';
     }
   };
 
-  const bkp=document.getElementById('btn-back-pay');
-  if(bkp)bkp.onclick=()=>{state.step=4;render();};
+  var bkp=document.getElementById('btn-back-pay');
+  if(bkp)bkp.onclick=function(){state.step=4;render();};
 }
 
 render();
