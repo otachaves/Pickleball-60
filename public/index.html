@@ -331,6 +331,16 @@ function renderSuccess() {
   return `<div class="success"><div class="success-icon">🏆</div><h2>Vaga garantida!</h2><p>Email enviado para <strong>${state.principal.email}</strong><br><br>Nos vemos na quadra, <strong>${state.principal.name.split(' ')[0]}</strong>!</p></div>`;
 }
 
+function renderPayment() {
+  return `
+    <div style="padding:1rem 0">
+      <p style="font-size:13px;color:#888;margin-bottom:1rem;">Total: <strong style="color:#1a1a1a">${fmt(totalPrice())}</strong></p>
+      <div id="mp-bricks"></div>
+    </div>
+  `;
+}
+
+
 function render() {
   const app = document.getElementById('app');
   if (!app) return;
@@ -359,7 +369,29 @@ function bindEvents() {
       const id = card.dataset.catid;
       const idx = state.selectedCats.indexOf(id);
       if (idx===-1) state.selectedCats.push(id); else state.selectedCats.splice(idx,1);
-      render();
+      function initBricks() {
+  const script = document.createElement('script');
+  script.src = 'https://sdk.mercadopago.com/js/v2';
+  script.onload = () => {
+    const mp = new MercadoPago('APP_USR-4b2344c1-9afe-4fa3-90b2-4e67da615fcb', { locale: 'pt-BR' });
+    const bricksBuilder = mp.bricks();
+    bricksBuilder.create('wallet', 'mp-bricks', {
+      initialization: { preferenceId: state.preferenceId },
+      customization: {
+        texts: { valueProp: 'smart_option' },
+        visual: { hidePaymentButton: false },
+      },
+      callbacks: {
+        onReady: () => {},
+        onSubmit: () => {},
+        onError: (err) => { console.error(err); alert('Erro no pagamento. Tente novamente.'); },
+      },
+    });
+  };
+  document.head.appendChild(script);
+}
+
+render();
     };
   });
   const b1=document.getElementById('btn-to2'); if(b1) b1.onclick=()=>{state.step=2;render();};
@@ -388,8 +420,14 @@ function bindEvents() {
         body:JSON.stringify({name:state.principal.name,email:state.principal.email,categories})
       });
       const data=await res.json();
-      if(data.init_point){ window.location.href=data.init_point; }
-      else{ alert('Erro ao iniciar pagamento. Tente novamente.'); bp.disabled=false; bp.textContent=`Pagar ${fmt(totalPrice())} →`; }
+      if(data.preference_id){
+        state.preferenceId=data.preference_id;
+        state.step=5;
+        render();
+      } else {
+        alert('Erro ao iniciar pagamento. Tente novamente.');
+        bp.disabled=false; bp.textContent=`Pagar ${fmt(totalPrice())} →`;
+      }
     } catch(err){
       alert('Erro ao conectar. Tente novamente.');
       bp.disabled=false; bp.textContent=`Pagar ${fmt(totalPrice())} →`;
