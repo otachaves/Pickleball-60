@@ -315,9 +315,20 @@ function renderPayment(){
 }
 
 function renderSuccess(){
+  var pixHtml='';
+  if(state.pixData){
+    pixHtml='<div style="margin-top:1.5rem;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:1.25rem;text-align:center">'
+      +'<p style="font-size:13px;font-weight:600;color:#166534;margin-bottom:12px;">Pague via Pix para confirmar sua vaga</p>'
+      +'<img src="data:image/png;base64,'+state.pixData.qrCodeBase64+'" style="width:180px;height:180px;margin:0 auto;display:block;border-radius:8px;" />'
+      +'<p style="font-size:11px;color:#888;margin-top:10px;margin-bottom:8px;">Ou copie o código:</p>'
+      +'<div style="background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:8px 12px;font-size:11px;word-break:break-all;color:#555;text-align:left">'+state.pixData.qrCode+'</div>'
+      +'<button onclick="navigator.clipboard.writeText(\''+state.pixData.qrCode+'\')" style="margin-top:10px;padding:8px 16px;font-size:13px;font-weight:600;background:#16a34a;color:#fff;border:none;border-radius:8px;cursor:pointer;">Copiar código Pix</button>'
+      +'</div>';
+  }
   return '<div class="success"><div class="success-icon">🏆</div><h2>Vaga garantida!</h2>'
     +'<p>Email enviado para <strong>'+state.principal.email+'</strong><br><br>'
-    +'Nos vemos na quadra, <strong>'+state.principal.name.split(' ')[0]+'</strong>!</p></div>';
+    +'Nos vemos na quadra, <strong>'+state.principal.name.split(' ')[0]+'</strong>!</p>'
+    +pixHtml+'</div>';
 }
 
 function render(){
