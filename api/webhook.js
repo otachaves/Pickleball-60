@@ -24,10 +24,10 @@ async function getSheetData(paymentId) {
     const sheets = google.sheets({ version: "v4", auth });
     const result = await sheets.spreadsheets.values.get({
       spreadsheetId: "1yXdYMc0Ud-B7MSVUOZg0bMPiaKceLHHW4v-eDjYIwOQ",
-      range: "Sheet1!A:G",
+      range: "Sheet1!A:H",
     });
     const rows = result.data.values || [];
-    const rowIndex = rows.findIndex((r) => r[6] === "Pendente (Pix)");
+    const rowIndex = rows.findIndex((r) => r[7] === String(paymentId));
     if (rowIndex !== -1) {
       return { rowIndex: rowIndex + 1, name: rows[rowIndex][1], email: rows[rowIndex][2] };
     }
