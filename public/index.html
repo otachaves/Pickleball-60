@@ -377,8 +377,17 @@ function loadBricks(){
             })
             .then(function(r){return r.json();})
             .then(function(d){
-              if(d.status==='approved'||d.status==='pending'){state.step=6;render();resolve();}
-              else{reject();}
+              if(d.status==='approved'){
+                state.step=6;render();resolve();
+              } else if(d.status==='pending' && d.point_of_interaction){
+                var qr=d.point_of_interaction.transaction_data;
+                state.pixData={qrCode:qr.qr_code,qrCodeBase64:qr.qr_code_base64};
+                state.step=6;render();resolve();
+              } else if(d.status==='pending'){
+                state.step=6;render();resolve();
+              } else {
+                reject();
+              }
             })
             .catch(function(){reject();});
           });
