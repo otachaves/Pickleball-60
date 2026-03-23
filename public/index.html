@@ -407,11 +407,8 @@ function loadBricks(){
                 state.pixData={
                   qrCode:qr.qr_code,
                   qrCodeBase64:qr.qr_code_base64,
-                  paymentId:d.payment_id||d.id,
                 };
-                state.step=6;render();
-                startPixPolling();
-                resolve();
+                state.step=6;render();resolve();
               }else if(d.status==='pending'){
                 state.step=6;render();resolve();
               }else{
