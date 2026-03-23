@@ -358,10 +358,22 @@ function loadBricks(){
         onReady:function(){var l=document.getElementById('mp-loading');if(l)l.style.display='none';},
         onSubmit:function(data){
           return new Promise(function(resolve,reject){
+            var categories=state.selectedCats.map(function(id,i){
+              var cat=CATS.find(function(c){return c.id===id;});
+              var players=(state.players[id]||[]).map(function(s){return s.name;});
+              return{label:cat.label,price:calcPrice(i),players:players};
+            });
+            var payload=Object.assign({},data.formData,{
+              metadata:{
+                name:state.principal.name,
+                email:state.principal.email,
+                categories:JSON.stringify(categories),
+              }
+            });
             fetch('/api/process-payment',{
               method:'POST',
               headers:{'Content-Type':'application/json'},
-              body:JSON.stringify(data.formData)
+              body:JSON.stringify(payload)
             })
             .then(function(r){return r.json();})
             .then(function(d){
