@@ -157,15 +157,14 @@ module.exports = async (req, res) => {
     const result = await payment.create({ body: req.body });
 
     if (result.status === "approved" || result.status === "pending") {
-      const payer = req.body.payer || {};
-      const name = payer.first_name
-        ? `${payer.first_name} ${payer.last_name || ""}`.trim()
-        : payer.name || "Participante";
-      const email = payer.email || "";
-      const categories = req.body.metadata?.categories
-        ? JSON.parse(req.body.metadata.categories)
-        : [];
-      const total = categories.reduce((s, c) => s + c.price, 0);
+    const meta = req.body.metadata || {};
+    const name = meta.name || req.body.payer?.first_name || "Participante";
+    const email = meta.email || req.body.payer?.email || "";
+    const categories = meta.categories ? JSON.parse(meta.categories) : [];
+    const total = categories.reduce((s, c) => s + c.price, 0);
+
+    console.log("META:", JSON.stringify(meta));
+    console.log("CATEGORIES:", JSON.stringify(categories));
 
       const data = { name, email, categories, total };
 
