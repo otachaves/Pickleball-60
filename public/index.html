@@ -175,6 +175,7 @@ const state={
   players:{},
   preferenceId:null,
   couponApplied:false,
+  pixData:null,
 };
 
 function fmt(v){return'R$ '+v.toLocaleString('pt-BR');}
@@ -289,8 +290,8 @@ function renderStep4(){
   }).join('');
 
   var couponHtml=state.couponApplied
-    ?'<div class="coupon-applied">✓ Cupom 95OFF aplicado — 95% de desconto!</div>'
-    +'<div class="summary-row" style="color:#16a34a;font-weight:600"><span>Desconto (95%)</span><span>− '+fmt(baseTotal()-totalPrice())+'</span></div>'
+    ?'<div class="coupon-applied">✓ Cupom '+COUPON_CODE+' aplicado!</div>'
+    +'<div class="summary-row" style="color:#16a34a;font-weight:600"><span>Desconto</span><span>− '+fmt(baseTotal()-totalPrice())+'</span></div>'
     :'<div class="coupon-row"><input id="inp-coupon" type="text" placeholder="Cupom de desconto"><button id="btn-coupon">Aplicar</button></div>';
 
   return stepsHtml(4)
@@ -324,11 +325,14 @@ function renderSuccess(){
       +'<div style="background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:8px 12px;font-size:11px;word-break:break-all;color:#555;text-align:left">'+state.pixData.qrCode+'</div>'
       +'<button onclick="navigator.clipboard.writeText(\''+state.pixData.qrCode+'\')" style="margin-top:10px;padding:8px 16px;font-size:13px;font-weight:600;background:#16a34a;color:#fff;border:none;border-radius:8px;cursor:pointer;">Copiar código Pix</button>'
       +'</div>';
+    return '<div class="success"><div class="success-icon">⏳</div><h2>Quase lá!</h2>'
+      +'<p>Conclua o pagamento via Pix abaixo.<br>Você receberá a confirmação por email assim que o pagamento for identificado.</p>'
+      +pixHtml+'</div>';
   }
-  return '<div class="success"><div class="success-icon">🏆</div><h2>Vaga garantida!</h2>'
-    +'<p>Email enviado para <strong>'+state.principal.email+'</strong><br><br>'
+  return '<div class="success"><div class="success-icon">🏆</div><h2>Inscrição recebida!</h2>'
+    +'<p>Você receberá a confirmação por email em breve.<br><br>'
     +'Nos vemos na quadra, <strong>'+state.principal.name.split(' ')[0]+'</strong>!</p>'
-    +pixHtml+'</div>';
+    +'</div>';
 }
 
 function render(){
@@ -390,13 +394,13 @@ function loadBricks(){
             .then(function(d){
               if(d.status==='approved'){
                 state.step=6;render();resolve();
-              } else if(d.status==='pending' && d.point_of_interaction){
+              }else if(d.status==='pending'&&d.point_of_interaction){
                 var qr=d.point_of_interaction.transaction_data;
                 state.pixData={qrCode:qr.qr_code,qrCodeBase64:qr.qr_code_base64};
                 state.step=6;render();resolve();
-              } else if(d.status==='pending'){
+              }else if(d.status==='pending'){
                 state.step=6;render();resolve();
-              } else {
+              }else{
                 reject();
               }
             })
@@ -435,34 +439,28 @@ function bindEvents(){
       render();
     };
   });
-
   var b1=document.getElementById('btn-to2');
   if(b1)b1.onclick=function(){state.step=2;render();};
-
   var inN=document.getElementById('inp-name');
   if(inN)inN.oninput=function(e){state.principal.name=e.target.value;checkStep2Valid();};
   var inE=document.getElementById('inp-email');
   if(inE)inE.oninput=function(e){state.principal.email=e.target.value;checkStep2Valid();};
   var inG=document.getElementById('inp-gender');
   if(inG)inG.onchange=function(e){state.principal.gender=e.target.value;checkStep2Valid();};
-
   var b2=document.getElementById('btn-to3');
   if(b2)b2.onclick=function(){state.step=3;render();};
   var bk2=document.getElementById('btn-back2');
   if(bk2)bk2.onclick=function(){state.step=1;render();};
-
   document.querySelectorAll('.player-input').forEach(function(inp){
     inp.oninput=function(e){
       state.players[e.target.dataset.cat][+e.target.dataset.slot].name=e.target.value;
       checkStep3Valid();
     };
   });
-
   var b3=document.getElementById('btn-to4');
   if(b3)b3.onclick=function(){state.step=4;render();};
   var bk3=document.getElementById('btn-back3');
   if(bk3)bk3.onclick=function(){state.step=2;render();};
-
   var bc=document.getElementById('btn-coupon');
   if(bc)bc.onclick=function(){
     var val=document.getElementById('inp-coupon');
@@ -472,10 +470,8 @@ function bindEvents(){
       alert('Cupom inválido.');
     }
   };
-
   var b4=document.getElementById('btn-back4');
   if(b4)b4.onclick=function(){state.step=3;render();};
-
   var bp=document.getElementById('btn-pay');
   if(bp)bp.onclick=async function(){
     bp.disabled=true;bp.textContent='Aguarde...';
@@ -505,7 +501,6 @@ function bindEvents(){
       bp.disabled=false;bp.textContent='Pagar '+fmt(totalPrice())+' →';
     }
   };
-
   var bkp=document.getElementById('btn-back-pay');
   if(bkp)bkp.onclick=function(){state.step=4;render();};
 }
