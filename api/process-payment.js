@@ -154,7 +154,7 @@ module.exports = async (req, res) => {
 
     if (result.status === "approved" && result.payment_method_id !== "pix") {
       await Promise.all([
-        saveToSheet({ ...data, status: "Confirmado" }),
+        saveToSheet({ ...data, status: "Confirmado", paymentId: result.id }),
         sendConfirmationEmail(data),
         sendOrganizerEmail(data),
       ]);
