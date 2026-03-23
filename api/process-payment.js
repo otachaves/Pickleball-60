@@ -148,17 +148,15 @@ module.exports = async (req, res) => {
     const email = meta.email || req.body.payer?.email || "";
     const categories = meta.categories ? JSON.parse(meta.categories) : [];
     const total = categories.reduce((s, c) => s + c.price, 0);
-    const data = { name, email, categories, total };
+    const data = { name, email, categories, total, paymentMethod: result.payment_method_id };
 
     if (result.status === "approved" && result.payment_method_id !== "pix") {
-      // Cartão aprovado — confirma imediatamente
       await Promise.all([
         saveToSheet({ ...data, status: "Confirmado" }),
         sendConfirmationEmail(data),
         sendOrganizerEmail(data),
       ]);
     } else if (result.status === "pending" || result.payment_method_id === "pix") {
-      // Pix pendente — salva como pendente, webhook envia o email quando pago
       await saveToSheet({ ...data, status: "Pendente (Pix)" });
     }
 
