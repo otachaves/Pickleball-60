@@ -175,7 +175,11 @@ module.exports = async (req, res) => {
       ]);
     }
 
-    res.status(200).json({ status: result.status });
+    res.status(200).json({
+      status: result.status,
+      payment_method_id: result.payment_method_id,
+      point_of_interaction: result.point_of_interaction || null,
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Erro ao processar pagamento" });
