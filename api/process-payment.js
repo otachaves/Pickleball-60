@@ -37,6 +37,7 @@ async function saveToSheet(data) {
         `R$ ${data.total}`,
         data.status || "Confirmado",
         data.paymentId || "",
+        JSON.stringify(data.categories || []),
       ]],
     },
   });
