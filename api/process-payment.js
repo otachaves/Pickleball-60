@@ -151,6 +151,8 @@ module.exports = async (req, res) => {
   if (req.method !== "POST") return res.status(405).end();
 
   try {
+    console.log("BODY RECEBIDO:", JSON.stringify(req.body));
+
     const payment = new Payment(client);
     const result = await payment.create({ body: req.body });
 
