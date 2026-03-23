@@ -25,7 +25,7 @@ async function saveToSheet(data) {
   const playersText = data.categories.map((c) => `${c.label}: ${c.players.join(", ")}`).join(" | ");
   await sheets.spreadsheets.values.append({
     spreadsheetId: "1yXdYMc0Ud-B7MSVUOZg0bMPiaKceLHHW4v-eDjYIwOQ",
-    range: "Sheet1!A:G",
+    range: "Sheet1!A:H",
     valueInputOption: "USER_ENTERED",
     requestBody: {
       values: [[
@@ -36,6 +36,7 @@ async function saveToSheet(data) {
         playersText,
         `R$ ${data.total}`,
         data.status || "Confirmado",
+        data.paymentId || "",
       ]],
     },
   });
@@ -157,7 +158,7 @@ module.exports = async (req, res) => {
         sendOrganizerEmail(data),
       ]);
     } else if (result.status === "pending" || result.payment_method_id === "pix") {
-      await saveToSheet({ ...data, status: "Pendente (Pix)" });
+      await saveToSheet({ ...data, status: "Pendente (Pix)", paymentId: result.id });
     }
 
     res.status(200).json({
