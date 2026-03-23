@@ -29,7 +29,13 @@ async function getSheetData(paymentId) {
     const rows = result.data.values || [];
     const rowIndex = rows.findIndex((r) => r[7] === String(paymentId));
     if (rowIndex !== -1) {
-      return { rowIndex: rowIndex + 1, name: rows[rowIndex][1], email: rows[rowIndex][2] };
+      return {
+        rowIndex: rowIndex + 1,
+        name: rows[rowIndex][1],
+        email: rows[rowIndex][2],
+        total: rows[rowIndex][5],
+        categories: rows[rowIndex][8] ? JSON.parse(rows[rowIndex][8]) : [],
+      };
     }
     return null;
   } catch (e) {
@@ -78,8 +84,10 @@ module.exports = async (req, res) => {
 
     // Busca dados do pagador na planilha
     const sheetData = await getSheetData(data.id);
-    const name = sheetData?.name || result.payer?.first_name || "Participante";
-    const email = sheetData?.email || result.payer?.email || "";
+    const name = sheetData?.name || "Participante";
+    const email = sheetData?.email || "";
+    const categories = sheetData?.categories || [];
+    const total = sheetData?.total?.replace("R$ ", "") || "0";
 
     console.log("WEBHOOK Pix aprovado - name:", name, "email:", email);
 
@@ -87,6 +95,15 @@ module.exports = async (req, res) => {
       console.error("Email nao encontrado para o pagamento:", data.id);
       return res.status(200).end();
     }
+
+    const catRows = categories.map((c) => {
+      const players = (c.players || []).filter((p) => p).join(", ") || "-";
+      return `<tr>
+        <td style="padding:8px 12px;border-bottom:1px solid #eee;font-weight:600">${c.label}</td>
+        <td style="padding:8px 12px;border-bottom:1px solid #eee">${players}</td>
+        <td style="padding:8px 12px;border-bottom:1px solid #eee;text-align:right">R$ ${c.price}</td>
+      </tr>`;
+    }).join("");
 
     // Atualiza planilha e envia emails
     await Promise.all([
@@ -103,12 +120,25 @@ module.exports = async (req, res) => {
             </div>
             <div style="background:#fff;padding:24px;border:1px solid #eee;border-top:none;border-radius:0 0 12px 12px">
               <p style="font-size:15px">Ola, <strong>${name}</strong>!</p>
-              <p style="font-size:14px;color:#555;">Seu pagamento via Pix foi confirmado. Sua vaga esta garantida!</p>
+              <p style="font-size:14px;color:#555;margin-bottom:20px">Seu pagamento via Pix foi confirmado. Sua vaga esta garantida!</p>
+              <table style="width:100%;border-collapse:collapse;font-size:14px">
+                <thead>
+                  <tr style="background:#f9fafb">
+                    <th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#aaa">Categoria</th>
+                    <th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#aaa">Jogadores</th>
+                    <th style="padding:8px 12px;text-align:right;font-size:11px;text-transform:uppercase;color:#aaa">Valor</th>
+                  </tr>
+                </thead>
+                <tbody>${catRows}</tbody>
+              </table>
+              <div style="display:flex;justify-content:space-between;padding:12px;background:#f9fafb;border-radius:8px;margin-top:4px;font-weight:700;font-size:15px">
+                <span>Total pago</span><span>${total}</span>
+              </div>
               <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:14px;margin-top:20px;font-size:14px;color:#166534">
                 2 e 3 de maio de 2026<br>
                 Paroquia Santa Clara - R. Cel. Veiga, 1130 - Petropolis
               </div>
-              <p style="margin-top:20px;font-size:13px;color:#888">Nos vemos na quadra!</p>
+              <p style="margin-top:20px;font-size:13px;color:#888">Duvidas? Responda este email.<br>Nos vemos na quadra!</p>
             </div>
           </div>
         `,
