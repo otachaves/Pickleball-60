@@ -50,7 +50,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#fafaf8;color:#1a1a1a;}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .discount-banner{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:10px 14px;font-size:13px;color:#166534;margin-bottom:1rem;display:flex;align-items:center;gap:8px;font-weight:500;}
 .cat-card{background:#fff;border:1.5px solid #e8e8e8;border-radius:14px;padding:1rem 1.25rem;margin-bottom:10px;cursor:pointer;transition:all .15s;}
-.cat-card.esgotado{opacity:0.5;cursor:default;pointer-events:none;}
+.cat-card:hover{border-color:#bbb;}
 .cat-card.selected{border-color:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,.08);}
 .cat-header{display:flex;align-items:center;gap:12px;}
 .cat-check{width:22px;height:22px;border:1.5px solid #ddd;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#f5f5f3;}
@@ -194,23 +194,7 @@ function totalPrice(){
   return state.couponApplied?Math.max(1,Math.round(base*(1-COUPON_DISCOUNT))):base;
 }
 
-async function carregarVagas(){
-  try{
-    var r=await fetch('/api/vagas');
-    state.vagas=await r.json();
-  }catch(e){
-    state.vagas={};
-  }
-  state.vagasLoaded=true;
-  render();
-carregarVagas();
-}
-
-function getVagas(label){
-  return state.vagas[label]||{limite:99,inscritos:0,restantes:99,esgotado:false};
-}
-
-
+function stepsHtml(active){
   const steps=['Categorias','Dados','Jogadores','Pagamento'];
   return '<div class="steps">'+steps.map((s,i)=>{
     const n=i+1,cls=n===active?'active':n<active?'done':'';
@@ -222,27 +206,13 @@ function getVagas(label){
 function renderStep1(){
   const sel=state.selectedCats;
   const duplasSelected=sel.filter(id=>isDupla(id)).length;
-
-  if(!state.vagasLoaded){
-    // Mostra categorias normalmente enquanto carrega vagas
-    state.vagasLoaded=true;
-  }
-
   const catsHtml=CATS.map(function(c){
     const idx=sel.indexOf(c.id);
     const isSelected=idx!==-1;
     const isDiscount=isSelected&&calcPrice(idx)<c.price;
     const showDiscount=!isSelected&&isDupla(c.id)&&duplasSelected===1;
     const displayPrice=isSelected?calcPrice(idx):(showDiscount?Math.round(c.price*0.5):c.price);
-    const v=getVagas(c.label);
-    const esgotado=v.esgotado&&!isSelected;
-    const vagasTag=esgotado
-      ?'<span style="font-size:11px;font-weight:700;color:#dc2626;background:#fee2e2;padding:2px 8px;border-radius:99px;">Esgotado</span>'
-      :v.restantes<=3
-        ?'<span style="font-size:11px;font-weight:700;color:#92400e;background:#fef3c7;padding:2px 8px;border-radius:99px;">'+v.restantes+' vaga'+(v.restantes===1?'':'s')+'</span>'
-        :'<span style="font-size:11px;color:#aaa;">'+v.restantes+' vagas</span>';
-
-    return '<div class="cat-card '+(esgotado?'esgotado ':''+(isSelected?'selected':''))+'" '+(esgotado?'':'data-catid="'+c.id+'"')+'>'
+    return '<div class="cat-card '+(isSelected?'selected':'')+'" data-catid="'+c.id+'">'
       +'<div class="cat-header">'
       +'<div class="cat-check"><div class="cat-check-inner"></div></div>'
       +'<div class="cat-info"><div class="cat-name">'+c.label+'</div><div class="cat-desc">'+c.priceLabel+'</div></div>'
@@ -250,7 +220,6 @@ function renderStep1(){
       +(isDiscount||showDiscount?'<div class="cat-price-orig">'+fmt(c.price)+'</div>':'')
       +'<div class="cat-price">'+fmt(displayPrice)+'</div>'
       +((isDiscount||showDiscount)?'<div class="cat-badge">50% off</div>':'')
-      +'<div style="margin-top:4px;">'+vagasTag+'</div>'
       +'</div></div></div>';
   }).join('');
 
