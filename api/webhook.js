@@ -51,6 +51,8 @@ module.exports = async (req, res) => {
     const payment = new Payment(client);
     const result = await payment.get({ id: data.id });
 
+    console.log("WEBHOOK payment id:", data.id, "status:", result.status, "method:", result.payment_method_id);
+
     if (result.status !== "approved") return res.status(200).end();
 
     const payer = result.payer || {};
