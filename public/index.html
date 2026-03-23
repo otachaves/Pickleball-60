@@ -366,7 +366,7 @@ function loadBricks(){
     mp.bricks().create('payment','mp-bricks',{
       initialization:{amount:totalPrice(),preferenceId:state.preferenceId},
       customization:{
-        paymentMethods:{creditCard:'all',debitCard:'all',ticket:'all',bankTransfer:'all',maxInstallments:12},
+        paymentMethods:{creditCard:'all',maxInstallments:12},
         visual:{hideFormTitle:false,hidePaymentButton:false}
       },
       callbacks:{
