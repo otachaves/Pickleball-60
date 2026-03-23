@@ -24,7 +24,7 @@ async function getSheetData(paymentId) {
     const sheets = google.sheets({ version: "v4", auth });
     const result = await sheets.spreadsheets.values.get({
       spreadsheetId: "1yXdYMc0Ud-B7MSVUOZg0bMPiaKceLHHW4v-eDjYIwOQ",
-      range: "Sheet1!A:H",
+      range: "Sheet1!A:I",
     });
     const rows = result.data.values || [];
     const rowIndex = rows.findIndex((r) => r[7] === String(paymentId));
