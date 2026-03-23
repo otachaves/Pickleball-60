@@ -224,7 +224,8 @@ function renderStep1(){
   const duplasSelected=sel.filter(id=>isDupla(id)).length;
 
   if(!state.vagasLoaded){
-    return stepsHtml(1)+'<p style="font-size:14px;color:#aaa;text-align:center;padding:2rem 0;">Carregando vagas disponíveis...</p>';
+    // Mostra categorias normalmente enquanto carrega vagas
+    state.vagasLoaded=true;
   }
 
   const catsHtml=CATS.map(function(c){
