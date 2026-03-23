@@ -315,6 +315,13 @@ function renderPayment(){
     +'</div>';
 }
 
+function renderPixConfirmed(){
+  return '<div class="success"><div class="success-icon">🏆</div><h2>Inscricao confirmada!</h2>'
+    +'<p>Pagamento via Pix confirmado!<br>Email enviado para <strong>'+state.principal.email+'</strong><br><br>'
+    +'Nos vemos na quadra, <strong>'+state.principal.name.split(' ')[0]+'</strong>!</p>'
+    +'</div>';
+}
+
 function renderSuccess(){
   var pixHtml='';
   if(state.pixData){
@@ -343,7 +350,8 @@ function render(){
   else if(state.step===3)app.innerHTML=renderStep3();
   else if(state.step===4)app.innerHTML=renderStep4();
   else if(state.step===5){app.innerHTML=renderPayment();initBricks();}
-  else app.innerHTML=renderSuccess();
+  else if(state.step===6)app.innerHTML=renderSuccess();
+  else app.innerHTML=renderPixConfirmed();
   bindEvents();
 }
 
@@ -396,8 +404,14 @@ function loadBricks(){
                 state.step=6;render();resolve();
               }else if(d.status==='pending'&&d.point_of_interaction){
                 var qr=d.point_of_interaction.transaction_data;
-                state.pixData={qrCode:qr.qr_code,qrCodeBase64:qr.qr_code_base64};
-                state.step=6;render();resolve();
+                state.pixData={
+                  qrCode:qr.qr_code,
+                  qrCodeBase64:qr.qr_code_base64,
+                  paymentId:d.payment_id||d.id,
+                };
+                state.step=6;render();
+                startPixPolling();
+                resolve();
               }else if(d.status==='pending'){
                 state.step=6;render();resolve();
               }else{
