@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Copa Imperial 60+</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;min-height:100vh;}
+.header{background:#1a1a1a;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.header h1{color:#fff;font-size:16px;font-weight:600;}
+.header span{color:#f0c040;font-size:12px;font-weight:600;}
+.container{max-width:480px;margin:0 auto;padding:1.5rem 1rem;}
+.section-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:#aaa;margin-bottom:1rem;}
+.cat-row{background:#fff;border:1px solid #e8e8e8;border-radius:12px;padding:1rem 1.25rem;margin-bottom:10px;display:flex;align-items:center;gap:12px;}
+.cat-info{flex:1;}
+.cat-name{font-size:15px;font-weight:600;}
+.cat-status{font-size:12px;margin-top:3px;}
+.cat-status.aberta{color:#16a34a;}
+.cat-status.fechada{color:#dc2626;}
+.toggle{position:relative;width:48px;height:26px;flex-shrink:0;}
+.toggle input{opacity:0;width:0;height:0;position:absolute;}
+.toggle-slider{position:absolute;inset:0;background:#ddd;border-radius:99px;cursor:pointer;transition:background .2s;}
+.toggle input:checked+.toggle-slider{background:#16a34a;}
+.toggle-slider::before{content:'';position:absolute;width:20px;height:20px;left:3px;top:3px;background:#fff;border-radius:50%;transition:transform .2s;}
+.toggle input:checked+.toggle-slider::before{transform:translateX(22px);}
+.saving{font-size:12px;color:#aaa;text-align:center;margin-top:1rem;}
+.close-all{width:100%;margin-top:1.5rem;padding:14px;font-size:14px;font-weight:700;background:#dc2626;color:#fff;border:none;border-radius:12px;cursor:pointer;}
+.close-all:hover{background:#b91c1c;}
+.open-all{width:100%;margin-top:8px;padding:14px;font-size:14px;font-weight:700;background:#16a34a;color:#fff;border:none;border-radius:12px;cursor:pointer;}
+.open-all:hover{background:#15803d;}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Copa Imperial 60+ — Admin</h1>
+  <span>Painel de controle</span>
+</div>
+
+<div class="container">
+  <div class="section-title">Categorias</div>
+  <div id="cats">Carregando...</div>
+  <p class="saving" id="saving"></p>
+  <button class="close-all" onclick="setAll(false)">Fechar todas as categorias</button>
+  <button class="open-all" onclick="setAll(true)">Abrir todas as categorias</button>
+</div>
+
+<script>
+const CATS = [
+  { id: 'sm', label: 'Single masculino' },
+  { id: 'dm', label: 'Dupla masculina' },
+  { id: 'df', label: 'Dupla feminina' },
+  { id: 'mix', label: 'Dupla mista' },
+  { id: 'q', label: 'Quarteto' },
+];
+
+var status = {};
+
+async function load() {
+  try {
+    var r = await fetch('/api/admin');
+    status = await r.json();
+  } catch(e) {
+    status = {};
+  }
+  render();
+}
+
+function render() {
+  var html = CATS.map(function(c) {
+    var aberta = status[c.id] !== false; // default aberta
+    return '<div class="cat-row">'
+      + '<div class="cat-info">'
+      + '<div class="cat-name">' + c.label + '</div>'
+      + '<div class="cat-status ' + (aberta ? 'aberta' : 'fechada') + '">'
+      + (aberta ? '● Aberta' : '● Fechada / Esgotada')
+      + '</div></div>'
+      + '<label class="toggle">'
+      + '<input type="checkbox" ' + (aberta ? 'checked' : '') + ' onchange="toggle(\'' + c.id + '\', this.checked)">'
+      + '<span class="toggle-slider"></span>'
+      + '</label>'
+      + '</div>';
+  }).join('');
+  document.getElementById('cats').innerHTML = html;
+}
+
+async function toggle(catId, aberta) {
+  status[catId] = aberta;
+  render();
+  document.getElementById('saving').textContent = 'Salvando...';
+  try {
+    await fetch('/api/admin', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ catId: catId, aberta: aberta })
+    });
+    document.getElementById('saving').textContent = 'Salvo!';
+    setTimeout(function() { document.getElementById('saving').textContent = ''; }, 2000);
+  } catch(e) {
+    document.getElementById('saving').textContent = 'Erro ao salvar.';
+  }
+}
+
+async function setAll(aberta) {
+  for (var i = 0; i < CATS.length; i++) {
+    await toggle(CATS[i].id, aberta);
+  }
+}
+
+load();
+</script>
+</body>
+</html>
