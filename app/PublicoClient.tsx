@@ -11,6 +11,7 @@ import TabelaClassificacao from '@/components/TabelaClassificacao'
 import CardJogo from '@/components/CardJogo'
 import BracketView from '@/components/BracketView'
 import RegrasBox from '@/components/RegrasBox'
+import InfoEvento from '@/components/InfoEvento'
 
 interface Props {
   categorias: Categoria[]
@@ -22,9 +23,12 @@ interface Props {
 type Aba = 'grupos' | 'chaveamento'
 
 export default function PublicoClient({ categorias, grupos, times, jogosIniciais }: Props) {
-  const [categoriaAtiva, setCategoriaAtiva] = useState(categorias[0]?.id ?? 0)
+  // categoriaAtiva: 0 = aba "Informações" (tela inicial), >0 = id da categoria
+  const [categoriaAtiva, setCategoriaAtiva] = useState(0)
   const [jogos, setJogos] = useState<Jogo[]>(jogosIniciais)
   const [abaAtiva, setAbaAtiva] = useState<Aba>('grupos')
+
+  const mostrandoInfo = categoriaAtiva === 0
 
   useEffect(() => {
     const channel = supabase
@@ -64,14 +68,19 @@ export default function PublicoClient({ categorias, grupos, times, jogosIniciais
     <div className="min-h-screen bg-slate-50">
       <header className="bg-white border-b border-slate-300 px-4 py-4">
         <h1 className="text-xl font-bold text-amber-600 mb-3">🏆 Copa Imperial</h1>
-        <CategoriaTabs categorias={categorias} ativa={categoriaAtiva} onChange={(id) => { setCategoriaAtiva(id); setAbaAtiva('grupos') }} />
-        {categoriaAtivaObj && getHorarioCategoria(categoriaAtivaObj.nome) && (
+        <CategoriaTabs
+          categorias={categorias}
+          ativa={categoriaAtiva}
+          onChange={(id) => { setCategoriaAtiva(id); setAbaAtiva('grupos') }}
+          showInfo
+        />
+        {!mostrandoInfo && categoriaAtivaObj && getHorarioCategoria(categoriaAtivaObj.nome) && (
           <p className="text-xs text-amber-700/80 mt-2 font-medium">
             🕗 {getHorarioCategoria(categoriaAtivaObj.nome)}
           </p>
         )}
 
-        {chaveamentoGerado && (
+        {!mostrandoInfo && chaveamentoGerado && (
           <div className="flex gap-1 mt-3">
             {(['grupos', 'chaveamento'] as Aba[]).map((aba) => (
               <button
@@ -89,11 +98,13 @@ export default function PublicoClient({ categorias, grupos, times, jogosIniciais
       </header>
 
       <main className={`px-4 py-6 mx-auto space-y-8 ${abaAtiva === 'chaveamento' ? 'max-w-6xl' : 'max-w-2xl'}`}>
-        {abaAtiva === 'grupos' && categoriaAtivaObj && (
+        {mostrandoInfo && <InfoEvento />}
+
+        {!mostrandoInfo && abaAtiva === 'grupos' && categoriaAtivaObj && (
           <RegrasBox categoria={categoriaAtivaObj} numGrupos={gruposDaCategoria.length} />
         )}
 
-        {abaAtiva === 'grupos' && gruposDaCategoria.map((grupo) => {
+        {!mostrandoInfo && abaAtiva === 'grupos' && gruposDaCategoria.map((grupo) => {
           const timesDo = times.filter((t) => t.grupo_id === grupo.id)
           const jogosDo = sortGamesRoundRobin(jogosGrupos.filter((j) => j.grupo_id === grupo.id))
           const classificacao = calcularClassificacao(timesDo, jogosDo)
@@ -109,7 +120,7 @@ export default function PublicoClient({ categorias, grupos, times, jogosIniciais
           )
         })}
 
-        {abaAtiva === 'chaveamento' && (
+        {!mostrandoInfo && abaAtiva === 'chaveamento' && (
           <section>
             <BracketView jogos={jogosElim} times={times} getCodigo={getCodigo} />
           </section>
