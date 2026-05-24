@@ -67,7 +67,7 @@ export default function PublicoClient({ categorias, grupos, times, jogosIniciais
   return (
     <div className="min-h-screen bg-slate-50">
       <header className="bg-white border-b border-slate-300 px-4 py-4">
-        <h1 className="text-xl font-bold text-amber-600 mb-3">🏆 Copa Imperial</h1>
+        <h1 className="text-xl font-bold text-amber-600 mb-3">🏆 Copa Cidade Imperial – Dupla Mista</h1>
         <CategoriaTabs
           categorias={categorias}
           ativa={categoriaAtiva}

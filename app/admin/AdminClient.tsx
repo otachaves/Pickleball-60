@@ -61,7 +61,7 @@ export default function AdminClient({
     return getCodigoJogo(j, cat, grupos, jogos)
   }
 
-  // ── Resultado de jogo ──────────────────────────────────────
+  // ── Resultado de jogo ───────────────────────────────────────────────────
   const openModal = (jogo: Jogo) => {
     setModal({
       jogo,
@@ -122,7 +122,7 @@ export default function AdminClient({
     }
   }
 
-  // ── Edição de nome ─────────────────────────────────────────
+  // ── Edição de nome ─────────────────────────────────────────────────
   const saveNomeTime = async () => {
     if (!editandoTime) return
     const { error } = await supabase
@@ -152,7 +152,7 @@ export default function AdminClient({
     }
   }
 
-  // ── Wildcard extra games ───────────────────────────────────
+  // ── Wildcard extra games ───────────────────────────────────────────────
   const criarJogosWildcard = async (tipo: 'dois' | 'tres', terceiros: { time: Time }[]) => {
     setGerandoWildcard(true)
     const rows = terceiros.map((t) => ({
@@ -174,7 +174,7 @@ export default function AdminClient({
     setGerandoWildcard(false)
   }
 
-  // ── Swap de times no bracket ──────────────────────────────
+  // ── Swap de times no bracket ────────────────────────────────────────────
   const swapBracket = async (
     src: { jogoId: number; pos: 'a' | 'b'; timeId: number },
     dst: { jogoId: number; pos: 'a' | 'b'; timeId: number }
@@ -209,7 +209,7 @@ export default function AdminClient({
     )
   }
 
-  // ── Avançar/Voltar fase eliminatória ──────────────────────
+  // ── Avançar/Voltar fase eliminatória ─────────────────────────────────────
   const [avancando, setAvancando] = useState(false)
   const [confirmVoltarFase, setConfirmVoltarFase] = useState<'quartas' | 'semifinal' | null>(null)
   const [confirmResetBracket, setConfirmResetBracket] = useState(false)
@@ -244,8 +244,6 @@ export default function AdminClient({
         return
       }
 
-      // SF1: vencedor QF1 vs vencedor QF2
-      // SF2: vencedor QF3 vs vencedor QF4
       const [r1, r2] = await Promise.all([
         supabase.from('jogos').update({ time_a_id: vQf1, time_b_id: vQf2 }).eq('id', sf1.id),
         supabase.from('jogos').update({ time_a_id: vQf3, time_b_id: vQf4 }).eq('id', sf2.id),
@@ -297,8 +295,6 @@ export default function AdminClient({
         return
       }
 
-      // Final: vencedor SF1 vs vencedor SF2
-      // 3º lugar: perdedor SF1 vs perdedor SF2
       const [r1, r2] = await Promise.all([
         supabase.from('jogos').update({ time_a_id: vSf1, time_b_id: vSf2 }).eq('id', fin.id),
         supabase.from('jogos').update({ time_a_id: pSf1, time_b_id: pSf2 }).eq('id', ter.id),
@@ -338,11 +334,10 @@ export default function AdminClient({
     setAvancando(false)
   }
 
-  // ── Voltar fase ────────────────────────────────────────────
+  // ── Voltar fase ─────────────────────────────────────────────────────────
   const voltarFase = async (fase: 'quartas' | 'semifinal') => {
     setAvancando(true)
 
-    // Use any team from the category as placeholder (foreign keys can't be 0)
     const timesDaCategoria = times.filter((t) =>
       grupos.some((g) => g.id === t.grupo_id && g.categoria_id === categoriaAtiva)
     )
@@ -354,7 +349,6 @@ export default function AdminClient({
     }
 
     if (fase === 'quartas') {
-      // Voltar de semi para quartas: zera SF
       const semis = jogosElim.filter((j) => j.rodada === 'semifinal')
       const updates = semis.map((j) =>
         supabase
@@ -394,7 +388,6 @@ export default function AdminClient({
     }
 
     if (fase === 'semifinal') {
-      // Voltar de final para semi: zera Final + 3º lugar
       const fin = jogosElim.find((j) => j.rodada === 'final')
       const ter = jogosElim.find((j) => j.rodada === 'terceiro_lugar')
       const updates = [fin, ter]
@@ -440,10 +433,9 @@ export default function AdminClient({
     setAvancando(false)
   }
 
-  // ── Resetar chaveamento (volta para fase de grupos) ───────
+  // ── Resetar chaveamento (volta para fase de grupos) ───────────────────────
   const resetBracket = async () => {
     setAvancando(true)
-    // Apaga TODOS os jogos da categoria que não são da fase de grupos
     const idsParaDeletar = jogos
       .filter((j) => j.categoria_id === categoriaAtiva && j.rodada !== 'grupos')
       .map((j) => j.id)
@@ -470,7 +462,7 @@ export default function AdminClient({
     setAvancando(false)
   }
 
-  // ── Swap de time no bracket (substituir por outro time) ───
+  // ── Swap de time no bracket (substituir por outro time) ─────────────────────
   const executarSwap = async (newTimeId: number) => {
     if (!swapJogo) return
     const currentJogo = jogos.find((j) => j.id === swapJogo.jogoId)
@@ -484,7 +476,6 @@ export default function AdminClient({
       return
     }
 
-    // Find if newTimeId is in another pending bracket slot (we'll swap)
     const otherJogo = jogosElim.find(
       (j) =>
         j.id !== swapJogo.jogoId &&
@@ -539,7 +530,7 @@ export default function AdminClient({
     setSwapJogo(null)
   }
 
-  // ── Geração do chaveamento ─────────────────────────────────
+  // ── Geração do chaveamento ───────────────────────────────────────────────
   const gerarChaveamento = async (classificados: ClassificacaoRow[]) => {
     setGerandoBracket(true)
     const novosJogos = gerarJogosEliminatorios(categoriaAtiva, classificados)
@@ -556,7 +547,7 @@ export default function AdminClient({
     setGerandoBracket(false)
   }
 
-  // ── Dados da categoria ativa ───────────────────────────────
+  // ── Dados da categoria ativa ───────────────────────────────────────────────
   const gruposDaCategoria = grupos.filter((g) => g.categoria_id === categoriaAtiva)
   const jogosGrupos = jogos.filter(
     (j) => j.categoria_id === categoriaAtiva && j.rodada === 'grupos'
@@ -571,7 +562,6 @@ export default function AdminClient({
     jogosGrupos.length > 0 && jogosGrupos.every((j) => j.status === 'encerrado')
   const chaveamentoGerado = jogosElim.length > 0
 
-  // Wildcard status (for quartas categories with 3 groups)
   const config = somenteGrupos
     ? null
     : getBracketConfig(gruposDaCategoria)
@@ -591,13 +581,11 @@ export default function AdminClient({
       wildcardStatus.wildcardResolvidos.length < (config?.wildcards ?? 0)
     : false
 
-  // Final classified list for bracket generation
   const classificadosFinais =
     wildcardStatus && !wildcardPendente
       ? [...wildcardStatus.diretos, ...wildcardStatus.wildcardResolvidos]
       : null
 
-  // For no-wildcard categories
   const classificadosSemWildcard =
     config && !config.wildcards && todosGruposEncerrados
       ? gruposDaCategoria.flatMap((g) => {
@@ -620,7 +608,7 @@ export default function AdminClient({
       {/* Header */}
       <header className="bg-white border-b border-slate-300 px-4 py-4">
         <div className="flex items-center justify-between mb-3">
-          <h1 className="text-xl font-bold text-amber-600">⚙️ Admin – Copa Imperial</h1>
+          <h1 className="text-xl font-bold text-amber-600">⚙️ Admin – Copa Cidade Imperial</h1>
           <div className="flex items-center gap-2">
             <a
               href={`/imprimir?token=${token}`}
@@ -678,7 +666,6 @@ export default function AdminClient({
           <div className="space-y-8">
             <RegrasBox categoria={categoriaAtivaObj} numGrupos={gruposDaCategoria.length} />
 
-            {/* Wildcard games */}
             {jogosWildcard.length > 0 && (
               <section>
                 <h2 className="text-sm font-bold text-amber-600 uppercase tracking-widest mb-3">
@@ -704,7 +691,6 @@ export default function AdminClient({
               </section>
             )}
 
-            {/* Group games */}
             {gruposDaCategoria.map((grupo) => {
               const jogosDo = sortGamesRoundRobin(jogosGrupos.filter((j) => j.grupo_id === grupo.id))
               const pendentes = jogosDo.filter((j) => j.status !== 'encerrado')
@@ -744,7 +730,6 @@ export default function AdminClient({
               )
             })}
 
-            {/* Elimination games */}
             {jogosElim.length > 0 && (
               <section>
                 <h2 className="text-sm font-bold text-slate-600 uppercase tracking-widest mb-3">
@@ -845,7 +830,6 @@ export default function AdminClient({
         {/* ── ABA CHAVEAMENTO ── */}
         {abaAtiva === 'chaveamento' && !somenteGrupos && (
           <div className="space-y-8">
-            {/* Classificação por grupo */}
             {gruposDaCategoria.map((grupo) => {
               const t = times.filter((x) => x.grupo_id === grupo.id)
               const j = jogosGrupos.filter((x) => x.grupo_id === grupo.id)
@@ -859,7 +843,6 @@ export default function AdminClient({
               )
             })}
 
-            {/* Wildcard alert */}
             {wildcardStatus?.empate && !chaveamentoGerado && (
               <div className="rounded-xl border border-amber-400 bg-amber-100 p-4">
                 <p className="text-amber-600 font-semibold text-sm mb-1">
@@ -903,7 +886,6 @@ export default function AdminClient({
               </div>
             )}
 
-            {/* Gerar chaveamento */}
             {!chaveamentoGerado && (
               <div className="rounded-xl border border-slate-300 bg-white p-5 text-center">
                 {prontoParaGerar ? (
@@ -931,7 +913,6 @@ export default function AdminClient({
               </div>
             )}
 
-            {/* Bracket + botões de avanço */}
             {chaveamentoGerado && (() => {
               const quartas = jogosElim.filter((j) => j.rodada === 'quartas')
               const semis   = jogosElim.filter((j) => j.rodada === 'semifinal')
@@ -941,7 +922,6 @@ export default function AdminClient({
               const quartasOk = quartas.length > 0 && quartas.every((j) => j.status === 'encerrado')
               const semisOk   = semis.length > 0 && semis.every((j) => j.status === 'encerrado')
 
-              // "Placeholder" = SF/Final ainda tem mesmo time nos dois lados
               const semiTemPlaceholder = semis.some((j) => j.time_a_id === j.time_b_id)
               const finalTemPlaceholder = fin && ter && fin.time_a_id === fin.time_b_id
 
@@ -953,7 +933,6 @@ export default function AdminClient({
 
               return (
                 <>
-                  {/* Avançar para Semi */}
                   {showAvancarSemi && (
                     <div className="rounded-xl border border-emerald-300 bg-emerald-50 p-4 flex items-center justify-between gap-3">
                       <p className="text-emerald-700 text-sm font-semibold flex-1">
@@ -969,7 +948,6 @@ export default function AdminClient({
                     </div>
                   )}
 
-                  {/* Avançar para Final */}
                   {showAvancarFinal && (
                     <div className="rounded-xl border border-emerald-300 bg-emerald-50 p-4 flex items-center justify-between gap-3">
                       <p className="text-emerald-700 text-sm font-semibold flex-1">
@@ -985,7 +963,6 @@ export default function AdminClient({
                     </div>
                   )}
 
-                  {/* Voltar para Quartas (limpa Semi) */}
                   {semiPopulada && (
                     <div className="rounded-xl border border-red-300 bg-red-50 p-3 flex items-center justify-between gap-3">
                       <p className="text-red-700 text-xs flex-1">
@@ -1001,7 +978,6 @@ export default function AdminClient({
                     </div>
                   )}
 
-                  {/* Voltar para Semi (limpa Final) */}
                   {finalPopulada && (
                     <div className="rounded-xl border border-red-300 bg-red-50 p-3 flex items-center justify-between gap-3">
                       <p className="text-red-700 text-xs flex-1">
@@ -1045,7 +1021,6 @@ export default function AdminClient({
         )}
       </main>
 
-      {/* Modal resetar chaveamento (volta para fase de grupos) */}
       {confirmResetBracket && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4">
           <div className="bg-white rounded-2xl p-6 w-full max-w-sm border border-red-400">
@@ -1077,7 +1052,6 @@ export default function AdminClient({
         </div>
       )}
 
-      {/* Modal voltar fase */}
       {confirmVoltarFase && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4">
           <div className="bg-white rounded-2xl p-6 w-full max-w-sm border border-slate-300">
@@ -1108,7 +1082,6 @@ export default function AdminClient({
         </div>
       )}
 
-      {/* Modal trocar time */}
       {swapJogo && (() => {
         const currentJogo = jogos.find((j) => j.id === swapJogo.jogoId)
         const currentTimeId = currentJogo
@@ -1121,10 +1094,8 @@ export default function AdminClient({
         const timesDaCategoria = times.filter((t) =>
           grupos.some((g) => g.id === t.grupo_id && g.categoria_id === categoriaAtiva)
         )
-        // Excluir o time atual
         const opcoes = timesDaCategoria.filter((t) => t.id !== currentTimeId)
 
-        // Indicar quais times estão na fase eliminatória
         const timesNaElim = new Set<number>()
         jogosElim.forEach((j) => {
           if (j.id !== swapJogo.jogoId) {
@@ -1174,7 +1145,6 @@ export default function AdminClient({
         )
       })()}
 
-      {/* Modal resultado */}
       {modal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4">
           <div className="bg-white rounded-2xl p-6 w-full max-w-sm border border-slate-300 shadow-2xl">
