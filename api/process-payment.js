@@ -54,13 +54,13 @@ async function sendConfirmationEmail(data) {
   }).join("");
 
   await transporter.sendMail({
-    from: `"Copa Imperial 60+" <${process.env.GMAIL_USER}>`,
+    from: `"Copa Imperial Duplas Mistas" <${process.env.GMAIL_USER}>`,
     to: data.email,
-    subject: "Inscricao confirmada - Copa Imperial 60+",
+    subject: "Inscricao confirmada - Copa Imperial Duplas Mistas",
     html: `
       <div style="font-family:sans-serif;max-width:560px;margin:0 auto;color:#1a1a1a">
         <div style="background:#16a34a;padding:28px 24px;text-align:center;border-radius:12px 12px 0 0">
-          <h1 style="color:#fff;margin:0;font-size:22px">Copa Imperial 60+</h1>
+          <h1 style="color:#fff;margin:0;font-size:22px">Copa Imperial Duplas Mistas</h1>
           <p style="color:rgba(255,255,255,0.85);margin:6px 0 0;font-size:14px">Inscricao confirmada!</p>
         </div>
         <div style="background:#fff;padding:24px;border:1px solid #eee;border-top:none;border-radius:0 0 12px 12px">
@@ -80,7 +80,7 @@ async function sendConfirmationEmail(data) {
             <span>Total pago</span><span>R$ ${data.total}</span>
           </div>
           <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:14px;margin-top:20px;font-size:14px;color:#166534">
-            📅 2 e 3 de maio de 2026<br>
+            📅 4 e 5 de julho de 2026<br>
             📍 Paróquia Santa Clara — R. Cel. Veiga, 1130 · Petrópolis
           </div>
           <p style="margin-top:20px;font-size:13px;color:#888">Dúvidas? Responda este email.<br>Nos vemos na quadra!</p>
@@ -101,7 +101,7 @@ async function sendOrganizerEmail(data) {
   }).join("");
 
   await transporter.sendMail({
-    from: `"Copa Imperial 60+" <${process.env.GMAIL_USER}>`,
+    from: `"Copa Imperial Duplas Mistas" <${process.env.GMAIL_USER}>`,
     to: process.env.GMAIL_USER,
     subject: `Nova inscricao - ${data.name}`,
     html: `

@@ -60,13 +60,13 @@ module.exports = async (req, res) => {
       await Promise.all([
         updateSheetStatus(email),
         transporter.sendMail({
-          from: `"Copa Imperial 60+" <${process.env.GMAIL_USER}>`,
+          from: `"Copa Imperial Duplas Mistas" <${process.env.GMAIL_USER}>`,
           to: email,
-          subject: "Pagamento confirmado - Copa Imperial 60+",
+          subject: "Pagamento confirmado - Copa Imperial Duplas Mistas",
           html: `
             <div style="font-family:sans-serif;max-width:560px;margin:0 auto;color:#1a1a1a">
               <div style="background:#16a34a;padding:28px 24px;text-align:center;border-radius:12px 12px 0 0">
-                <h1 style="color:#fff;margin:0;font-size:22px">Copa Imperial 60+</h1>
+                <h1 style="color:#fff;margin:0;font-size:22px">Copa Imperial Duplas Mistas</h1>
                 <p style="color:rgba(255,255,255,0.85);margin:6px 0 0;font-size:14px">Pagamento confirmado!</p>
               </div>
               <div style="background:#fff;padding:24px;border:1px solid #eee;border-top:none;border-radius:0 0 12px 12px">
@@ -75,7 +75,7 @@ module.exports = async (req, res) => {
                 ${categories.map(c => `<p style="font-size:14px;margin:4px 0"><strong>${c.label}</strong> - ${c.players.join(", ")}: R$ ${c.price}</p>`).join("")}
                 <p style="font-size:15px;font-weight:700;margin-top:12px">Total: R$ ${total}</p>
                 <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:14px;margin-top:20px;font-size:14px;color:#166534">
-                  2 e 3 de maio de 2026<br>
+                  4 e 5 de julho de 2026<br>
                   Paroquia Santa Clara - R. Cel. Veiga, 1130 - Petropolis
                 </div>
                 <p style="margin-top:20px;font-size:13px;color:#888">Nos vemos na quadra!</p>
@@ -84,7 +84,7 @@ module.exports = async (req, res) => {
           `,
         }),
         transporter.sendMail({
-          from: `"Copa Imperial 60+" <${process.env.GMAIL_USER}>`,
+          from: `"Copa Imperial Duplas Mistas" <${process.env.GMAIL_USER}>`,
           to: process.env.GMAIL_USER,
           subject: `Pix confirmado - ${name}`,
           html: `<p>Pagamento Pix confirmado para <strong>${name}</strong> (${email}). Total: R$ ${total}</p>`,
