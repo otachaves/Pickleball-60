@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Copa Imperial – Pickleball',
-  description: 'Tabela e resultados da Copa Imperial de Pickleball',
+  title: 'Copa Cidade Imperial – Dupla Mista',
+  description: 'Tabela e resultados da Copa Cidade Imperial de Pickleball – Dupla Mista',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

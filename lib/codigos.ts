@@ -2,11 +2,11 @@ import { Categoria, Grupo, Jogo } from './types'
 import { sortGamesRoundRobin } from './scheduling'
 
 const CATEGORIA_INITIALS: Record<string, string> = {
-  'Single Masculino': 'SM',
-  'Dupla Mista': 'DX',
-  'Dupla Masculina': 'DM',
-  'Dupla Feminina': 'DF',
-  'Quarteto': 'QT',
+  'Kids': 'KD',
+  'Open': 'OP',
+  '40+':  '40',
+  '50+':  '50',
+  '60+':  '60',
 }
 
 function getInitials(nome: string): string {

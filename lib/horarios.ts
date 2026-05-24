@@ -2,11 +2,11 @@
 // Identificado por nome da categoria (ou cair no default se não encontrar)
 
 export const HORARIOS_CATEGORIA: Record<string, string> = {
-  'Single Masculino': '2 de maio · a partir de 08:00',
-  'Dupla Feminina': '2 de maio · a partir de 13:00',
-  'Dupla Masculina': '2 de maio · a partir de 15:00',
-  'Dupla Mista': '3 de maio · a partir de 09:00',
-  'Quarteto': '3 de maio · a partir de 13:00',
+  'Kids':  '4 de julho · a partir de 08:00',
+  'Open':  '4 de julho · a partir de 10:00',
+  '40+':   '5 de julho · a partir de 08:00',
+  '50+':   '5 de julho · a partir de 10:30',
+  '60+':   '5 de julho · a partir de 13:00',
 }
 
 export function getHorarioCategoria(nomeCategoria: string): string | null {

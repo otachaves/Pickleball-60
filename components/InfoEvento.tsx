@@ -3,9 +3,9 @@ export default function InfoEvento() {
     <div className="space-y-6 max-w-2xl mx-auto">
       <div className="text-center mb-8">
         <h1 className="text-3xl sm:text-4xl font-black text-amber-600 mb-2">
-          🏆 Copa Imperial 60+
+          🏆 Copa Cidade Imperial
         </h1>
-        <p className="text-lg text-slate-700 font-medium">Torneio de Pickleball</p>
+        <p className="text-lg text-slate-700 font-medium">Dupla Mista – Pickleball</p>
       </div>
 
       <section className="rounded-2xl border border-slate-300 bg-white p-5 shadow-sm">
@@ -15,19 +15,19 @@ export default function InfoEvento() {
         <div className="space-y-3 text-sm text-slate-700">
           <div className="flex items-start gap-3">
             <span className="text-slate-500 font-mono text-xs uppercase mt-0.5 w-20 flex-shrink-0">
-              1 maio
+              4 jul
             </span>
             <div>
-              <p className="font-semibold text-slate-900">Open Play</p>
-              <p className="text-slate-600">A partir das 15:00</p>
+              <p className="font-semibold text-slate-900">Torneio – Dia 1</p>
+              <p className="text-slate-600">Veja horário de cada categoria nas abas</p>
             </div>
           </div>
           <div className="flex items-start gap-3">
             <span className="text-slate-500 font-mono text-xs uppercase mt-0.5 w-20 flex-shrink-0">
-              2-3 maio
+              5 jul
             </span>
             <div>
-              <p className="font-semibold text-slate-900">Torneio</p>
+              <p className="font-semibold text-slate-900">Torneio – Dia 2</p>
               <p className="text-slate-600">Veja horário de cada categoria nas abas</p>
             </div>
           </div>

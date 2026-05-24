@@ -1,10 +1,12 @@
--- Copa Imperial – Schema
+-- Copa Cidade Imperial – Schema
 -- Run this in Supabase SQL Editor
 
 create table if not exists categorias (
-  id   serial primary key,
-  nome text not null,
-  ordem int not null default 0
+  id      serial primary key,
+  nome    text not null,
+  ordem   int  not null default 0,
+  formato text not null default 'quartas'
+    check (formato in ('grupos_apenas', 'quartas', 'semifinal'))
 );
 
 create table if not exists grupos (
@@ -22,13 +24,16 @@ create table if not exists times (
 create table if not exists jogos (
   id               serial primary key,
   categoria_id     int  not null references categorias(id),
-  grupo_id         int  not null references grupos(id),
+  grupo_id         int  references grupos(id),
   time_a_id        int  not null references times(id),
   time_b_id        int  not null references times(id),
   placar_a         int  default 0,
   placar_b         int  default 0,
   status           text not null default 'pendente' check (status in ('pendente','em_andamento','encerrado')),
   horario_previsto timestamptz,
+  rodada           text not null default 'grupos'
+    check (rodada in ('grupos','quartas','semifinal','final','terceiro_lugar','wildcard')),
+  bracket_slot     int,
   created_at       timestamptz default now()
 );
 

@@ -1,69 +1,60 @@
--- Copa Imperial – Seed
--- ⚠️ Preencher os nomes reais após o sorteio
+-- Copa Cidade Imperial – Seed
+-- ⚠️ Preencher os nomes reais das duplas após o sorteio
 -- Run AFTER schema.sql
 
 -- CATEGORIAS
-insert into categorias (id, nome, ordem) values
-  (1, 'Single Masculino',  1),
-  (2, 'Dupla Mista',       2),
-  (3, 'Dupla Masculina',   3),
-  (4, 'Dupla Feminina',    4),
-  (5, 'Quarteto',          5);
+insert into categorias (id, nome, ordem, formato) values
+  (1, 'Kids',  1, 'grupos_apenas'),
+  (2, 'Open',  2, 'quartas'),
+  (3, '40+',   3, 'semifinal'),
+  (4, '50+',   4, 'semifinal'),
+  (5, '60+',   5, 'grupos_apenas');
 
--- ─── SINGLE MASCULINO ──────────────────────────────────────
+-- ─── KIDS ─────────────────────────────────────────────────
 insert into grupos (id, nome, categoria_id) values
-  (1,  'Grupo A', 1),
-  (2,  'Grupo B', 1),
-  (3,  'Grupo C', 1),
-  (4,  'Grupo D', 1);
+  (1, 'Grupo Único', 1);
 
 insert into times (nome, grupo_id) values
-  -- Grupo A
-  ('Jogador A1', 1), ('Jogador A2', 1), ('Jogador A3', 1),
-  -- Grupo B
-  ('Jogador B1', 2), ('Jogador B2', 2), ('Jogador B3', 2),
-  -- Grupo C
-  ('Jogador C1', 3), ('Jogador C2', 3), ('Jogador C3', 3),
-  -- Grupo D
-  ('Jogador D1', 4), ('Jogador D2', 4), ('Jogador D3', 4);
+  ('Kids 1', 1), ('Kids 2', 1), ('Kids 3', 1), ('Kids 4', 1);
 
--- ─── DUPLA MISTA ───────────────────────────────────────────
+-- ─── OPEN ─────────────────────────────────────────────────
 insert into grupos (id, nome, categoria_id) values
-  (5,  'Grupo A', 2),
-  (6,  'Grupo B', 2),
-  (7,  'Grupo C', 2);
+  (2, 'Grupo A', 2),
+  (3, 'Grupo B', 2),
+  (4, 'Grupo C', 2);
 
 insert into times (nome, grupo_id) values
-  ('Dupla Mista A1', 5), ('Dupla Mista A2', 5), ('Dupla Mista A3', 5), ('Dupla Mista A4', 5),
-  ('Dupla Mista B1', 6), ('Dupla Mista B2', 6), ('Dupla Mista B3', 6), ('Dupla Mista B4', 6),
-  ('Dupla Mista C1', 7), ('Dupla Mista C2', 7), ('Dupla Mista C3', 7);
+  ('Open A1', 2), ('Open A2', 2), ('Open A3', 2),
+  ('Open B1', 3), ('Open B2', 3), ('Open B3', 3),
+  ('Open C1', 4), ('Open C2', 4), ('Open C3', 4);
 
--- ─── DUPLA MASCULINA ───────────────────────────────────────
+-- ─── 40+ ──────────────────────────────────────────────────
 insert into grupos (id, nome, categoria_id) values
-  (8,  'Grupo A', 3),
-  (9,  'Grupo B', 3);
+  (5, 'Grupo A', 3),
+  (6, 'Grupo B', 3);
 
 insert into times (nome, grupo_id) values
-  ('Dupla Masc A1', 8), ('Dupla Masc A2', 8), ('Dupla Masc A3', 8),
-  ('Dupla Masc B1', 9), ('Dupla Masc B2', 9), ('Dupla Masc B3', 9);
+  ('40+ A1', 5), ('40+ A2', 5), ('40+ A3', 5),
+  ('40+ B1', 6), ('40+ B2', 6), ('40+ B3', 6);
 
--- ─── DUPLA FEMININA ────────────────────────────────────────
+-- ─── 50+ ──────────────────────────────────────────────────
 insert into grupos (id, nome, categoria_id) values
-  (10, 'Grupo Único', 4);
+  (7, 'Grupo A', 4),
+  (8, 'Grupo B', 4);
 
 insert into times (nome, grupo_id) values
-  ('Dupla Fem 1', 10), ('Dupla Fem 2', 10), ('Dupla Fem 3', 10),
-  ('Dupla Fem 4', 10), ('Dupla Fem 5', 10);
+  ('50+ A1', 7), ('50+ A2', 7), ('50+ A3', 7),
+  ('50+ B1', 8), ('50+ B2', 8), ('50+ B3', 8);
 
--- ─── QUARTETO ──────────────────────────────────────────────
+-- ─── 60+ ──────────────────────────────────────────────────
 insert into grupos (id, nome, categoria_id) values
-  (11, 'Grupo Único', 5);
+  (9, 'Grupo Único', 5);
 
 insert into times (nome, grupo_id) values
-  ('Quarteto 1', 11), ('Quarteto 2', 11), ('Quarteto 3', 11), ('Quarteto 4', 11);
+  ('60+ 1', 9), ('60+ 2', 9), ('60+ 3', 9), ('60+ 4', 9);
 
--- ─── GERAR JOGOS (round robin por grupo) ───────────────────
--- Cada time joga contra todos os outros do grupo 1 vez
+-- ─── GERAR JOGOS (round robin por grupo) ──────────────────────
+-- Cada dupla joga contra todas as outras do grupo 1 vez
 insert into jogos (categoria_id, grupo_id, time_a_id, time_b_id)
 select
   g.categoria_id,
