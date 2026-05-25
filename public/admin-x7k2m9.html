@@ -5,107 +5,185 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin — Copa Imperial Duplas Mistas</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;min-height:100vh;}
-.header{background:#1a1a1a;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
-.header h1{color:#fff;font-size:16px;font-weight:600;}
-.header span{color:#f0c040;font-size:12px;font-weight:600;}
-.container{max-width:480px;margin:0 auto;padding:1.5rem 1rem;}
-.section-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:#aaa;margin-bottom:1rem;}
-.cat-row{background:#fff;border:1px solid #e8e8e8;border-radius:12px;padding:1rem 1.25rem;margin-bottom:10px;display:flex;align-items:center;gap:12px;}
-.cat-info{flex:1;}
-.cat-name{font-size:15px;font-weight:600;}
-.cat-status{font-size:12px;margin-top:3px;}
-.cat-status.aberta{color:#16a34a;}
-.cat-status.fechada{color:#dc2626;}
-.toggle{position:relative;width:48px;height:26px;flex-shrink:0;}
-.toggle input{opacity:0;width:0;height:0;position:absolute;}
-.toggle-slider{position:absolute;inset:0;background:#ddd;border-radius:99px;cursor:pointer;transition:background .2s;}
-.toggle input:checked+.toggle-slider{background:#16a34a;}
-.toggle-slider::before{content:'';position:absolute;width:20px;height:20px;left:3px;top:3px;background:#fff;border-radius:50%;transition:transform .2s;}
-.toggle input:checked+.toggle-slider::before{transform:translateX(22px);}
-.saving{font-size:12px;color:#aaa;text-align:center;margin-top:1rem;}
-.close-all{width:100%;margin-top:1.5rem;padding:14px;font-size:14px;font-weight:700;background:#dc2626;color:#fff;border:none;border-radius:12px;cursor:pointer;}
-.close-all:hover{background:#b91c1c;}
-.open-all{width:100%;margin-top:8px;padding:14px;font-size:14px;font-weight:700;background:#16a34a;color:#fff;border:none;border-radius:12px;cursor:pointer;}
-.open-all:hover{background:#15803d;}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: system-ui, sans-serif; background: #f5f5f3; color: #1a1a1a; min-height: 100vh; padding-bottom: 4rem; }
+.header { background: #1a1a1a; padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+.header h1 { color: #fff; font-size: 16px; font-weight: 600; }
+.header span { color: #f0c040; font-size: 12px; font-weight: 600; }
+.container { max-width: 520px; margin: 0 auto; padding: 1.5rem 1rem; }
+.section-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: #aaa; margin-bottom: 0.75rem; margin-top: 1.5rem; }
+.section-title:first-child { margin-top: 0; }
+
+/* Lote toggle */
+.lote-toggle { display: flex; background: #e8e8e8; border-radius: 12px; padding: 4px; }
+.lote-option { flex: 1; padding: 12px; text-align: center; font-size: 14px; font-weight: 700; color: #888; cursor: pointer; border-radius: 9px; transition: all .15s; }
+.lote-option.active { background: #16a34a; color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.lote-prices { margin-top: 10px; padding: 10px 14px; background: #fff; border: 1px solid #e8e8e8; border-radius: 10px; font-size: 12px; color: #666; line-height: 1.6; }
+.lote-prices strong { color: #1a1a1a; }
+
+/* Cat row */
+.cat-row { background: #fff; border: 1px solid #e8e8e8; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 10px; }
+.cat-row-top { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.cat-info { flex: 1; }
+.cat-name { font-size: 15px; font-weight: 700; }
+.cat-status { font-size: 12px; margin-top: 3px; }
+.cat-status.aberta { color: #16a34a; }
+.cat-status.fechada { color: #dc2626; font-weight: 600; }
+
+.cat-row-bottom { display: flex; align-items: center; gap: 12px; padding-top: 10px; border-top: 1px solid #f0f0f0; }
+.vagas-label { font-size: 13px; color: #666; flex: 1; }
+.vagas-controls { display: flex; align-items: center; gap: 4px; }
+.vagas-btn { width: 28px; height: 28px; border: 1px solid #ddd; background: #f5f5f3; border-radius: 6px; font-size: 16px; cursor: pointer; color: #555; }
+.vagas-btn:hover { background: #e8e8e8; }
+.vagas-input { width: 50px; padding: 6px 8px; font-size: 14px; border: 1px solid #ddd; border-radius: 6px; text-align: center; font-weight: 700; }
+
+.toggle { position: relative; width: 48px; height: 26px; flex-shrink: 0; }
+.toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+.toggle-slider { position: absolute; inset: 0; background: #16a34a; border-radius: 99px; cursor: pointer; transition: background .2s; }
+.toggle input:checked + .toggle-slider { background: #dc2626; }
+.toggle-slider::before { content: ''; position: absolute; width: 20px; height: 20px; left: 25px; top: 3px; background: #fff; border-radius: 50%; transition: transform .2s; }
+.toggle input:checked + .toggle-slider::before { transform: translateX(-22px); }
+
+.saving { font-size: 12px; color: #aaa; text-align: center; margin-top: 1rem; min-height: 16px; transition: color .2s; }
+.saving.ok { color: #16a34a; font-weight: 600; }
+.saving.err { color: #dc2626; font-weight: 600; }
 </style>
 </head>
 <body>
 
 <div class="header">
   <h1>Copa Imperial Duplas Mistas — Admin</h1>
-  <span>Painel de controle</span>
+  <span>Painel</span>
 </div>
 
 <div class="container">
+
+  <div class="section-title">Lote atual</div>
+  <div class="lote-toggle">
+    <div class="lote-option" id="lote-1" onclick="setLote(1)">Lote 1</div>
+    <div class="lote-option" id="lote-2" onclick="setLote(2)">Lote 2</div>
+  </div>
+  <div class="lote-prices">
+    <strong>Lote 1:</strong> R$ 160 (Open/40+/50+/60+) · R$ 98 (Kids)<br>
+    <strong>Lote 2:</strong> R$ 200 (Open/40+/50+/60+) · R$ 120 (Kids)
+  </div>
+
   <div class="section-title">Categorias</div>
   <div id="cats">Carregando...</div>
+
   <p class="saving" id="saving"></p>
-  <button class="close-all" onclick="setAll(false)">Fechar todas as categorias</button>
-  <button class="open-all" onclick="setAll(true)">Abrir todas as categorias</button>
 </div>
 
 <script>
 const CATS = [
-  { id: 'sm', label: 'Single masculino' },
-  { id: 'dm', label: 'Dupla masculina' },
-  { id: 'df', label: 'Dupla feminina' },
-  { id: 'mix', label: 'Dupla mista' },
-  { id: 'q', label: 'Quarteto' },
+  { id: 'open', label: 'Open' },
+  { id: '40', label: '40+' },
+  { id: '50', label: '50+' },
+  { id: '60', label: '60+' },
+  { id: 'kids', label: 'Kids' },
 ];
 
-var status = {};
+var config = { lote: 1, categorias: {} };
+var savingTimer;
 
 async function load() {
   try {
-    var r = await fetch('/api/admin');
-    status = await r.json();
-  } catch(e) {
-    status = {};
-  }
+    const r = await fetch('/api/admin');
+    config = await r.json();
+  } catch(e) {}
   render();
 }
 
 function render() {
-  var html = CATS.map(function(c) {
-    var aberta = status[c.id] !== false; // default aberta
-    return '<div class="cat-row">'
-      + '<div class="cat-info">'
-      + '<div class="cat-name">' + c.label + '</div>'
-      + '<div class="cat-status ' + (aberta ? 'aberta' : 'fechada') + '">'
-      + (aberta ? '● Aberta' : '● Fechada / Esgotada')
-      + '</div></div>'
-      + '<label class="toggle">'
-      + '<input type="checkbox" ' + (aberta ? 'checked' : '') + ' onchange="toggle(\'' + c.id + '\', this.checked)">'
-      + '<span class="toggle-slider"></span>'
-      + '</label>'
-      + '</div>';
+  // Lote
+  document.getElementById('lote-1').classList.toggle('active', config.lote === 1);
+  document.getElementById('lote-2').classList.toggle('active', config.lote === 2);
+
+  // Categorias
+  const html = CATS.map(c => {
+    const cc = config.categorias[c.id] || { vagas: 12, esgotado: false };
+    return `
+      <div class="cat-row">
+        <div class="cat-row-top">
+          <div class="cat-info">
+            <div class="cat-name">${c.label}</div>
+            <div class="cat-status ${cc.esgotado ? 'fechada' : 'aberta'}">
+              ${cc.esgotado ? '● Esgotada — vendas bloqueadas' : '● Aberta para vendas'}
+            </div>
+          </div>
+          <label class="toggle" title="${cc.esgotado ? 'Reabrir vendas' : 'Marcar como esgotada'}">
+            <input type="checkbox" ${cc.esgotado ? 'checked' : ''} onchange="setEsgotado('${c.id}', this.checked)">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="cat-row-bottom">
+          <span class="vagas-label">Vagas disponíveis</span>
+          <div class="vagas-controls">
+            <button class="vagas-btn" onclick="adjustVagas('${c.id}', -1)">−</button>
+            <input type="number" min="0" class="vagas-input" id="vagas-${c.id}" value="${cc.vagas}" onchange="setVagas('${c.id}', this.value)">
+            <button class="vagas-btn" onclick="adjustVagas('${c.id}', 1)">+</button>
+          </div>
+        </div>
+      </div>
+    `;
   }).join('');
   document.getElementById('cats').innerHTML = html;
 }
 
-async function toggle(catId, aberta) {
-  status[catId] = aberta;
-  render();
-  document.getElementById('saving').textContent = 'Salvando...';
-  try {
-    await fetch('/api/admin', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ catId: catId, aberta: aberta })
-    });
-    document.getElementById('saving').textContent = 'Salvo!';
-    setTimeout(function() { document.getElementById('saving').textContent = ''; }, 2000);
-  } catch(e) {
-    document.getElementById('saving').textContent = 'Erro ao salvar.';
+function showSaving(text, type) {
+  const el = document.getElementById('saving');
+  el.textContent = text;
+  el.className = 'saving' + (type ? ' ' + type : '');
+  clearTimeout(savingTimer);
+  if (type === 'ok' || type === 'err') {
+    savingTimer = setTimeout(() => { el.textContent = ''; el.className = 'saving'; }, 2000);
   }
 }
 
-async function setAll(aberta) {
-  for (var i = 0; i < CATS.length; i++) {
-    await toggle(CATS[i].id, aberta);
+async function saveConfig(key, value) {
+  showSaving('Salvando...');
+  try {
+    const r = await fetch('/api/admin', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ key, value })
+    });
+    if (!r.ok) throw new Error();
+    showSaving('✓ Salvo!', 'ok');
+  } catch(e) {
+    showSaving('✗ Erro ao salvar', 'err');
   }
+}
+
+async function setLote(lote) {
+  config.lote = lote;
+  render();
+  await saveConfig('lote', lote);
+}
+
+function ensureCat(catId) {
+  if (!config.categorias[catId]) config.categorias[catId] = { vagas: 12, esgotado: false };
+}
+
+async function setEsgotado(catId, esgotado) {
+  ensureCat(catId);
+  config.categorias[catId].esgotado = esgotado;
+  render();
+  await saveConfig(`${catId}.esgotado`, esgotado);
+}
+
+async function setVagas(catId, vagas) {
+  ensureCat(catId);
+  const v = Math.max(0, parseInt(vagas) || 0);
+  config.categorias[catId].vagas = v;
+  document.getElementById('vagas-' + catId).value = v;
+  await saveConfig(`${catId}.vagas`, v);
+}
+
+function adjustVagas(catId, delta) {
+  ensureCat(catId);
+  const newValue = Math.max(0, (config.categorias[catId].vagas || 0) + delta);
+  setVagas(catId, newValue);
 }
 
 load();

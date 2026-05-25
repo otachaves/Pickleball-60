@@ -1,7 +1,18 @@
 const { google } = require("googleapis");
 
 const SHEET_ID = "1yXdYMc0Ud-B7MSVUOZg0bMPiaKceLHHW4v-eDjYIwOQ";
-const STATUS_RANGE = "Status!A:B";
+const CONFIG_RANGE = "Config!A:B";
+
+const DEFAULT_CONFIG = {
+  lote: 1,
+  categorias: {
+    open: { vagas: 12, esgotado: false },
+    "40": { vagas: 12, esgotado: false },
+    "50": { vagas: 12, esgotado: false },
+    "60": { vagas: 12, esgotado: false },
+    kids: { vagas: 12, esgotado: false },
+  },
+};
 
 async function getSheets() {
   const auth = new google.auth.JWT({
@@ -12,69 +23,109 @@ async function getSheets() {
   return google.sheets({ version: "v4", auth });
 }
 
+function parseConfigRows(rows) {
+  const config = JSON.parse(JSON.stringify(DEFAULT_CONFIG));
+  for (const row of rows) {
+    const [key, value] = row;
+    if (!key || value === undefined) continue;
+
+    if (key === "lote") {
+      config.lote = parseInt(value) || 1;
+      continue;
+    }
+
+    const dotIdx = key.indexOf(".");
+    if (dotIdx === -1) continue;
+    const catId = key.slice(0, dotIdx);
+    const field = key.slice(dotIdx + 1);
+    if (!config.categorias[catId]) continue;
+
+    if (field === "vagas") {
+      config.categorias[catId].vagas = parseInt(value) || 0;
+    } else if (field === "esgotado") {
+      config.categorias[catId].esgotado = String(value).toLowerCase() === "true";
+    }
+  }
+  return config;
+}
+
 module.exports = async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   if (req.method === "OPTIONS") return res.status(200).end();
 
-  const sheets = await getSheets();
+  let sheets;
+  try {
+    sheets = await getSheets();
+  } catch (e) {
+    console.error("Erro ao autenticar Sheets:", e);
+    return res.status(500).json({ error: "Erro de autenticação" });
+  }
 
-  // GET — retorna status atual de todas as categorias
   if (req.method === "GET") {
     try {
       const result = await sheets.spreadsheets.values.get({
         spreadsheetId: SHEET_ID,
-        range: STATUS_RANGE,
+        range: CONFIG_RANGE,
       });
       const rows = result.data.values || [];
-      const status = {};
-      rows.forEach(r => { if (r[0]) status[r[0]] = r[1] === "true"; });
-      return res.status(200).json(status);
+      return res.status(200).json(parseConfigRows(rows));
     } catch (e) {
-      // Se a aba não existe ainda, retorna todas abertas
-      return res.status(200).json({});
+      // Aba "Config" pode não existir ainda — retorna defaults
+      return res.status(200).json(DEFAULT_CONFIG);
     }
   }
 
-  // POST — atualiza status de uma categoria
   if (req.method === "POST") {
-    const { catId, aberta } = req.body;
-    if (!catId) return res.status(400).json({ error: "catId obrigatorio" });
+    const { key, value } = req.body || {};
+    if (!key || value === undefined) {
+      return res.status(400).json({ error: "key e value obrigatórios" });
+    }
 
     try {
-      // Busca rows atuais
+      // Tenta ler linhas atuais
       let rows = [];
       try {
         const result = await sheets.spreadsheets.values.get({
           spreadsheetId: SHEET_ID,
-          range: STATUS_RANGE,
+          range: CONFIG_RANGE,
         });
         rows = result.data.values || [];
-      } catch (e) {}
+      } catch (e) {
+        // Se a aba Config não existe, tenta criar e depois append
+        try {
+          await sheets.spreadsheets.batchUpdate({
+            spreadsheetId: SHEET_ID,
+            requestBody: {
+              requests: [{ addSheet: { properties: { title: "Config" } } }],
+            },
+          });
+        } catch (createErr) {
+          // Aba já existe, ignore
+        }
+      }
 
-      const idx = rows.findIndex(r => r[0] === catId);
+      const idx = rows.findIndex((r) => r[0] === key);
       if (idx !== -1) {
-        // Atualiza linha existente
         await sheets.spreadsheets.values.update({
           spreadsheetId: SHEET_ID,
-          range: `Status!B${idx + 1}`,
+          range: `Config!B${idx + 1}`,
           valueInputOption: "USER_ENTERED",
-          requestBody: { values: [[String(aberta)]] },
+          requestBody: { values: [[String(value)]] },
         });
       } else {
-        // Adiciona nova linha
         await sheets.spreadsheets.values.append({
           spreadsheetId: SHEET_ID,
-          range: STATUS_RANGE,
+          range: CONFIG_RANGE,
           valueInputOption: "USER_ENTERED",
-          requestBody: { values: [[catId, String(aberta)]] },
+          requestBody: { values: [[key, String(value)]] },
         });
       }
       return res.status(200).json({ ok: true });
     } catch (e) {
-      console.error(e);
-      return res.status(500).json({ error: "Erro ao salvar status" });
+      console.error("Erro ao salvar config:", e);
+      return res.status(500).json({ error: "Erro ao salvar config" });
     }
   }
 

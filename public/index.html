@@ -172,12 +172,20 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:#bbb;border-top:
 // CONTROLE DE VAGAS — edite esgotado:true para bloquear
 // ============================================================
 var CATS=[
-  {id:'open', label:'Dupla Mista — Open', price:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', esgotado:false},
-  {id:'40',   label:'Dupla Mista — 40+',  price:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', esgotado:false},
-  {id:'50',   label:'Dupla Mista — 50+',  price:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', esgotado:false},
-  {id:'60',   label:'Dupla Mista — 60+',  price:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', esgotado:false},
-  {id:'kids', label:'Dupla Mista — Kids', price:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', esgotado:false},
+  {id:'open', label:'Dupla Mista — Open', precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', esgotado:false},
+  {id:'40',   label:'Dupla Mista — 40+',  precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', esgotado:false},
+  {id:'50',   label:'Dupla Mista — 50+',  precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', esgotado:false},
+  {id:'60',   label:'Dupla Mista — 60+',  precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', esgotado:false},
+  {id:'kids', label:'Dupla Mista — Kids', precoLote1:98,  precoLote2:120, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', esgotado:false},
 ];
+
+// Lote atual — atualizado via /api/admin no init()
+var LOTE_ATUAL = 1;
+function precoFor(catId){
+  var c=CATS.find(function(x){return x.id===catId;});
+  if(!c)return 0;
+  return LOTE_ATUAL===2?c.precoLote2:c.precoLote1;
+}
 // ============================================================
 
 var COUPON_CODE='99OFF';
@@ -197,11 +205,7 @@ function fmt(v){return 'R$ '+v.toLocaleString('pt-BR');}
 function isDupla(id){var c=CATS.find(function(c){return c.id===id;});return c&&c.slots===2;}
 
 function calcPrice(idx){
-  var cat=CATS.find(function(c){return c.id===state.selectedCats[idx];});
-  if(!cat)return 0;
-  if(!isDupla(cat.id))return cat.price;
-  var before=state.selectedCats.slice(0,idx).filter(function(id){return isDupla(id);}).length;
-  return before===1?Math.round(cat.price*0.5):cat.price;
+  return precoFor(state.selectedCats[idx]);
 }
 
 function baseTotal(){return state.selectedCats.reduce(function(s,_,i){return s+calcPrice(i);},0);}
@@ -221,7 +225,6 @@ function stepsHtml(active){
 
 function renderStep1(){
   var sel=state.selectedCats;
-  var duplasSelected=sel.filter(function(id){return isDupla(id);}).length;
 
   var catsHtml=CATS.map(function(c){
     if(c.esgotado){
@@ -235,33 +238,29 @@ function renderStep1(){
     }
     var idx=sel.indexOf(c.id);
     var isSelected=idx!==-1;
-    var isDiscount=isSelected&&calcPrice(idx)<c.price;
-    var showDiscount=!isSelected&&isDupla(c.id)&&duplasSelected===1;
-    var displayPrice=isSelected?calcPrice(idx):(showDiscount?Math.round(c.price*0.5):c.price);
+    var preco=precoFor(c.id);
     return '<div class="cat-card '+(isSelected?'selected':'')+'" data-catid="'+c.id+'">'
       +'<div class="cat-header">'
       +'<div class="cat-check"><div class="cat-check-inner"></div></div>'
       +'<div class="cat-info"><div class="cat-name">'+c.label+'</div>'
       +'<div class="cat-desc">'+c.priceLabel+' &nbsp;·&nbsp; <span style="color:#16a34a;font-weight:600">'+c.vagas+'</span></div></div>'
-      +'<div class="cat-price-col">'
-      +(isDiscount||showDiscount?'<div class="cat-price-orig">'+fmt(c.price)+'</div>':'')
-      +'<div class="cat-price">'+fmt(displayPrice)+'</div>'
-      +((isDiscount||showDiscount)?'<div class="cat-badge">50% off</div>':'')
-      +'</div></div></div>';
+      +'<div class="cat-price-col"><div class="cat-price">'+fmt(preco)+'</div></div>'
+      +'</div></div>';
   }).join('');
 
   var summaryHtml='';
   if(sel.length>0){
-    var lines=sel.map(function(id,i){
+    var lines=sel.map(function(id){
       var c=CATS.find(function(x){return x.id===id;});
-      var disc=calcPrice(i)<c.price;
-      return '<div class="summary-row"><span>'+c.label+(disc?' <span style="font-size:11px;color:#16a34a;font-weight:600">50% off</span>':'')+'</span><span>'+fmt(calcPrice(i))+'</span></div>';
+      return '<div class="summary-row"><span>'+c.label+'</span><span>'+fmt(precoFor(id))+'</span></div>';
     }).join('');
-    summaryHtml='<div class="summary">'+lines+'<hr class="summary-divider"><div class="summary-total"><span>Total estimado</span><span>'+fmt(totalPrice())+'</span></div></div>';
+    summaryHtml='<div class="summary">'+lines+'<hr class="summary-divider"><div class="summary-total"><span>Total</span><span>'+fmt(totalPrice())+'</span></div></div>';
   }
 
+  var loteBanner='<div class="discount-banner" style="background:#eff6ff;border-color:#bfdbfe;color:#1e40af">📦 Inscrições no <strong>Lote '+LOTE_ATUAL+'</strong> — aproveite!</div>';
+
   return stepsHtml(1)
-    +(duplasSelected>=1?'<div class="discount-banner">🎉 Inscreva mais de uma categoria de dupla → 50% OFF na segunda!</div>':'')
+    +loteBanner
     +'<div class="section-title">Escolha suas categorias</div>'
     +catsHtml+summaryHtml
     +'<button class="btn" id="btn-to2" '+(sel.length>0?'':'disabled')+'>Garantir vaga →</button>';
@@ -537,7 +536,24 @@ function bindEvents(){
   if(bkp)bkp.onclick=function(){state.step=4;render();};
 }
 
-render();
+async function init(){
+  try{
+    var r=await fetch('/api/admin');
+    var cfg=await r.json();
+    if(cfg.lote)LOTE_ATUAL=cfg.lote;
+    if(cfg.categorias){
+      CATS.forEach(function(c){
+        var cc=cfg.categorias[c.id];
+        if(cc){
+          c.vagas=cc.vagas+' vaga'+(cc.vagas===1?'':'s');
+          c.esgotado=cc.esgotado||cc.vagas<=0;
+        }
+      });
+    }
+  }catch(e){console.error('Erro ao buscar config:',e);}
+  render();
+}
+init();
 </script>
 
 </body>
