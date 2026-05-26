@@ -1,558 +1,1023 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta property="og:title" content="Copa Imperial Duplas Mistas — Inscrições abertas!">
-<meta property="og:description" content="4 e 5 de julho de 2026 · Paróquia Santa Clara, Petrópolis. Categorias: Open, 40+, 50+, 60+ e Kids. Garanta sua vaga!">
+<meta property="og:description" content="4 e 5 de julho de 2026 · Paróquia Santa Clara, Petrópolis. Categorias: Open, 40+, 50+, 60+ e Kids.">
 <meta property="og:image" content="https://copaimperial.online/og-image.jpg">
 <meta property="og:url" content="https://copaimperial.online">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<title>Copa Imperial Duplas Mistas</title>
+<title>Copa Imperial — Duplas Mistas · Petrópolis 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700;800&display=swap');
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Inter',system-ui,sans-serif;background:#fafaf8;color:#1a1a1a;}
-.hero{background:#fafaf8;padding:5rem 1.5rem 3rem;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid #eee;}
-.hero-bg-text{position:absolute;font-family:'Playfair Display',serif;font-size:clamp(120px,25vw,220px);font-weight:800;color:rgba(0,0,0,0.04);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;line-height:1;z-index:0;}
-.hero-inner{position:relative;z-index:1;}
-.hero-badge{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid #e0e0e0;color:#555;font-size:12px;font-weight:600;padding:6px 14px;border-radius:99px;margin-bottom:2rem;letter-spacing:.05em;}
-.hero-badge span{width:7px;height:7px;border-radius:50%;background:#22c55e;display:inline-block;}
-.hero-title{font-family:'Playfair Display',serif;font-size:clamp(3rem,10vw,6rem);font-weight:800;line-height:.95;letter-spacing:-.02em;margin-bottom:.5rem;}
-.hero-title .line1{display:block;color:#1a1a1a;}
-.hero-title .line2{display:block;color:#16a34a;}
-.hero-title .line3{display:block;color:#f59e0b;font-size:clamp(4rem,14vw,8rem);}
-.hero-tagline{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1rem,2.5vw,1.2rem);color:#555;margin-bottom:1.75rem;}
-.hero-location-box{display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:10px 20px;font-size:14px;font-weight:600;color:#1a1a1a;}
-.hero-location-box span{color:#aaa;font-weight:400;}
-.about-strip{background:#16a34a;color:#fff;padding:2.5rem 1.5rem;text-align:center;}
-.about-strip p{max-width:560px;margin:0 auto;font-size:15px;line-height:1.8;opacity:.92;}
-.vagas-strip{background:#fffbeb;border-top:1px solid #fde68a;border-bottom:1px solid #fde68a;padding:.75rem 1.5rem;text-align:center;font-size:13px;font-weight:600;color:#92400e;}
-.info-section{padding:2.5rem 1.5rem;max-width:640px;margin:0 auto;}
-.info-section h2{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:800;margin-bottom:1.25rem;color:#1a1a1a;}
-.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.info-card{background:#fff;border:1px solid #eee;border-radius:14px;padding:1.25rem;display:flex;align-items:flex-start;gap:14px;}
-.info-card-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
-.ic-blue{background:#dbeafe;}.ic-orange{background:#ffedd5;}
-.info-card-label{font-size:11px;color:#aaa;font-weight:600;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;}
-.info-card-value{font-size:14px;font-weight:600;color:#1a1a1a;line-height:1.4;}
-.info-card-sub{font-size:12px;color:#aaa;margin-top:2px;line-height:1.4;}
-.register-section{padding:2.5rem 1.5rem 5rem;max-width:600px;margin:0 auto;}
-.register-section h2{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:800;margin-bottom:.4rem;color:#1a1a1a;}
-.register-section .sub{font-size:14px;color:#888;margin-bottom:2rem;}
-.section-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:#aaa;margin-bottom:1rem;margin-top:1.75rem;}
-.steps{display:flex;align-items:center;gap:6px;margin-bottom:2rem;}
-.step{font-size:12px;font-weight:500;color:#ccc;display:flex;align-items:center;gap:5px;white-space:nowrap;}
-.step.active{color:#16a34a;}.step.done{color:#bbb;}
-.step-dot{width:8px;height:8px;border-radius:50%;background:#e0e0e0;flex-shrink:0;}
-.step.active .step-dot{background:#16a34a;}.step.done .step-dot{background:#bbb;}
-.step-divider{flex:1;height:1px;background:#e8e8e8;min-width:8px;}
-.age-notice{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:10px 14px;font-size:13px;color:#92400e;margin-bottom:1.25rem;display:flex;align-items:flex-start;gap:8px;line-height:1.5;}
-.field{margin-bottom:12px;}
-.field label{display:block;font-size:13px;color:#555;margin-bottom:5px;font-weight:500;}
-.field input,.field select{width:100%;padding:11px 13px;font-size:14px;border:1px solid #e0e0e0;border-radius:10px;background:#fff;outline:none;transition:border-color .15s;appearance:none;color:#1a1a1a;}
-.field input:focus,.field select:focus{border-color:#16a34a;}
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.discount-banner{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:10px 14px;font-size:13px;color:#166534;margin-bottom:1rem;display:flex;align-items:center;gap:8px;font-weight:500;}
-.cat-card{background:#fff;border:1.5px solid #e8e8e8;border-radius:14px;padding:1rem 1.25rem;margin-bottom:10px;cursor:pointer;transition:all .15s;}
-.cat-card:hover{border-color:#bbb;}
-.cat-card.selected{border-color:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,.08);}
-.cat-card.esgotado{background:#f5f5f3;border-color:#e0e0e0;opacity:.55;cursor:not-allowed;pointer-events:none;}
-.cat-header{display:flex;align-items:center;gap:12px;}
-.cat-check{width:22px;height:22px;border:1.5px solid #ddd;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#f5f5f3;}
-.cat-card.selected .cat-check{background:#16a34a;border-color:#16a34a;}
-.cat-check-inner{width:6px;height:10px;border:2px solid #fff;border-top:none;border-left:none;transform:rotate(45deg) translateY(-1px);display:none;}
-.cat-card.selected .cat-check-inner{display:block;}
-.cat-check-x{width:22px;height:22px;border:1.5px solid #fca5a5;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#fee2e2;font-size:12px;color:#991b1b;}
-.cat-info{flex:1;}.cat-name{font-size:15px;font-weight:600;}.cat-desc{font-size:12px;color:#aaa;margin-top:2px;}
-.cat-price-col{text-align:right;}.cat-price{font-size:15px;font-weight:700;color:#1a1a1a;}
-.cat-price-orig{font-size:12px;color:#bbb;text-decoration:line-through;}
-.cat-badge{display:inline-block;background:#fef3c7;color:#92400e;font-size:10px;font-weight:700;padding:2px 7px;border-radius:99px;margin-top:3px;}
-.cat-badge-sold{display:inline-block;background:#fee2e2;color:#991b1b;font-size:10px;font-weight:700;padding:2px 7px;border-radius:99px;margin-top:3px;}
-.summary{background:#f9fafb;border:1px solid #e8e8e8;border-radius:14px;padding:1rem 1.25rem;margin-top:1.25rem;}
-.summary-row{display:flex;justify-content:space-between;font-size:14px;padding:4px 0;color:#555;}
-.summary-divider{border:none;border-top:1px solid #eee;margin:8px 0;}
-.summary-total{display:flex;justify-content:space-between;font-size:16px;font-weight:700;color:#1a1a1a;}
-.btn{width:100%;margin-top:16px;padding:15px;font-size:15px;font-weight:700;background:#16a34a;color:#fff;border:none;border-radius:12px;cursor:pointer;transition:background .15s;font-family:'Inter',sans-serif;}
-.btn:hover{background:#15803d;}.btn:disabled{background:#e0e0e0;color:#aaa;cursor:default;}
-.btn-sec{background:transparent;color:#666;border:1px solid #e0e0e0;margin-top:8px;}
-.btn-sec:hover{background:#f5f5f3;color:#1a1a1a;}
-.player-card{background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:1rem 1.25rem;margin-bottom:12px;}
-.player-card-title{font-size:13px;font-weight:700;color:#16a34a;margin-bottom:12px;}
-.player-slot{margin-bottom:12px;}
-.player-slot-label{font-size:12px;color:#aaa;margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;}
-.player-input{width:100%;padding:9px 12px;font-size:13px;border:1px solid #e0e0e0;border-radius:10px;outline:none;font-family:'Inter',sans-serif;}
-.player-input:focus{border-color:#16a34a;}
-.coupon-row{display:flex;gap:8px;margin-top:12px;}
-.coupon-row input{flex:1;padding:10px 12px;font-size:13px;border:1px solid #e0e0e0;border-radius:10px;outline:none;font-family:'Inter',sans-serif;}
-.coupon-row input:focus{border-color:#16a34a;}
-.coupon-row button{padding:10px 16px;font-size:13px;font-weight:600;background:#fff;border:1px solid #e0e0e0;border-radius:10px;cursor:pointer;}
-.coupon-applied{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:10px 14px;font-size:13px;color:#166534;font-weight:500;margin-top:12px;}
-.success{text-align:center;padding:4rem 1.5rem;}
-.success-icon{font-size:64px;margin-bottom:1.25rem;}
-.success h2{font-family:'Playfair Display',serif;font-size:2rem;font-weight:800;margin-bottom:.75rem;}
-.success p{color:#666;font-size:15px;line-height:1.7;}
-footer{text-align:center;padding:2rem 1rem;font-size:12px;color:#bbb;border-top:1px solid #eee;background:#fff;}
-@media(max-width:480px){.info-grid{grid-template-columns:1fr;}.field-row{grid-template-columns:1fr;}}
+  :root{
+    --navy-900:#0A1F44;
+    --navy-800:#0F2454;
+    --navy-700:#173061;
+    --navy-100:#E3E7F1;
+    --gold-700:#8B6F2A;
+    --gold-600:#A8862F;
+    --gold-500:#C9A961;
+    --gold-400:#D9BD7C;
+    --gold-300:#E8D9A8;
+    --gold-100:#F4E9C8;
+    --parchment-50:#FBF7EC;
+    --parchment-100:#F5EFDF;
+    --parchment-200:#EDE3C8;
+    --parchment-300:#E0D2A8;
+    --ink:#2A2418;
+    --ink-soft:#5B5240;
+    --ink-faint:#8B816A;
+    --wine:#6B1818;
+    --emerald:#1F5238;
+    --shadow-imperial: 0 1px 0 rgba(255,255,255,.6) inset, 0 0 0 1px rgba(139,111,42,.18), 0 20px 50px -25px rgba(10,31,68,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:'Cormorant Garamond', Georgia, serif;
+    color:var(--ink);
+    background:
+      radial-gradient(1200px 600px at 50% -200px, rgba(201,169,97,.18), transparent 60%),
+      radial-gradient(900px 500px at 50% 100%, rgba(10,31,68,.06), transparent 70%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0.55  0 0 0 0 0.46  0 0 0 0 0.25  0 0 0 .045 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
+      linear-gradient(180deg,#FBF7EC 0%, #F5EFDF 100%);
+    background-attachment: fixed;
+    min-height:100vh;
+  }
+
+  .shell{max-width:1120px;margin:0 auto;padding:0 28px}
+  .top-rule{height:6px;background:linear-gradient(90deg,var(--navy-900) 0%, var(--navy-700) 50%, var(--navy-900) 100%);border-bottom:1px solid var(--gold-600);position:relative}
+  .top-rule::before{content:"";position:absolute;inset:0 0 -3px 0;border-bottom:1px solid var(--gold-500);opacity:.35}
+
+  .utility{display:flex;justify-content:space-between;align-items:center;padding:14px 0;font-family:'Inter',sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--navy-800)}
+  .utility .crest{display:flex;align-items:center;gap:10px;font-weight:600}
+  .utility .crest .mono{width:28px;height:28px;border-radius:50%;background:var(--navy-900);color:var(--gold-400);display:grid;place-items:center;font-family:'Cinzel',serif;font-weight:700;border:1px solid var(--gold-500)}
+  .utility nav{display:flex;gap:26px;color:var(--ink-soft)}
+  .utility nav a{color:inherit;text-decoration:none;position:relative}
+  .utility nav a:hover{color:var(--navy-900)}
+  .utility nav a:hover::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:1px;background:var(--gold-500)}
+
+  .divider{display:flex;align-items:center;gap:14px;color:var(--gold-600);justify-content:center}
+  .divider::before,.divider::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold-500),transparent)}
+
+  /* hero */
+  .hero{position:relative;padding:36px 28px 56px;text-align:center;overflow:hidden}
+  .hero-frame{position:relative;max-width:980px;margin:0 auto;padding:42px 36px 36px;background:linear-gradient(180deg, rgba(255,255,255,.55), rgba(245,239,223,.2));border:1px solid var(--gold-500);box-shadow:var(--shadow-imperial)}
+  .hero-frame::before,.hero-frame::after{content:"";position:absolute;inset:8px;border:1px solid var(--gold-400);pointer-events:none}
+  .hero-frame::after{inset:14px;border-color:rgba(139,111,42,.28)}
+  .corner{position:absolute;width:54px;height:54px;color:var(--gold-600);pointer-events:none}
+  .corner.tl{top:-2px;left:-2px}
+  .corner.tr{top:-2px;right:-2px;transform:scaleX(-1)}
+  .corner.bl{bottom:-2px;left:-2px;transform:scaleY(-1)}
+  .corner.br{bottom:-2px;right:-2px;transform:scale(-1,-1)}
+  .ghost-word{position:absolute;left:0;right:0;top:38%;transform:translateY(-50%);text-align:center;font-family:'Cinzel',serif;font-weight:800;font-size:clamp(80px,16vw,220px);letter-spacing:.06em;color:rgba(10,31,68,.045);pointer-events:none;line-height:1;user-select:none;white-space:nowrap}
+  .ribbon{position:relative;display:inline-block;margin:0 auto 18px;padding:9px 28px;background:var(--navy-900);color:var(--gold-300);font-family:'Cinzel',serif;font-weight:600;letter-spacing:.28em;font-size:13px;text-transform:uppercase;border:1px solid var(--gold-500);box-shadow:0 0 0 3px var(--navy-900), 0 0 0 4px var(--gold-600)}
+  .ribbon::before,.ribbon::after{content:"";position:absolute;top:50%;width:64px;height:1px;background:linear-gradient(90deg,transparent,var(--gold-600))}
+  .ribbon::before{right:calc(100% + 14px);transform:scaleX(-1)}
+  .ribbon::after{left:calc(100% + 14px)}
+  .crown{display:block;margin:0 auto 6px;color:var(--gold-600)}
+  .hero h1{font-family:'Cinzel',serif;margin:6px 0 0;line-height:.95;letter-spacing:.01em;font-weight:700;position:relative}
+  .hero .h-copa{font-size:clamp(64px,11vw,128px);color:var(--ink)}
+  .hero .h-imperial{font-size:clamp(76px,14vw,160px);color:var(--navy-900);letter-spacing:.005em;margin-top:-6px}
+  .hero .h-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:clamp(36px,6.5vw,72px);color:var(--gold-700);margin-top:-2px;letter-spacing:.005em}
+  .tag{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink-soft);font-size:22px;margin-top:14px}
+
+  .hero-meta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:30px;position:relative;z-index:2}
+  .meta-pill{display:inline-flex;align-items:center;gap:12px;padding:12px 20px;background:rgba(255,255,255,.7);border:1px solid var(--gold-500);color:var(--navy-900);font-family:'Inter',sans-serif;font-size:14px;font-weight:500;backdrop-filter:blur(6px);box-shadow:0 1px 0 rgba(255,255,255,.7) inset, 0 6px 20px -12px rgba(10,31,68,.4)}
+  .meta-pill .lbl{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.22em;color:var(--gold-700);text-transform:uppercase}
+  .meta-pill .val{font-weight:600}
+  .meta-pill .sep{width:1px;height:18px;background:var(--gold-500);opacity:.5}
+
+  .cta-row{display:flex;gap:14px;justify-content:center;margin-top:32px;flex-wrap:wrap;position:relative;z-index:2}
+  .btn{font-family:'Cinzel',serif;font-weight:700;letter-spacing:.22em;font-size:13px;text-transform:uppercase;padding:18px 34px;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:14px;transition:transform .18s ease, box-shadow .18s ease, background .18s ease;text-decoration:none}
+  .btn-primary{color:var(--gold-300);background:linear-gradient(180deg,var(--navy-800),var(--navy-900));border:1px solid var(--gold-500);box-shadow:0 0 0 3px var(--parchment-100), 0 0 0 4px var(--gold-600), 0 18px 40px -18px rgba(10,31,68,.7)}
+  .btn-primary:hover{transform:translateY(-1px);background:linear-gradient(180deg,#1B3675,var(--navy-800))}
+  .btn-primary svg{color:var(--gold-400)}
+
+  /* imperial strip */
+  .imperial-strip{margin:20px 0 0;background:linear-gradient(180deg,var(--navy-800),var(--navy-900));color:var(--gold-300);position:relative;padding:22px 28px;border-top:1px solid var(--gold-600);border-bottom:1px solid var(--gold-600)}
+  .imperial-strip::before,.imperial-strip::after{content:"";position:absolute;left:0;right:0;height:1px;background:rgba(217,189,124,.4)}
+  .imperial-strip::before{top:4px}
+  .imperial-strip::after{bottom:4px}
+  .imperial-strip-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;gap:28px;justify-content:center;flex-wrap:wrap;text-align:center}
+  .imperial-strip p{margin:0;font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;letter-spacing:.005em}
+  .imperial-strip strong{color:var(--gold-400);font-weight:700;font-style:italic}
+  .imperial-strip .cat-chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+  .cat-chip{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;padding:6px 12px;border:1px solid var(--gold-500);color:var(--gold-300);background:rgba(0,0,0,.18)}
+
+  /* section heading */
+  .section{padding:72px 0}
+  .sec-eyebrow{display:flex;align-items:center;justify-content:center;gap:10px;font-family:'Cinzel',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-700)}
+  .sec-eyebrow::before,.sec-eyebrow::after{content:"";width:36px;height:1px;background:var(--gold-500)}
+  .sec-title{font-family:'Cinzel',serif;font-weight:700;font-size:clamp(32px,5vw,52px);color:var(--navy-900);text-align:center;margin:10px 0 6px;letter-spacing:.005em}
+  .sec-sub{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink-soft);font-size:20px;text-align:center;margin:0 0 32px}
+
+  /* carousel */
+  .carousel{position:relative;margin-top:8px}
+  .carousel-track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:6px 2px 18px;scrollbar-width:none;-ms-overflow-style:none}
+  .carousel-track::-webkit-scrollbar{display:none}
+  .carousel .frame{flex:0 0 calc((100% - 36px) / 3);aspect-ratio:4/5;background:linear-gradient(135deg,var(--parchment-200),var(--parchment-100));border:1px solid var(--gold-500);position:relative;overflow:hidden;box-shadow:var(--shadow-imperial);display:grid;place-items:center;scroll-snap-align:start}
+  .carousel .frame::before{content:"";position:absolute;inset:6px;border:1px solid rgba(139,111,42,.35);pointer-events:none;z-index:2}
+  .carousel .frame img{width:100%;height:100%;object-fit:cover}
+  .car-btn{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;display:grid;place-items:center;background:linear-gradient(180deg,var(--navy-800),var(--navy-900));color:var(--gold-300);border:1px solid var(--gold-500);cursor:pointer;z-index:3;box-shadow:0 0 0 3px var(--parchment-100), 0 0 0 4px var(--gold-600), 0 10px 24px -10px rgba(10,31,68,.55);transition:transform .15s ease, filter .15s ease}
+  .car-btn:hover{filter:brightness(1.15)}
+  .car-btn:active{transform:translateY(-50%) scale(.96)}
+  .car-btn.prev{left:-12px}
+  .car-btn.next{right:-12px}
+  .car-btn:disabled{opacity:.35;cursor:not-allowed}
+  .car-dots{display:flex;justify-content:center;gap:8px;margin-top:10px}
+  .car-dots button{width:8px;height:8px;border-radius:50%;border:1px solid var(--gold-600);background:transparent;padding:0;cursor:pointer;transition:all .2s ease}
+  .car-dots button.active{background:var(--navy-900);border-color:var(--navy-900);width:24px;border-radius:4px}
+
+  /* info cards */
+  .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start}
+  .info-card{position:relative;background:var(--parchment-50);border:1px solid var(--gold-500);padding:28px;box-shadow:var(--shadow-imperial)}
+  .info-card::before{content:"";position:absolute;inset:6px;border:1px solid rgba(139,111,42,.22);pointer-events:none}
+  .info-card .ic-corner{position:absolute;width:30px;height:30px;color:var(--gold-600)}
+  .info-card .ic-corner.tl{top:-1px;left:-1px}
+  .info-card .ic-corner.tr{top:-1px;right:-1px;transform:scaleX(-1)}
+  .info-card .ic-corner.bl{bottom:-1px;left:-1px;transform:scaleY(-1)}
+  .info-card .ic-corner.br{bottom:-1px;right:-1px;transform:scale(-1,-1)}
+  .ic-head{display:flex;align-items:center;gap:14px;margin-bottom:14px;position:relative;z-index:2}
+  .ic-icon{width:46px;height:46px;display:grid;place-items:center;flex:0 0 auto;color:var(--gold-400);background:var(--navy-900);border:1px solid var(--gold-500)}
+  .ic-eyebrow{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.28em;color:var(--gold-700);text-transform:uppercase}
+  .ic-title{font-family:'Cinzel',serif;font-size:22px;color:var(--navy-900);font-weight:700;margin:2px 0 0}
+  .ic-body{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--ink);line-height:1.5;position:relative;z-index:2}
+  .ic-body .muted{color:var(--ink-soft);font-size:17px}
+
+  .schedule-day{padding:14px 0;border-top:1px dashed rgba(139,111,42,.4);position:relative;z-index:2}
+  .schedule-day:first-of-type{border-top:none;padding-top:0}
+  .schedule-day .day-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px;flex-wrap:wrap}
+  .schedule-day .day-date{font-family:'Cinzel',serif;font-weight:700;color:var(--navy-900);font-size:20px;letter-spacing:.02em}
+  .schedule-day .day-hours{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold-700);font-size:17px}
+  .schedule-day ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,1fr);gap:6px 18px}
+  .schedule-day li{font-size:18px;display:flex;align-items:center;gap:8px;color:var(--ink)}
+  .schedule-day li::before{content:"";width:6px;height:6px;background:var(--gold-500);border-radius:50%;display:inline-block;flex:0 0 auto}
+
+  .map-stub{margin-top:14px;height:140px;background:linear-gradient(135deg,var(--parchment-200),var(--parchment-100));border:1px solid rgba(139,111,42,.35);position:relative;display:grid;place-items:center;color:var(--ink-faint);font-style:italic;text-decoration:none}
+  .map-stub::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(139,111,42,.18) 1px, transparent 1px),linear-gradient(90deg, rgba(139,111,42,.18) 1px, transparent 1px);background-size:28px 28px;opacity:.6}
+
+  /* warnings */
+  .imperial-note{margin:18px auto 0;max-width:1064px;padding:14px 22px;border:1px solid var(--gold-500);background:linear-gradient(180deg,#FFF8E1,#F4E9C8);color:var(--gold-700);font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;display:flex;align-items:center;gap:12px;justify-content:center;text-align:center}
+  .imperial-note strong{color:var(--wine);font-style:normal;font-weight:700}
+
+  /* registration */
+  .signup{background:var(--parchment-50);border:1px solid var(--gold-500);box-shadow:var(--shadow-imperial);padding:36px;position:relative}
+  .signup::before{content:"";position:absolute;inset:8px;border:1px solid rgba(139,111,42,.25);pointer-events:none}
+  .signup > *{position:relative;z-index:2}
+  .stepper{display:flex;gap:6px;margin:8px 0 22px;flex-wrap:wrap;font-family:'Cinzel',serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase}
+  .step{flex:1;min-width:120px;padding:10px 12px;border:1px solid rgba(139,111,42,.4);background:rgba(255,255,255,.5);color:var(--ink-faint);display:flex;align-items:center;gap:8px}
+  .step.active{background:var(--navy-900);color:var(--gold-300);border-color:var(--gold-600)}
+  .step.done{background:rgba(31,82,56,.08);color:var(--emerald);border-color:rgba(31,82,56,.4)}
+  .step .num{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:10px;background:rgba(0,0,0,.08)}
+  .step.active .num{background:var(--gold-500);color:var(--navy-900)}
+  .step.done .num{background:var(--emerald);color:#fff}
+
+  .lote-banner{display:flex;align-items:center;gap:14px;padding:14px 18px;background:linear-gradient(180deg,#FFFCEF,var(--gold-100));border:1px solid var(--gold-500);margin-bottom:18px;flex-wrap:wrap}
+  .lote-banner .label{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.22em;color:var(--gold-700);text-transform:uppercase}
+  .lote-banner .desc{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ink)}
+  .lote-banner .desc b{color:var(--navy-900)}
+  .lote-banner .timer{margin-left:auto;display:flex;gap:6px;font-family:'Cinzel',serif}
+  .timer .unit{background:var(--navy-900);color:var(--gold-300);padding:6px 10px;font-size:12px;display:grid;place-items:center;min-width:48px;text-align:center}
+  .timer .unit small{display:block;font-size:9px;letter-spacing:.18em;color:var(--gold-500);margin-top:2px}
+
+  .sec-label{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.24em;color:var(--gold-700);text-transform:uppercase;margin-top:4px;margin-bottom:0}
+
+  .cat-list{display:grid;gap:10px;margin-top:12px}
+  .cat-row{display:flex;align-items:center;gap:16px;padding:16px 18px;background:#fff;border:1px solid rgba(139,111,42,.35);transition:border-color .15s ease, box-shadow .15s ease, transform .12s ease;cursor:pointer}
+  .cat-row:hover{border-color:var(--gold-500);box-shadow:0 10px 22px -16px rgba(10,31,68,.35)}
+  .cat-row.selected{border-color:var(--navy-900);background:linear-gradient(180deg,#fff,#FBF6E6);box-shadow:0 0 0 1px var(--gold-500), 0 14px 28px -18px rgba(10,31,68,.4)}
+  .cat-row.esgotado{opacity:.5;cursor:not-allowed;background:#f5f5f3}
+  .check{width:24px;height:24px;border:1.5px solid var(--gold-600);background:#fff;display:grid;place-items:center;flex:0 0 auto;color:transparent;transition:all .15s ease}
+  .cat-row.selected .check{background:var(--navy-900);border-color:var(--navy-900);color:var(--gold-400)}
+  .cat-emblem{width:44px;height:44px;display:grid;place-items:center;flex:0 0 auto;background:var(--navy-900);color:var(--gold-400);border:1px solid var(--gold-500);font-family:'Cinzel',serif;font-weight:700;font-size:14px}
+  .cat-name{font-family:'Cinzel',serif;font-weight:700;color:var(--navy-900);font-size:18px;letter-spacing:.01em}
+  .cat-meta{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink-soft);font-size:16px;display:flex;gap:14px;margin-top:2px;flex-wrap:wrap}
+  .cat-meta .vagas{color:var(--emerald);font-style:normal;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;letter-spacing:.04em}
+  .cat-meta .vagas.zero{color:var(--wine)}
+  .price{margin-left:auto;text-align:right}
+  .price .lote1{font-family:'Cinzel',serif;font-weight:700;color:var(--navy-900);font-size:22px}
+  .price .lote2{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink-faint);font-size:14px}
+  .price .lote2 b{color:var(--gold-700);font-style:normal;font-family:'Inter',sans-serif;font-weight:600}
+  .price .badge-esg{display:inline-block;background:var(--wine);color:#fff;font-family:'Cinzel',serif;font-size:11px;letter-spacing:.16em;padding:4px 10px}
+
+  .sum-bar{margin-top:22px;padding:18px 22px;background:linear-gradient(180deg,var(--navy-800),var(--navy-900));color:var(--parchment-100);border:1px solid var(--gold-500);display:flex;align-items:center;gap:18px;flex-wrap:wrap;box-shadow:0 0 0 3px var(--parchment-50), 0 0 0 4px var(--gold-600)}
+  .sum-bar .label{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.24em;color:var(--gold-400);text-transform:uppercase}
+  .sum-bar .total{font-family:'Cinzel',serif;font-weight:700;color:var(--gold-300);font-size:30px;letter-spacing:.02em}
+  .sum-bar .count{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--parchment-200);font-size:17px}
+  .sum-bar .submit{margin-left:auto}
+  .sum-bar .submit button{font-family:'Cinzel',serif;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:14px 28px;background:linear-gradient(180deg,var(--gold-400),var(--gold-600));color:var(--navy-900);border:1px solid var(--gold-300);cursor:pointer;font-size:13px;display:inline-flex;align-items:center;gap:10px}
+  .sum-bar .submit button:disabled{opacity:.45;cursor:not-allowed;background:#999;color:#444;border-color:#777}
+  .sum-bar .submit button:not(:disabled):hover{filter:brightness(1.05);transform:translateY(-1px)}
+
+  /* form */
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+  .field{display:flex;flex-direction:column;gap:6px}
+  .field.full{grid-column:1/-1}
+  .field label{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.22em;color:var(--gold-700);text-transform:uppercase}
+  .field input,.field select{font-family:'Cormorant Garamond',serif;font-size:18px;padding:12px 14px;background:#fff;border:1px solid rgba(139,111,42,.45);color:var(--ink);outline:none;transition:border-color .15s, box-shadow .15s}
+  .field input:focus,.field select:focus{border-color:var(--navy-900);box-shadow:0 0 0 3px rgba(201,169,97,.25)}
+  .helper{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink-faint);font-size:15px}
+
+  .player-card{border:1px solid rgba(139,111,42,.35);padding:18px;background:#fff;position:relative;margin-top:14px}
+  .player-card .pc-head{display:flex;align-items:center;gap:12px;margin-bottom:8px;flex-wrap:wrap}
+  .player-card .pc-num{width:32px;height:32px;display:grid;place-items:center;background:var(--navy-900);color:var(--gold-400);font-family:'Cinzel',serif;font-weight:700;border:1px solid var(--gold-500)}
+  .player-card .pc-title{font-family:'Cinzel',serif;font-size:16px;color:var(--navy-900);font-weight:700;letter-spacing:.02em}
+  .player-card .pc-cat{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold-700);margin-left:auto}
+
+  /* steps nav */
+  .step-nav{display:flex;justify-content:space-between;margin-top:24px;gap:10px;flex-wrap:wrap}
+  .step-nav .ghost{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.22em;text-transform:uppercase;padding:14px 22px;background:transparent;border:1px solid rgba(10,31,68,.4);color:var(--navy-900);cursor:pointer}
+  .step-nav .ghost:hover{background:var(--navy-900);color:var(--gold-300)}
+  .step-nav .next{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;padding:14px 28px;background:linear-gradient(180deg,var(--navy-800),var(--navy-900));color:var(--gold-300);border:1px solid var(--gold-500);cursor:pointer;display:inline-flex;align-items:center;gap:10px}
+  .step-nav .next:hover{filter:brightness(1.1)}
+  .step-nav .next:disabled{opacity:.4;cursor:not-allowed}
+
+  /* summary in step 4 */
+  .summary-final{display:grid;gap:8px;margin-top:8px}
+  .summary-row{display:flex;justify-content:space-between;gap:14px;padding:10px 14px;background:#fff;border:1px solid rgba(139,111,42,.3);font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--ink)}
+  .summary-row .label{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.16em;color:var(--gold-700);text-transform:uppercase;margin-right:8px}
+
+  /* success */
+  .success{padding:36px;text-align:center}
+  .success .crown-big{color:var(--gold-500);margin-bottom:6px}
+  .success h3{font-family:'Cinzel',serif;color:var(--navy-900);font-size:32px;margin:8px 0 4px}
+  .success p{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink-soft);font-style:italic;margin:0 0 6px}
+  .success .code{display:inline-block;margin-top:18px;padding:10px 18px;background:var(--navy-900);color:var(--gold-300);font-family:'Cinzel',serif;letter-spacing:.24em;border:1px solid var(--gold-500)}
+  .pix-box{margin-top:18px;display:inline-block;background:#fff;border:1px solid var(--gold-500);padding:16px}
+  .pix-box img{display:block;margin:0 auto 8px;max-width:200px}
+  .pix-code{font-family:'Inter',monospace;font-size:11px;color:var(--ink-soft);word-break:break-all;padding:8px;background:var(--parchment-100);border:1px solid rgba(139,111,42,.3);max-width:320px}
+  .pix-copy{margin-top:8px;padding:8px 16px;background:var(--navy-900);color:var(--gold-300);border:1px solid var(--gold-500);font-family:'Cinzel',serif;font-size:11px;letter-spacing:.2em;cursor:pointer;text-transform:uppercase}
+
+  /* mp brick container override */
+  #mp-bricks{margin-top:16px;background:#fff;border:1px solid rgba(139,111,42,.3);padding:14px}
+  #mp-loading{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink-faint);font-size:15px;margin:8px 0}
+
+  /* footer */
+  .imperial-footer{margin-top:80px;background:var(--navy-900);color:var(--parchment-200);border-top:1px solid var(--gold-600);position:relative}
+  .imperial-footer::before{content:"";position:absolute;inset:3px 0 auto;height:1px;background:rgba(217,189,124,.3)}
+  .footer-inner{max-width:1120px;margin:0 auto;padding:38px 28px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px}
+  .footer-inner h4{font-family:'Cinzel',serif;letter-spacing:.16em;font-size:13px;color:var(--gold-400);margin:0 0 12px;text-transform:uppercase}
+  .footer-inner p,.footer-inner a{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--parchment-200);text-decoration:none;line-height:1.6;display:block;margin:0 0 4px}
+  .footer-inner a:hover{color:var(--gold-300)}
+  .footer-inner .crest{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+  .footer-inner .crest .mono{width:44px;height:44px;border-radius:50%;background:transparent;border:1px solid var(--gold-500);color:var(--gold-400);display:grid;place-items:center;font-family:'Cinzel',serif;font-weight:700;font-size:18px}
+  .footer-inner .crest .name{font-family:'Cinzel',serif;letter-spacing:.06em;color:var(--gold-300);font-size:18px}
+  .copy{border-top:1px solid rgba(217,189,124,.2);text-align:center;padding:18px 28px;font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold-400);font-size:15px;letter-spacing:.04em}
+
+  /* responsive */
+  @media (max-width:900px){
+    .info-grid{grid-template-columns:1fr}
+    .carousel .frame{flex-basis:calc((100% - 18px) / 2)}
+    .schedule-day ul{grid-template-columns:1fr}
+    .footer-inner{grid-template-columns:1fr}
+    .form-grid{grid-template-columns:1fr}
+  }
+  @media (max-width:600px){
+    .utility nav{display:none}
+    .hero-frame{padding:24px 18px 24px}
+    .signup{padding:22px}
+    .carousel .frame{flex-basis:100%}
+    .sum-bar{flex-direction:column;align-items:stretch;text-align:center}
+    .sum-bar .submit{margin-left:0}
+    .sum-bar .submit button{width:100%;justify-content:center}
+    .lote-banner .timer{margin-left:0;width:100%;justify-content:center}
+  }
+
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+  .pulse{animation:pulse 2s ease-in-out infinite;display:inline-block}
 </style>
 </head>
 <body>
 
-<div class="hero">
-  <div class="hero-bg-text">PICKLEBALL</div>
-  <div class="hero-inner">
-    <div class="hero-badge"><span></span> Inscrições abertas</div>
-    <div class="hero-title">
-      <span class="line1">Copa</span>
-      <span class="line2">Imperial</span>
-      <span class="line3" style="font-size:clamp(2.5rem,7vw,4.5rem)">Duplas Mistas</span>
+<div class="top-rule"></div>
+
+<div class="shell">
+  <div class="utility">
+    <div class="crest">
+      <div class="mono">P</div>
+      <span>Copa Imperial</span>
     </div>
-    <p class="hero-tagline">Dois dias de pickleball, amizade e muita alegria.</p>
-    <div class="hero-location-box">📍 Petrópolis <span>·</span> 4 e 5 de julho de 2026</div>
+    <nav>
+      <a href="#galeria">Edição anterior</a>
+      <a href="#informacoes">Informações</a>
+      <a href="#inscricao">Inscrição</a>
+    </nav>
+    <a href="#inscricao" style="font-weight:600;color:var(--gold-700);text-decoration:none">Garanta sua vaga →</a>
   </div>
 </div>
 
-<div class="about-strip">
-  <p>A Copa Imperial Duplas Mistas é um torneio para todas as idades. Categorias Open, 40+, 50+, 60+ e Kids. Venha jogar com seu par favorito!</p>
-</div>
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-frame">
+    <svg class="corner tl" viewBox="0 0 54 54"><g fill="none" stroke="currentColor" stroke-width="1.2"><path d="M2 18 V2 H18"/><path d="M6 22 V6 H22"/><path d="M10 6 Q14 10 18 14" stroke-width=".9"/><circle cx="6" cy="6" r="1.5" fill="currentColor"/></g></svg>
+    <svg class="corner tr" viewBox="0 0 54 54"><g fill="none" stroke="currentColor" stroke-width="1.2"><path d="M2 18 V2 H18"/><path d="M6 22 V6 H22"/><path d="M10 6 Q14 10 18 14" stroke-width=".9"/><circle cx="6" cy="6" r="1.5" fill="currentColor"/></g></svg>
+    <svg class="corner bl" viewBox="0 0 54 54"><g fill="none" stroke="currentColor" stroke-width="1.2"><path d="M2 18 V2 H18"/><path d="M6 22 V6 H22"/><path d="M10 6 Q14 10 18 14" stroke-width=".9"/><circle cx="6" cy="6" r="1.5" fill="currentColor"/></g></svg>
+    <svg class="corner br" viewBox="0 0 54 54"><g fill="none" stroke="currentColor" stroke-width="1.2"><path d="M2 18 V2 H18"/><path d="M6 22 V6 H22"/><path d="M10 6 Q14 10 18 14" stroke-width=".9"/><circle cx="6" cy="6" r="1.5" fill="currentColor"/></g></svg>
 
-<div class="vagas-strip">🔔 Vagas limitadas — garanta a sua!</div>
+    <div class="ghost-word">PICKLEBALL</div>
 
-<div class="info-section">
-  <h2>Informações do evento</h2>
-  <div class="info-grid">
-    <div class="info-card" style="grid-column:1/-1">
-      <div class="info-card-icon ic-blue">📌</div>
-      <div><div class="info-card-label">Endereço</div><div class="info-card-value">Paróquia Santa Clara</div><div class="info-card-sub">R. Cel. Veiga, 1130 — Cohab · Cel. Veiga · Petrópolis</div></div>
+    <svg class="crown" width="56" height="34" viewBox="0 0 56 34" fill="none">
+      <path d="M2 30 L6 10 L14 22 L20 6 L28 18 L36 6 L42 22 L50 10 L54 30 Z" fill="currentColor" opacity=".95"/>
+      <rect x="2" y="30" width="52" height="3" fill="currentColor"/>
+      <circle cx="6" cy="10" r="2" fill="#0A1F44"/>
+      <circle cx="20" cy="6" r="2" fill="#0A1F44"/>
+      <circle cx="36" cy="6" r="2" fill="#0A1F44"/>
+      <circle cx="50" cy="10" r="2" fill="#0A1F44"/>
+      <circle cx="28" cy="18" r="2.5" fill="#0A1F44"/>
+    </svg>
+
+    <div class="ribbon">Segunda Edição · MMXXVI</div>
+
+    <h1 class="h-copa">Copa</h1>
+    <h1 class="h-imperial">Imperial</h1>
+    <h1 class="h-sub">Duplas Mistas</h1>
+    <p class="tag">Venham jogar e se divertir na cidade dos imperadores.</p>
+
+    <div class="hero-meta">
+      <div class="meta-pill">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span class="lbl">Local</span><span class="val">Petrópolis · RJ</span>
+      </div>
+      <div class="meta-pill">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        <span class="lbl">Data</span><span class="val">04 &amp; 05 de Julho · 2026</span>
+      </div>
     </div>
-    <div class="info-card" style="grid-column:1/-1;display:block;">
-      <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:14px;">
-        <div class="info-card-icon ic-orange">📋</div>
-        <div><div class="info-card-label">Programação</div></div>
-      </div>
-      <div style="display:grid;gap:10px;">
-        <div style="background:#f9fafb;border-radius:10px;padding:12px;">
-          <div style="font-size:12px;font-weight:700;color:#888;margin-bottom:6px;">03/07 · a partir das 15h</div>
-          <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:4px;">Open Play</div>
-          <div style="font-size:12px;color:#888;">Reconhecimento da quadra — aberto a todos os participantes</div>
-        </div>
-        <div style="background:#f9fafb;border-radius:10px;padding:12px;">
-          <div style="font-size:12px;font-weight:700;color:#16a34a;margin-bottom:6px;">04/07 · a partir das 8h</div>
-          <ul style="font-size:13px;color:#444;line-height:1.9;padding-left:16px;">
-            <li>Kids</li><li>Open</li><li>40+</li>
-          </ul>
-          <div style="font-size:11px;color:#aaa;margin-top:6px;">Previsão de término: 18h</div>
-        </div>
-        <div style="background:#f9fafb;border-radius:10px;padding:12px;">
-          <div style="font-size:12px;font-weight:700;color:#16a34a;margin-bottom:6px;">05/07 · a partir das 9h</div>
-          <ul style="font-size:13px;color:#444;line-height:1.9;padding-left:16px;">
-            <li>50+</li><li>60+</li>
-          </ul>
-          <div style="font-size:11px;color:#aaa;margin-top:6px;">Previsão de término: 14h</div>
-        </div>
-      </div>
+
+    <div class="cta-row">
+      <a href="#inscricao" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8m-4-4v4M5 4h14l-1 7a6 6 0 0 1-12 0L5 4z"/><path d="M5 4H2v3a4 4 0 0 0 4 4M19 4h3v3a4 4 0 0 1-4 4"/></svg>
+        Garanta sua vaga
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="imperial-strip">
+  <div class="imperial-strip-inner">
+    <p>Um torneio para todas as idades. <strong>Venha jogar com seu par favorito.</strong></p>
+    <div class="cat-chips">
+      <span class="cat-chip">Open</span>
+      <span class="cat-chip">40+</span>
+      <span class="cat-chip">50+</span>
+      <span class="cat-chip">60+</span>
+      <span class="cat-chip">Kids</span>
     </div>
   </div>
 </div>
 
-<div class="vagas-strip" style="border-top:1px solid #fde68a;">ℹ️ Escolha a categoria adequada à idade dos dois jogadores da dupla</div>
+<!-- ============ GALLERY ============ -->
+<section class="section" id="galeria">
+  <div class="shell">
+    <div class="sec-eyebrow"><span>Reviva os melhores momentos</span></div>
+    <h2 class="sec-title">Edição Anterior</h2>
 
-<div class="register-section">
-  <h2>Inscreva-se</h2>
-  <p class="sub">Rápido e fácil — menos de 2 minutos.</p>
-  <div id="app"></div>
+    <div class="carousel">
+      <button class="car-btn prev" id="carPrev" aria-label="Anterior">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="car-btn next" id="carNext" aria-label="Próximo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+      <div class="carousel-track" id="carTrack">
+        <div class="frame"><img src="/images/Landscape.jpg" alt="Edição anterior"></div>
+        <div class="frame"><img src="/images/Landscape2.jpg" alt="Edição anterior"></div>
+        <div class="frame"><img src="/images/Landscape3.jpg" alt="Edição anterior"></div>
+        <div class="frame"><img src="/images/Landscape4.jpg" alt="Edição anterior"></div>
+        <div class="frame"><img src="/images/Vertical1.jpg" alt="Edição anterior"></div>
+        <div class="frame"><img src="/images/Vertical2.jpg" alt="Edição anterior"></div>
+        <div class="frame"><img src="/images/Vertical3.jpg" alt="Edição anterior"></div>
+        <div class="frame"><img src="/images/Vertical4.jpg" alt="Edição anterior"></div>
+        <div class="frame"><img src="/images/Vertical5.jpg" alt="Edição anterior"></div>
+        <div class="frame"><img src="/images/Vertical6.jpg" alt="Edição anterior"></div>
+        <div class="frame"><img src="/images/verical7.jpg" alt="Edição anterior"></div>
+      </div>
+      <div class="car-dots" id="carDots"></div>
+    </div>
+  </div>
+</section>
+
+<div class="imperial-note">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21a2 2 0 0 0 4 0"/></svg>
+  <span class="pulse">Vagas limitadas — garanta a sua antes do encerramento do <strong>Lote 1</strong>.</span>
 </div>
 
-<footer>Copa Imperial Duplas Mistas &nbsp;·&nbsp; 4 e 5 de julho de 2026 &nbsp;·&nbsp; Paróquia Santa Clara · Petrópolis</footer>
+<!-- ============ INFO ============ -->
+<section class="section" id="informacoes">
+  <div class="shell">
+    <div class="sec-eyebrow"><span>Informações do evento</span></div>
+    <h2 class="sec-title">A casa do torneio</h2>
 
+    <div class="info-grid">
+
+      <div class="info-card">
+        <svg class="ic-corner tl" viewBox="0 0 30 30"><g fill="none" stroke="currentColor" stroke-width="1"><path d="M2 12 V2 H12"/><circle cx="4" cy="4" r="1" fill="currentColor"/></g></svg>
+        <svg class="ic-corner tr" viewBox="0 0 30 30"><g fill="none" stroke="currentColor" stroke-width="1"><path d="M2 12 V2 H12"/><circle cx="4" cy="4" r="1" fill="currentColor"/></g></svg>
+        <svg class="ic-corner bl" viewBox="0 0 30 30"><g fill="none" stroke="currentColor" stroke-width="1"><path d="M2 12 V2 H12"/><circle cx="4" cy="4" r="1" fill="currentColor"/></g></svg>
+        <svg class="ic-corner br" viewBox="0 0 30 30"><g fill="none" stroke="currentColor" stroke-width="1"><path d="M2 12 V2 H12"/><circle cx="4" cy="4" r="1" fill="currentColor"/></g></svg>
+
+        <div class="ic-head">
+          <div class="ic-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="ic-eyebrow">Endereço</div>
+            <h3 class="ic-title">Arena Paróquia Santa Clara</h3>
+          </div>
+        </div>
+        <div class="ic-body">
+          <div>R. Cel. Veiga, 1130 — Cohab</div>
+          <div class="muted">Cel. Veiga · Petrópolis · RJ</div>
+        </div>
+        <a class="map-stub" target="_blank" rel="noopener" href="https://maps.google.com/?q=R.+Cel.+Veiga%2C+1130%2C+Petr%C3%B3polis%2C+RJ">
+          <span style="position:relative;z-index:1;display:flex;align-items:center;gap:8px;color:var(--navy-900);font-family:'Cinzel',serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Abrir mapa</span>
+          </span>
+        </a>
+      </div>
+
+      <div class="info-card">
+        <svg class="ic-corner tl" viewBox="0 0 30 30"><g fill="none" stroke="currentColor" stroke-width="1"><path d="M2 12 V2 H12"/><circle cx="4" cy="4" r="1" fill="currentColor"/></g></svg>
+        <svg class="ic-corner tr" viewBox="0 0 30 30"><g fill="none" stroke="currentColor" stroke-width="1"><path d="M2 12 V2 H12"/><circle cx="4" cy="4" r="1" fill="currentColor"/></g></svg>
+        <svg class="ic-corner bl" viewBox="0 0 30 30"><g fill="none" stroke="currentColor" stroke-width="1"><path d="M2 12 V2 H12"/><circle cx="4" cy="4" r="1" fill="currentColor"/></g></svg>
+        <svg class="ic-corner br" viewBox="0 0 30 30"><g fill="none" stroke="currentColor" stroke-width="1"><path d="M2 12 V2 H12"/><circle cx="4" cy="4" r="1" fill="currentColor"/></g></svg>
+
+        <div class="ic-head">
+          <div class="ic-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          </div>
+          <div>
+            <div class="ic-eyebrow">Programação</div>
+            <h3 class="ic-title">Dois dias de torneio</h3>
+          </div>
+        </div>
+
+        <div class="schedule-day">
+          <div class="day-head">
+            <span class="day-date">Sábado · 04/07</span>
+            <span class="day-hours">das 8h às 18h</span>
+          </div>
+          <ul>
+            <li>Duplas 60+</li>
+            <li>Duplas 50+</li>
+            <li>Duplas 40+</li>
+          </ul>
+        </div>
+        <div class="schedule-day">
+          <div class="day-head">
+            <span class="day-date">Domingo · 05/07</span>
+            <span class="day-hours">das 9h às 13h</span>
+          </div>
+          <ul>
+            <li>Duplas Kids (10–14 anos)</li>
+            <li>Duplas Open</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="imperial-note" style="margin-top:26px">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v5M12 16h.01"/></svg>
+      <span>Os jogadores podem se inscrever em uma categoria de idade <em>menor ou igual</em> à própria · <strong>Open não tem restrição</strong>.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SIGNUP ============ -->
+<section class="section" id="inscricao" style="padding-top:30px">
+  <div class="shell">
+    <div class="sec-eyebrow"><span>Inscreva-se</span></div>
+    <h2 class="sec-title">Garanta sua vaga</h2>
+
+    <div class="signup">
+      <div id="app">Carregando inscrições...</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="imperial-footer" id="contato">
+  <div class="footer-inner">
+    <div>
+      <div class="crest">
+        <div class="mono">P</div>
+        <div class="name">COPA IMPERIAL</div>
+      </div>
+      <p style="color:var(--parchment-300);font-style:italic">Pickleball em Petrópolis · Duplas Mistas · 2026.</p>
+      <p style="color:var(--gold-400);margin-top:14px;font-family:'Cinzel',serif;letter-spacing:.18em;font-size:12px;text-transform:uppercase">"Venham jogar e se divertir."</p>
+    </div>
+    <div>
+      <h4>Evento</h4>
+      <a href="#informacoes">Informações</a>
+      <a href="#galeria">Edição anterior</a>
+      <a href="#inscricao">Inscrição</a>
+    </div>
+    <div>
+      <h4>Contato</h4>
+      <a href="https://wa.me/5524988050643">WhatsApp: (24) 98805-0643</a>
+    </div>
+  </div>
+  <div class="copy">© 2026 Copa Imperial · Paróquia Santa Clara · Petrópolis · RJ</div>
+</footer>
+
+<!-- ============ CAROUSEL JS ============ -->
+<script>
+(function(){
+  var track = document.getElementById('carTrack');
+  var prevBtn = document.getElementById('carPrev');
+  var nextBtn = document.getElementById('carNext');
+  var dotsBox = document.getElementById('carDots');
+  if(!track) return;
+  var frames = [].slice.call(track.querySelectorAll('.frame'));
+  function perPage(){var w=window.innerWidth;if(w<=600)return 1;if(w<=900)return 2;return 3;}
+  function pageCount(){return Math.max(1, Math.ceil(frames.length / perPage()));}
+  function currentPage(){return Math.round(track.scrollLeft / track.clientWidth);}
+  function go(page){var total=pageCount();var p=Math.max(0,Math.min(total-1,page));track.scrollTo({left:p*track.clientWidth,behavior:'smooth'});}
+  function renderDots(){
+    dotsBox.innerHTML='';
+    var total=pageCount();var cur=currentPage();
+    for(var i=0;i<total;i++){
+      var b=document.createElement('button');
+      b.setAttribute('aria-label','Página '+(i+1));
+      if(i===cur)b.classList.add('active');
+      (function(idx){b.addEventListener('click',function(){go(idx);});})(i);
+      dotsBox.appendChild(b);
+    }
+    prevBtn.disabled=cur===0;
+    nextBtn.disabled=cur>=total-1;
+  }
+  prevBtn.addEventListener('click',function(){go(currentPage()-1);});
+  nextBtn.addEventListener('click',function(){go(currentPage()+1);});
+  var t;
+  track.addEventListener('scroll',function(){clearTimeout(t);t=setTimeout(renderDots,80);});
+  window.addEventListener('resize',renderDots);
+  renderDots();
+})();
+</script>
+
+<!-- ============ SIGNUP JS ============ -->
 <script>
 // ============================================================
-// CONTROLE DE VAGAS — edite esgotado:true para bloquear
+// CONFIG — categorias e preços (sobrescritos por /api/admin)
 // ============================================================
 var CATS=[
-  {id:'open', label:'Dupla Mista — Open', precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', esgotado:false},
-  {id:'40',   label:'Dupla Mista — 40+',  precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', esgotado:false},
-  {id:'50',   label:'Dupla Mista — 50+',  precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', esgotado:false},
-  {id:'60',   label:'Dupla Mista — 60+',  precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', esgotado:false},
-  {id:'kids', label:'Dupla Mista — Kids', precoLote1:98,  precoLote2:120, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', esgotado:false},
+  {id:'open', label:'Dupla Mista — Open',           emblem:'O',  precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', vagasNum:12, esgotado:false, note:'Sem restrição de idade'},
+  {id:'40',   label:'Dupla Mista — 40+',            emblem:'IV', precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', vagasNum:12, esgotado:false},
+  {id:'50',   label:'Dupla Mista — 50+',            emblem:'V',  precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', vagasNum:12, esgotado:false},
+  {id:'60',   label:'Dupla Mista — 60+',            emblem:'VI', precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', vagasNum:12, esgotado:false},
+  {id:'kids', label:'Dupla Mista — Kids (10–14)',   emblem:'K',  precoLote1:98,  precoLote2:120, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', vagasNum:12, esgotado:false, note:'10 a 14 anos'},
 ];
 
-// Lote atual — atualizado via /api/admin no init()
 var LOTE_ATUAL = 1;
+var LOTE1_END = new Date('2026-06-11T23:59:59-03:00').getTime();
+
 function precoFor(catId){
   var c=CATS.find(function(x){return x.id===catId;});
   if(!c)return 0;
   return LOTE_ATUAL===2?c.precoLote2:c.precoLote1;
 }
-// ============================================================
 
-var COUPON_CODE='99OFF';
-var COUPON_DISCOUNT=0.99;
-
-var state={
-  step:1,
-  selectedCats:[],
-  principal:{name:'',email:'',gender:''},
-  players:{},
-  preferenceId:null,
-  couponApplied:false,
-  pixData:null,
+var state = {
+  step: 1,
+  selectedCats: [],
+  principal: {name:'', email:'', telefone:'', cidade:'', gender:''},
+  players: {},
+  preferenceId: null,
+  pixData: null,
 };
 
 function fmt(v){return 'R$ '+v.toLocaleString('pt-BR');}
-function isDupla(id){var c=CATS.find(function(c){return c.id===id;});return c&&c.slots===2;}
+function calcPrice(idx){return precoFor(state.selectedCats[idx]);}
+function totalPrice(){return state.selectedCats.reduce(function(s,_,i){return s+calcPrice(i);},0);}
 
-function calcPrice(idx){
-  return precoFor(state.selectedCats[idx]);
+// ============================================================
+// RENDER — Stepper
+// ============================================================
+function stepperHtml(active){
+  var steps = ['Categorias','Dados','Jogadores','Pagamento'];
+  return '<div class="stepper">' + steps.map(function(s,i){
+    var n=i+1, cls = n===active?'active':n<active?'done':'';
+    var icon = n<active ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>' : n;
+    return '<div class="step '+cls+'"><span class="num">'+icon+'</span><span>'+s+'</span></div>';
+  }).join('') + '</div>';
 }
 
-function baseTotal(){return state.selectedCats.reduce(function(s,_,i){return s+calcPrice(i);},0);}
-function totalPrice(){
-  var base=baseTotal();
-  return state.couponApplied?Math.max(1,Math.round(base*(1-COUPON_DISCOUNT))):base;
-}
-
-function stepsHtml(active){
-  var steps=['Categorias','Dados','Jogadores','Pagamento'];
-  return '<div class="steps">'+steps.map(function(s,i){
-    var n=i+1,cls=n===active?'active':n<active?'done':'';
-    return(i>0?'<div class="step-divider"></div>':'')+
-      '<div class="step '+cls+'"><div class="step-dot"></div>'+s+'</div>';
-  }).join('')+'</div>';
-}
-
+// ============================================================
+// RENDER — Step 1 (Categorias)
+// ============================================================
 function renderStep1(){
-  var sel=state.selectedCats;
+  var sel = state.selectedCats;
 
-  var catsHtml=CATS.map(function(c){
+  // Countdown HTML
+  var diff = Math.max(0, LOTE1_END - Date.now());
+  var d = Math.floor(diff/86400000);
+  var h = Math.floor((diff%86400000)/3600000);
+  var m = Math.floor((diff%3600000)/60000);
+  var s = Math.floor((diff%60000)/1000);
+  function pad(n){return String(n).padStart(2,'0');}
+
+  var loteBannerHtml = LOTE_ATUAL===1
+    ? '<div class="lote-banner">'
+      +'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold-700);flex-shrink:0"><path d="M8 21h8m-4-4v4M5 4h14l-1 7a6 6 0 0 1-12 0L5 4z"/><path d="M5 4H2v3a4 4 0 0 0 4 4M19 4h3v3a4 4 0 0 1-4 4"/></svg>'
+      +'<div><div class="label">Inscrições Lote 1</div><div class="desc">Preço promocional até <b>11 de junho</b> — economize por categoria.</div></div>'
+      +'<div class="timer">'
+      +'<div class="unit">'+pad(d)+'<small>DIAS</small></div>'
+      +'<div class="unit">'+pad(h)+'<small>HORAS</small></div>'
+      +'<div class="unit">'+pad(m)+'<small>MIN</small></div>'
+      +'<div class="unit">'+pad(s)+'<small>SEG</small></div>'
+      +'</div></div>'
+    : '<div class="lote-banner"><div><div class="label">Lote atual</div><div class="desc"><b>Lote 2</b> ativo</div></div></div>';
+
+  var catsHtml = CATS.map(function(c){
     if(c.esgotado){
-      return '<div class="cat-card esgotado">'
-        +'<div class="cat-header">'
-        +'<div class="cat-check-x">✕</div>'
-        +'<div class="cat-info"><div class="cat-name" style="color:#aaa">'+c.label+'</div>'
-        +'<div class="cat-desc">'+c.priceLabel+' &nbsp;·&nbsp; <span style="color:#991b1b;font-weight:600">Esgotado</span></div></div>'
-        +'<div class="cat-price-col"><div class="cat-badge-sold">Esgotado</div></div>'
-        +'</div></div>';
-    }
-    var idx=sel.indexOf(c.id);
-    var isSelected=idx!==-1;
-    var preco=precoFor(c.id);
-    return '<div class="cat-card '+(isSelected?'selected':'')+'" data-catid="'+c.id+'">'
-      +'<div class="cat-header">'
-      +'<div class="cat-check"><div class="cat-check-inner"></div></div>'
-      +'<div class="cat-info"><div class="cat-name">'+c.label+'</div>'
-      +'<div class="cat-desc">'+c.priceLabel+' &nbsp;·&nbsp; <span style="color:#16a34a;font-weight:600">'+c.vagas+'</span></div></div>'
-      +'<div class="cat-price-col"><div class="cat-price">'+fmt(preco)+'</div></div>'
-      +'</div></div>';
-  }).join('');
-
-  var summaryHtml='';
-  if(sel.length>0){
-    var lines=sel.map(function(id){
-      var c=CATS.find(function(x){return x.id===id;});
-      return '<div class="summary-row"><span>'+c.label+'</span><span>'+fmt(precoFor(id))+'</span></div>';
-    }).join('');
-    summaryHtml='<div class="summary">'+lines+'<hr class="summary-divider"><div class="summary-total"><span>Total</span><span>'+fmt(totalPrice())+'</span></div></div>';
-  }
-
-  var loteBanner='<div class="discount-banner" style="background:#eff6ff;border-color:#bfdbfe;color:#1e40af">📦 Inscrições no <strong>Lote '+LOTE_ATUAL+'</strong> — aproveite!</div>';
-
-  return stepsHtml(1)
-    +loteBanner
-    +'<div class="section-title">Escolha suas categorias</div>'
-    +catsHtml+summaryHtml
-    +'<button class="btn" id="btn-to2" '+(sel.length>0?'':'disabled')+'>Garantir vaga →</button>';
-}
-
-function renderStep2(){
-  var p=state.principal;
-  var valid=p.name&&p.email&&p.gender;
-  return stepsHtml(2)
-    +'<div class="age-notice">ℹ️ <span>Lembre-se: a idade de <strong>ambos os jogadores da dupla</strong> deve estar dentro da categoria escolhida. Para a categoria Open, não há restrição de idade.</span></div>'
-    +'<div class="section-title">Responsável pela inscrição</div>'
-    +'<div class="field"><label>Nome completo</label><input id="inp-name" type="text" placeholder="Seu nome completo" value="'+p.name+'"></div>'
-    +'<div class="field-row">'
-    +'<div class="field"><label>Email</label><input id="inp-email" type="email" placeholder="seu@email.com" value="'+p.email+'"></div>'
-    +'<div class="field"><label>Gênero</label><select id="inp-gender"><option value="" '+((!p.gender)?'selected':'')+'>Selecione</option><option value="M" '+(p.gender==='M'?'selected':'')+'>Masculino</option><option value="F" '+(p.gender==='F'?'selected':'')+'>Feminino</option></select></div>'
-    +'</div>'
-    +'<button class="btn" id="btn-to3" '+(valid?'':'disabled')+'>Continuar →</button>'
-    +'<button class="btn btn-sec" id="btn-back2">← Voltar</button>';
-}
-
-function renderStep3(){
-  var cardsHtml=state.selectedCats.map(function(id,catIdx){
-    var cat=CATS.find(function(c){return c.id===id;});
-    if(!state.players[id])state.players[id]=Array.from({length:cat.slots},function(){return{name:''};});
-    if(cat.id==='q'&&state.players[id].teamName===undefined)state.players[id].teamName='';
-    var teamNameHtml=cat.id==='q'
-      ?'<div class="player-slot"><div class="player-slot-label">Nome do time</div><input class="player-input team-name-input" type="text" data-cat="'+id+'" placeholder="Nome do quarteto" value="'+(state.players[id].teamName||'')+'"></div>'
-      :'';
-    var slotsHtml=state.players[id].map(function(slot,si){
-      var req=cat.genders[si];
-      var gLabel=req==='M'?'Masculino':req==='F'?'Feminino':'Qualquer';
-      return '<div class="player-slot">'
-        +'<div class="player-slot-label">Jogador '+(si+1)+' · '+gLabel+'</div>'
-        +'<input class="player-input" type="text" data-cat="'+id+'" data-slot="'+si+'" placeholder="Nome completo" value="'+slot.name+'">'
+      return '<div class="cat-row esgotado">'
+        +'<div class="check"></div>'
+        +'<div class="cat-emblem">'+c.emblem+'</div>'
+        +'<div style="min-width:0;flex:1">'
+        +'<div class="cat-name" style="color:#aaa">'+c.label+'</div>'
+        +'<div class="cat-meta"><span>'+c.priceLabel+'</span><span>·</span><span class="vagas zero">Esgotado</span></div>'
+        +'</div>'
+        +'<div class="price"><span class="badge-esg">ESGOTADO</span></div>'
         +'</div>';
-    }).join('');
-    return '<div class="player-card"><div class="player-card-title">🏓 '+cat.label+' — '+fmt(calcPrice(catIdx))+'</div>'+teamNameHtml+slotsHtml+'</div>';
+    }
+    var isSelected = sel.indexOf(c.id) !== -1;
+    var preco = precoFor(c.id);
+    var lote2Hint = LOTE_ATUAL===1
+      ? '<div class="lote2">Lote 2: <b>'+fmt(c.precoLote2)+'</b></div>'
+      : '';
+    var noteHtml = c.note ? '<span>·</span><span><em>'+c.note+'</em></span>' : '';
+    return '<div class="cat-row '+(isSelected?'selected':'')+'" data-catid="'+c.id+'">'
+      +'<div class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>'
+      +'<div class="cat-emblem">'+c.emblem+'</div>'
+      +'<div style="min-width:0;flex:1">'
+      +'<div class="cat-name">'+c.label+'</div>'
+      +'<div class="cat-meta"><span>'+c.priceLabel+'</span><span>·</span><span class="vagas">'+c.vagas+'</span>'+noteHtml+'</div>'
+      +'</div>'
+      +'<div class="price"><div class="lote1">'+fmt(preco)+'</div>'+lote2Hint+'</div>'
+      +'</div>';
   }).join('');
 
-  var allFilled=state.selectedCats.every(function(id){
+  var total = totalPrice();
+  var canNext = sel.length > 0;
+
+  return stepperHtml(1)
+    + loteBannerHtml
+    + '<div class="sec-label">Escolha suas categorias</div>'
+    + '<div class="cat-list">'+catsHtml+'</div>'
+    + '<div class="sum-bar">'
+    + '<div><div class="label">Total — Lote '+LOTE_ATUAL+'</div><div class="total">'+fmt(total)+'</div></div>'
+    + '<div class="count">'+sel.length+' categoria'+(sel.length===1?'':'s')+'</div>'
+    + '<div class="submit"><button id="btn-to2" '+(canNext?'':'disabled')+'>Avançar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button></div>'
+    + '</div>';
+}
+
+// ============================================================
+// RENDER — Step 2 (Dados do responsável)
+// ============================================================
+function renderStep2(){
+  var p = state.principal;
+  var valid = p.name && p.email && p.gender;
+
+  return stepperHtml(2)
+    + '<h3 style="font-family:\'Cinzel\',serif;color:var(--navy-900);margin:4px 0 4px;font-size:22px">Dados da inscrição</h3>'
+    + '<p style="font-family:\'Cormorant Garamond\',serif;font-style:italic;color:var(--ink-soft);margin:0 0 14px">Quem é o responsável pela inscrição? Usaremos esse contato para confirmar o pagamento.</p>'
+    + '<div class="form-grid">'
+    + '<div class="field full"><label>Nome completo</label><input id="inp-name" type="text" value="'+p.name+'" placeholder="Seu nome completo"></div>'
+    + '<div class="field"><label>E-mail</label><input id="inp-email" type="email" value="'+p.email+'" placeholder="voce@email.com"></div>'
+    + '<div class="field"><label>Gênero</label><select id="inp-gender">'
+      + '<option value="" '+(!p.gender?'selected':'')+'>Selecione</option>'
+      + '<option value="M" '+(p.gender==='M'?'selected':'')+'>Masculino</option>'
+      + '<option value="F" '+(p.gender==='F'?'selected':'')+'>Feminino</option>'
+      + '</select></div>'
+    + '</div>'
+    + '<div class="step-nav">'
+    + '<button class="ghost" id="btn-back2">← Voltar</button>'
+    + '<button class="next" id="btn-to3" '+(valid?'':'disabled')+'>Próximo passo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>'
+    + '</div>';
+}
+
+// ============================================================
+// RENDER — Step 3 (Jogadores)
+// ============================================================
+function renderStep3(){
+  var cardsHtml = state.selectedCats.map(function(catId, catIdx){
+    var cat = CATS.find(function(c){return c.id===catId;});
+    if(!state.players[catId]) state.players[catId] = Array.from({length:cat.slots},function(){return{name:''};});
+
+    var slotsHtml = state.players[catId].map(function(slot, si){
+      var req = cat.genders[si];
+      var gLabel = req==='M'?'Masculino':req==='F'?'Feminino':'Qualquer';
+      return '<div class="field"><label>Jogador(a) '+(si+1)+' · '+gLabel+'</label>'
+        +'<input class="player-input" type="text" data-cat="'+catId+'" data-slot="'+si+'" value="'+slot.name+'" placeholder="Nome completo"></div>';
+    }).join('');
+
+    return '<div class="player-card">'
+      +'<div class="pc-head"><div class="pc-num">'+(catIdx+1)+'</div><div class="pc-title">'+cat.label+'</div><div class="pc-cat">'+fmt(calcPrice(catIdx))+'</div></div>'
+      +'<div class="form-grid">'+slotsHtml+'</div>'
+      +'</div>';
+  }).join('');
+
+  var allFilled = state.selectedCats.every(function(id){
     return (state.players[id]||[]).every(function(s){return s.name.trim()!=='';});
   });
 
-  return stepsHtml(3)
-    +'<div class="section-title">Jogadores por categoria</div>'
-    +cardsHtml
-    +'<button class="btn" id="btn-to4" '+(allFilled?'':'disabled')+'>Continuar →</button>'
-    +'<button class="btn btn-sec" id="btn-back3">← Voltar</button>';
+  return stepperHtml(3)
+    + '<h3 style="font-family:\'Cinzel\',serif;color:var(--navy-900);margin:4px 0 4px;font-size:22px">Jogadores</h3>'
+    + '<p style="font-family:\'Cormorant Garamond\',serif;font-style:italic;color:var(--ink-soft);margin:0 0 6px">Mista = um(a) jogador(a) de cada gênero. A categoria é definida pela idade do mais velho.</p>'
+    + cardsHtml
+    + '<div class="step-nav">'
+    + '<button class="ghost" id="btn-back3">← Voltar</button>'
+    + '<button class="next" id="btn-to4" '+(allFilled?'':'disabled')+'>Próximo passo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>'
+    + '</div>';
 }
 
+// ============================================================
+// RENDER — Step 4 (Resumo + pagamento)
+// ============================================================
 function renderStep4(){
-  var lines=state.selectedCats.map(function(id,i){
-    var cat=CATS.find(function(c){return c.id===id;});
-    var names=(state.players[id]||[]).map(function(s){return s.name;}).join(', ');
-    return '<div class="summary-row"><span>'+cat.label+' — '+names+'</span><span>'+fmt(calcPrice(i))+'</span></div>';
+  var lines = state.selectedCats.map(function(id, i){
+    var cat = CATS.find(function(c){return c.id===id;});
+    var names = (state.players[id]||[]).map(function(s){return s.name;}).join(', ');
+    return '<div class="summary-row"><span><span class="label">'+cat.label.split('—')[1].trim()+'</span> '+names+'</span><strong>'+fmt(calcPrice(i))+'</strong></div>';
   }).join('');
 
-  var couponHtml=state.couponApplied
-    ?'<div class="coupon-applied">✓ Cupom '+COUPON_CODE+' aplicado!</div>'
-    +'<div class="summary-row" style="color:#16a34a;font-weight:600"><span>Desconto</span><span>− '+fmt(baseTotal()-totalPrice())+'</span></div>'
-    :'<div class="coupon-row"><input id="inp-coupon" type="text" placeholder="Cupom de desconto"><button id="btn-coupon">Aplicar</button></div>';
-
-  return stepsHtml(4)
-    +'<div class="section-title">Resumo final</div>'
-    +'<div class="summary">'
-    +'<div class="summary-row" style="font-weight:600;color:#1a1a1a"><span>Responsável</span><span>'+state.principal.name+'</span></div>'
-    +'<hr class="summary-divider">'+lines+'<hr class="summary-divider">'
-    +'<div class="summary-total"><span>Total</span><span>'+fmt(totalPrice())+'</span></div>'
-    +'</div>'
-    +couponHtml
-    +'<button class="btn" id="btn-pay">Pagar '+fmt(totalPrice())+' →</button>'
-    +'<button class="btn btn-sec" id="btn-back4">← Voltar</button>';
+  return stepperHtml(4)
+    + '<h3 style="font-family:\'Cinzel\',serif;color:var(--navy-900);margin:4px 0 4px;font-size:22px">Resumo final</h3>'
+    + '<p style="font-family:\'Cormorant Garamond\',serif;font-style:italic;color:var(--ink-soft);margin:0 0 14px">Pagamento seguro via Pix ou cartão. Confirmação chega no seu e-mail.</p>'
+    + '<div class="summary-final">'
+    + '<div class="summary-row"><span><span class="label">Responsável</span> '+state.principal.name+'</span><span>'+state.principal.email+'</span></div>'
+    + lines
+    + '</div>'
+    + '<div class="sum-bar" style="margin-top:18px">'
+    + '<div><div class="label">Total da inscrição</div><div class="total">'+fmt(totalPrice())+'</div></div>'
+    + '<div class="submit"><button id="btn-pay"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8m-4-4v4M5 4h14l-1 7a6 6 0 0 1-12 0L5 4z"/><path d="M5 4H2v3a4 4 0 0 0 4 4M19 4h3v3a4 4 0 0 1-4 4"/></svg> Pagar '+fmt(totalPrice())+'</button></div>'
+    + '</div>'
+    + '<div class="step-nav">'
+    + '<button class="ghost" id="btn-back4">← Voltar</button>'
+    + '<span style="font-family:\'Cormorant Garamond\',serif;font-style:italic;color:var(--ink-faint);align-self:center">Pagamento processado por gateway seguro · SSL</span>'
+    + '</div>';
 }
 
+// ============================================================
+// RENDER — Step 5 (MP Brick checkout)
+// ============================================================
 function renderPayment(){
-  return '<div style="padding:1rem 0">'
-    +'<p style="font-size:14px;color:#555;margin-bottom:1rem;">Total: <strong style="color:#1a1a1a;font-size:16px">'+fmt(totalPrice())+'</strong></p>'
-    +'<div id="mp-loading" style="font-size:13px;color:#aaa;margin-bottom:1rem;">Carregando checkout...</div>'
-    +'<div id="mp-bricks"></div>'
-    +'<button class="btn btn-sec" id="btn-back-pay" style="margin-top:12px">← Voltar</button>'
-    +'</div>';
+  return stepperHtml(4)
+    + '<h3 style="font-family:\'Cinzel\',serif;color:var(--navy-900);margin:4px 0 14px;font-size:22px">Pagamento</h3>'
+    + '<div id="mp-loading">Carregando checkout do Mercado Pago...</div>'
+    + '<div id="mp-bricks"></div>'
+    + '<div class="step-nav"><button class="ghost" id="btn-back-pay">← Voltar</button></div>';
+}
+
+// ============================================================
+// RENDER — Step 6 (Success)
+// ============================================================
+function renderSuccess(){
+  var pixHtml = '';
+  if(state.pixData){
+    pixHtml = '<div class="pix-box">'
+      + '<img src="data:image/png;base64,'+state.pixData.qrCodeBase64+'" alt="Pix QR">'
+      + '<div class="pix-code">'+state.pixData.qrCode+'</div>'
+      + '<button class="pix-copy" onclick="navigator.clipboard.writeText(\''+state.pixData.qrCode+'\').then(function(){this.textContent=\'Copiado!\'}.bind(this))">Copiar código Pix</button>'
+      + '</div>';
+    return '<div class="success">'
+      + '<svg class="crown-big" width="62" height="38" viewBox="0 0 56 34" fill="none"><path d="M2 30 L6 10 L14 22 L20 6 L28 18 L36 6 L42 22 L50 10 L54 30 Z" fill="currentColor"/><rect x="2" y="30" width="52" height="3" fill="currentColor"/></svg>'
+      + '<h3>Quase lá!</h3>'
+      + '<p>Conclua o pagamento via Pix abaixo.<br>Confirmação chegará por e-mail.</p>'
+      + pixHtml
+      + '</div>';
+  }
+  return '<div class="success">'
+    + '<svg class="crown-big" width="62" height="38" viewBox="0 0 56 34" fill="none"><path d="M2 30 L6 10 L14 22 L20 6 L28 18 L36 6 L42 22 L50 10 L54 30 Z" fill="currentColor"/><rect x="2" y="30" width="52" height="3" fill="currentColor"/></svg>'
+    + '<h3>Inscrição recebida!</h3>'
+    + '<p>Você receberá a confirmação por e-mail em breve.</p>'
+    + '<div class="code">CONFIRMAÇÃO ENVIADA</div>'
+    + '<p style="margin-top:18px;font-size:18px">Te esperamos em <em>Petrópolis · 04 e 05 de Julho · 2026</em>.</p>'
+    + '</div>';
 }
 
 function renderPixConfirmed(){
-  return '<div class="success"><div class="success-icon">🏆</div><h2>Inscricao confirmada!</h2>'
-    +'<p>Pagamento via Pix confirmado!<br>Email enviado para <strong>'+state.principal.email+'</strong><br><br>'
-    +'Nos vemos na quadra, <strong>'+state.principal.name.split(' ')[0]+'</strong>!</p>'
-    +'</div>';
+  return '<div class="success">'
+    + '<svg class="crown-big" width="62" height="38" viewBox="0 0 56 34" fill="none"><path d="M2 30 L6 10 L14 22 L20 6 L28 18 L36 6 L42 22 L50 10 L54 30 Z" fill="currentColor"/><rect x="2" y="30" width="52" height="3" fill="currentColor"/></svg>'
+    + '<h3>Inscrição confirmada!</h3>'
+    + '<p>Pagamento via Pix confirmado!<br>E-mail enviado para <strong style="color:var(--navy-900);font-style:normal">'+state.principal.email+'</strong></p>'
+    + '<p style="margin-top:18px;font-size:18px">Nos vemos na quadra, <em>'+state.principal.name.split(' ')[0]+'</em>!</p>'
+    + '</div>';
 }
 
-function renderSuccess(){
-  var pixHtml='';
-  if(state.pixData){
-    pixHtml='<div style="margin-top:1.5rem;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:1.25rem;text-align:center">'
-      +'<p style="font-size:13px;font-weight:600;color:#166534;margin-bottom:12px;">Pague via Pix para confirmar sua vaga</p>'
-      +'<img src="data:image/png;base64,'+state.pixData.qrCodeBase64+'" style="width:180px;height:180px;margin:0 auto;display:block;border-radius:8px;" />'
-      +'<p style="font-size:11px;color:#888;margin-top:10px;margin-bottom:8px;">Ou copie o código:</p>'
-      +'<div style="background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:8px 12px;font-size:11px;word-break:break-all;color:#555;text-align:left">'+state.pixData.qrCode+'</div>'
-      +'<button onclick="navigator.clipboard.writeText(\''+state.pixData.qrCode+'\')" style="margin-top:10px;padding:8px 16px;font-size:13px;font-weight:600;background:#16a34a;color:#fff;border:none;border-radius:8px;cursor:pointer;">Copiar código Pix</button>'
-      +'</div>';
-    return '<div class="success"><div class="success-icon">⏳</div><h2>Quase lá!</h2>'
-      +'<p>Conclua o pagamento via Pix abaixo.<br>Você receberá a confirmação por email assim que o pagamento for identificado.</p>'
-      +pixHtml+'</div>';
-  }
-  return '<div class="success"><div class="success-icon">🏆</div><h2>Inscrição recebida!</h2>'
-    +'<p>Você receberá a confirmação por email em breve.<br><br>'
-    +'Nos vemos na quadra, <strong>'+state.principal.name.split(' ')[0]+'</strong>!</p>'
-    +'</div>';
-}
-
+// ============================================================
+// RENDER ROUTER
+// ============================================================
 function render(){
-  var app=document.getElementById('app');
-  if(!app)return;
-  if(state.step===1)app.innerHTML=renderStep1();
-  else if(state.step===2)app.innerHTML=renderStep2();
-  else if(state.step===3)app.innerHTML=renderStep3();
-  else if(state.step===4)app.innerHTML=renderStep4();
-  else if(state.step===5){app.innerHTML=renderPayment();initBricks();}
-  else if(state.step===6)app.innerHTML=renderSuccess();
-  else app.innerHTML=renderPixConfirmed();
+  var app = document.getElementById('app');
+  if(!app) return;
+  if(state.step===1) app.innerHTML = renderStep1();
+  else if(state.step===2) app.innerHTML = renderStep2();
+  else if(state.step===3) app.innerHTML = renderStep3();
+  else if(state.step===4) app.innerHTML = renderStep4();
+  else if(state.step===5){ app.innerHTML = renderPayment(); initBricks(); }
+  else if(state.step===6) app.innerHTML = renderSuccess();
+  else app.innerHTML = renderPixConfirmed();
   bindEvents();
 }
 
+// ============================================================
+// MP Bricks
+// ============================================================
 function initBricks(){
-  var existing=document.getElementById('mp-sdk');
-  if(existing){loadBricks();return;}
-  var script=document.createElement('script');
-  script.id='mp-sdk';
-  script.src='https://sdk.mercadopago.com/js/v2';
-  script.onload=function(){loadBricks();};
-  script.onerror=function(){alert('Erro ao carregar SDK do Mercado Pago.');};
+  var existing = document.getElementById('mp-sdk');
+  if(existing){ loadBricks(); return; }
+  var script = document.createElement('script');
+  script.id = 'mp-sdk';
+  script.src = 'https://sdk.mercadopago.com/js/v2';
+  script.onload = function(){ loadBricks(); };
+  script.onerror = function(){ alert('Erro ao carregar SDK do Mercado Pago.'); };
   document.head.appendChild(script);
 }
 
 function loadBricks(){
-  var container=document.getElementById('mp-bricks');
-  if(!container)return;
+  var container = document.getElementById('mp-bricks');
+  if(!container) return;
   try{
-    var mp=new MercadoPago('APP_USR-4b2344c1-9afe-4fa3-90b2-4e67da615fcb',{locale:'pt-BR'});
+    var mp = new MercadoPago('APP_USR-4b2344c1-9afe-4fa3-90b2-4e67da615fcb', {locale:'pt-BR'});
     mp.bricks().create('payment','mp-bricks',{
-      initialization:{amount:totalPrice(),preferenceId:state.preferenceId},
+      initialization:{ amount: totalPrice(), preferenceId: state.preferenceId },
       customization:{
-        paymentMethods:{creditCard:'all',bankTransfer:'all',maxInstallments:12},
-        visual:{hideFormTitle:false,hidePaymentButton:false}
+        paymentMethods:{ creditCard:'all', bankTransfer:'all', maxInstallments:12 },
+        visual:{ hideFormTitle:false, hidePaymentButton:false }
       },
       callbacks:{
-        onReady:function(){var l=document.getElementById('mp-loading');if(l)l.style.display='none';},
-        onSubmit:function(data){
-          return new Promise(function(resolve,reject){
-            var categories=state.selectedCats.map(function(id,i){
-              var cat=CATS.find(function(c){return c.id===id;});
-              var players=(state.players[id]||[]).map(function(s){return s.name;});
-              return{label:cat.label,price:calcPrice(i),players:players};
+        onReady: function(){ var l=document.getElementById('mp-loading'); if(l) l.style.display='none'; },
+        onSubmit: function(data){
+          return new Promise(function(resolve, reject){
+            var categories = state.selectedCats.map(function(id,i){
+              var cat = CATS.find(function(c){return c.id===id;});
+              var players = (state.players[id]||[]).map(function(s){return s.name;});
+              return { label: cat.label, price: calcPrice(i), players: players };
             });
-            var payload=Object.assign({},data.formData,{
-              metadata:{
-                name:state.principal.name,
-                email:state.principal.email,
-                categories:JSON.stringify(categories),
+            var payload = Object.assign({}, data.formData, {
+              metadata: {
+                name: state.principal.name,
+                email: state.principal.email,
+                categories: JSON.stringify(categories),
               }
             });
-            fetch('/api/process-payment',{
-              method:'POST',
-              headers:{'Content-Type':'application/json'},
-              body:JSON.stringify(payload)
+            fetch('/api/process-payment', {
+              method: 'POST',
+              headers: {'Content-Type':'application/json'},
+              body: JSON.stringify(payload)
             })
-            .then(function(r){return r.json();})
+            .then(function(r){ return r.json(); })
             .then(function(d){
-              if(d.status==='approved'){state.step=6;render();resolve();}
-              else if(d.status==='pending'&&d.point_of_interaction){
-                var qr=d.point_of_interaction.transaction_data;
-                state.pixData={qrCode:qr.qr_code,qrCodeBase64:qr.qr_code_base64};
-                state.step=6;render();resolve();
-              }else if(d.status==='pending'){state.step=6;render();resolve();}
-              else{reject();}
+              if(d.status === 'approved'){ state.step=6; render(); resolve(); }
+              else if(d.status === 'pending' && d.point_of_interaction){
+                var qr = d.point_of_interaction.transaction_data;
+                state.pixData = { qrCode: qr.qr_code, qrCodeBase64: qr.qr_code_base64 };
+                state.step = 6; render(); resolve();
+              } else if(d.status === 'pending'){ state.step=6; render(); resolve(); }
+              else { reject(); }
             })
-            .catch(function(){reject();});
+            .catch(function(){ reject(); });
           });
         },
-        onError:function(err){console.error('Bricks error:',err);}
+        onError: function(err){ console.error('Bricks error:', err); }
       }
     });
-  }catch(e){
-    console.error('MP init error:',e);
+  } catch(e){
+    console.error('MP init error:', e);
     alert('Erro ao iniciar pagamento. Tente novamente.');
   }
 }
 
+// ============================================================
+// BIND EVENTS
+// ============================================================
 function checkStep2Valid(){
-  var btn=document.getElementById('btn-to3');
-  if(btn)btn.disabled=!(state.principal.name&&state.principal.email&&state.principal.gender);
+  var btn = document.getElementById('btn-to3');
+  if(btn) btn.disabled = !(state.principal.name && state.principal.email && state.principal.gender);
 }
-
 function checkStep3Valid(){
-  var btn=document.getElementById('btn-to4');
-  if(!btn)return;
-  btn.disabled=!state.selectedCats.every(function(id){
+  var btn = document.getElementById('btn-to4');
+  if(!btn) return;
+  btn.disabled = !state.selectedCats.every(function(id){
     return (state.players[id]||[]).every(function(s){return s.name.trim()!=='';});
   });
 }
 
 function bindEvents(){
-  document.querySelectorAll('.cat-card[data-catid]').forEach(function(card){
-    card.onclick=function(){
-      var id=card.dataset.catid;
-      var idx=state.selectedCats.indexOf(id);
-      if(idx===-1)state.selectedCats.push(id);
-      else state.selectedCats.splice(idx,1);
+  // Step 1: cat cards
+  document.querySelectorAll('.cat-row[data-catid]').forEach(function(card){
+    card.onclick = function(){
+      var id = card.dataset.catid;
+      var idx = state.selectedCats.indexOf(id);
+      if(idx === -1) state.selectedCats.push(id);
+      else state.selectedCats.splice(idx, 1);
       render();
     };
   });
-  var b1=document.getElementById('btn-to2');
-  if(b1)b1.onclick=function(){state.step=2;render();};
-  var inN=document.getElementById('inp-name');
-  if(inN)inN.oninput=function(e){state.principal.name=e.target.value;checkStep2Valid();};
-  var inE=document.getElementById('inp-email');
-  if(inE)inE.oninput=function(e){state.principal.email=e.target.value;checkStep2Valid();};
-  var inG=document.getElementById('inp-gender');
-  if(inG)inG.onchange=function(e){state.principal.gender=e.target.value;checkStep2Valid();};
-  var b2=document.getElementById('btn-to3');
-  if(b2)b2.onclick=function(){state.step=3;render();};
-  var bk2=document.getElementById('btn-back2');
-  if(bk2)bk2.onclick=function(){state.step=1;render();};
-  document.querySelectorAll('.team-name-input').forEach(function(inp){
-    inp.oninput=function(e){state.players[e.target.dataset.cat].teamName=e.target.value;checkStep3Valid();};
-  });
-  document.querySelectorAll('.player-input:not(.team-name-input)').forEach(function(inp){
-    inp.oninput=function(e){
-      state.players[e.target.dataset.cat][+e.target.dataset.slot].name=e.target.value;
+  var b1 = document.getElementById('btn-to2');
+  if(b1) b1.onclick = function(){ state.step=2; render(); };
+
+  // Step 2
+  var inN = document.getElementById('inp-name');
+  if(inN) inN.oninput = function(e){ state.principal.name = e.target.value; checkStep2Valid(); };
+  var inE = document.getElementById('inp-email');
+  if(inE) inE.oninput = function(e){ state.principal.email = e.target.value; checkStep2Valid(); };
+  var inG = document.getElementById('inp-gender');
+  if(inG) inG.onchange = function(e){ state.principal.gender = e.target.value; checkStep2Valid(); };
+  var b2 = document.getElementById('btn-to3');
+  if(b2) b2.onclick = function(){ state.step=3; render(); };
+  var bk2 = document.getElementById('btn-back2');
+  if(bk2) bk2.onclick = function(){ state.step=1; render(); };
+
+  // Step 3
+  document.querySelectorAll('.player-input').forEach(function(inp){
+    inp.oninput = function(e){
+      state.players[e.target.dataset.cat][+e.target.dataset.slot].name = e.target.value;
       checkStep3Valid();
     };
   });
-  var b3=document.getElementById('btn-to4');
-  if(b3)b3.onclick=function(){state.step=4;render();};
-  var bk3=document.getElementById('btn-back3');
-  if(bk3)bk3.onclick=function(){state.step=2;render();};
-  var bc=document.getElementById('btn-coupon');
-  if(bc)bc.onclick=function(){
-    var val=document.getElementById('inp-coupon');
-    if(val&&val.value.trim().toUpperCase()===COUPON_CODE){state.couponApplied=true;render();}
-    else{alert('Cupom inválido.');}
-  };
-  var b4=document.getElementById('btn-back4');
-  if(b4)b4.onclick=function(){state.step=3;render();};
-  var bp=document.getElementById('btn-pay');
-  if(bp)bp.onclick=async function(){
-    bp.disabled=true;bp.textContent='Aguarde...';
+  var b3 = document.getElementById('btn-to4');
+  if(b3) b3.onclick = function(){ state.step=4; render(); };
+  var bk3 = document.getElementById('btn-back3');
+  if(bk3) bk3.onclick = function(){ state.step=2; render(); };
+
+  // Step 4 (pay button creates preference and goes to step 5)
+  var bk4 = document.getElementById('btn-back4');
+  if(bk4) bk4.onclick = function(){ state.step=3; render(); };
+  var bp = document.getElementById('btn-pay');
+  if(bp) bp.onclick = async function(){
+    bp.disabled = true;
+    bp.innerHTML = 'Aguarde...';
     try{
-      var categories=state.selectedCats.map(function(id,i){
-        var cat=CATS.find(function(c){return c.id===id;});
-        var players=(state.players[id]||[]).map(function(s){return s.name;});
-        return{label:cat.label,price:calcPrice(i),players:players};
+      var categories = state.selectedCats.map(function(id,i){
+        var cat = CATS.find(function(c){return c.id===id;});
+        var players = (state.players[id]||[]).map(function(s){return s.name;});
+        return { label: cat.label, price: calcPrice(i), players: players };
       });
-      var res=await fetch('/api/create-payment',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({name:state.principal.name,email:state.principal.email,categories:categories})
+      var res = await fetch('/api/create-payment', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ name: state.principal.name, email: state.principal.email, categories: categories })
       });
-      var data=await res.json();
+      var data = await res.json();
       if(data.preference_id){
-        state.preferenceId=data.preference_id;state.step=5;render();
-      }else{
+        state.preferenceId = data.preference_id;
+        state.step = 5;
+        render();
+      } else {
         alert('Erro ao iniciar pagamento. Tente novamente.');
-        bp.disabled=false;bp.textContent='Pagar '+fmt(totalPrice())+' →';
+        bp.disabled = false;
+        bp.textContent = 'Pagar '+fmt(totalPrice());
       }
-    }catch(err){
-      console.error('Fetch error:',err);
+    } catch(err){
+      console.error('Fetch error:', err);
       alert('Erro ao conectar. Tente novamente.');
-      bp.disabled=false;bp.textContent='Pagar '+fmt(totalPrice())+' →';
+      bp.disabled = false;
+      bp.textContent = 'Pagar '+fmt(totalPrice());
     }
   };
-  var bkp=document.getElementById('btn-back-pay');
-  if(bkp)bkp.onclick=function(){state.step=4;render();};
+
+  // Step 5 (MP brick)
+  var bkp = document.getElementById('btn-back-pay');
+  if(bkp) bkp.onclick = function(){ state.step=4; render(); };
 }
 
+// ============================================================
+// INIT — busca config no /api/admin
+// ============================================================
 async function init(){
   try{
-    var r=await fetch('/api/admin');
-    var cfg=await r.json();
-    if(cfg.lote)LOTE_ATUAL=cfg.lote;
+    var r = await fetch('/api/admin');
+    var cfg = await r.json();
+    if(cfg.lote) LOTE_ATUAL = cfg.lote;
     if(cfg.categorias){
       CATS.forEach(function(c){
-        var cc=cfg.categorias[c.id];
+        var cc = cfg.categorias[c.id];
         if(cc){
-          c.vagas=cc.vagas+' vaga'+(cc.vagas===1?'':'s');
-          c.esgotado=cc.esgotado||cc.vagas<=0;
+          c.vagasNum = cc.vagas;
+          c.vagas = cc.vagas + ' vaga' + (cc.vagas===1?'':'s');
+          c.esgotado = cc.esgotado || cc.vagas <= 0;
         }
       });
     }
-  }catch(e){console.error('Erro ao buscar config:',e);}
+  } catch(e){ console.error('Erro ao buscar config:', e); }
+
   render();
+
+  // Countdown timer rerenders on step 1
+  setInterval(function(){
+    if(state.step === 1) render();
+  }, 1000);
 }
+
 init();
 </script>
 
