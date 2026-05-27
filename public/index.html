@@ -316,6 +316,12 @@
     .meta-pill{padding:10px 14px;font-size:13px;gap:8px}
     .signup{padding:22px 16px}
     .signup::before{inset:6px}
+    /* Na etapa do MP Brick, sem moldura — Brick precisa de espaço */
+    .signup.brick-mode{padding:0;border:none;box-shadow:none;background:transparent}
+    .signup.brick-mode::before{display:none}
+    .signup.brick-mode h3{padding:0 4px}
+    .signup.brick-mode .step-nav{padding:0 4px}
+    #mp-bricks{padding:0;border:none;background:transparent}
     .carousel .frame{flex-basis:100%}
     .sum-bar{flex-direction:column;align-items:stretch;text-align:center;padding:14px 16px}
     .sum-bar .submit{margin-left:0}
@@ -437,8 +443,8 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </button>
       <div class="carousel-track" id="carTrack">
-        <div class="frame"><img src="/images/Landscape.jpg" alt="Edição anterior"></div>
         <div class="frame"><img src="/images/Landscape2.jpg" alt="Edição anterior"></div>
+        <div class="frame"><img src="/images/Landscape.jpg" alt="Edição anterior"></div>
         <div class="frame"><img src="/images/Landscape3.jpg" alt="Edição anterior"></div>
         <div class="frame"><img src="/images/Landscape4.jpg" alt="Edição anterior"></div>
         <div class="frame"><img src="/images/Vertical1.jpg" alt="Edição anterior"></div>
@@ -557,8 +563,8 @@
         </button>
         <div class="faq-a">
           <div class="faq-a-inner">
-            <p><strong>Lote 1</strong> (promocional, até 11 de junho): <strong>R$ 160</strong> por dupla nas categorias Open, 40+, 50+ e 60+. <strong>R$ 98</strong> por dupla na categoria Kids.</p>
-            <p style="margin-top:8px"><strong>Lote 2</strong> (a partir de 12 de junho): <strong>R$ 200</strong> · <strong>R$ 120</strong> (Kids).</p>
+            <p><strong>Lote 1</strong> (promocional 20% OFF, até <strong>10 de junho</strong>): <strong>R$ 160</strong> por dupla nas categorias Open, 40+, 50+ e 60+. <strong>R$ 98</strong> por dupla na categoria Kids.</p>
+            <p style="margin-top:8px"><strong>Lote 2</strong> (a partir de <strong>11 de junho</strong>): <strong>R$ 200</strong> · <strong>R$ 120</strong> (Kids).</p>
           </div>
         </div>
       </div>
@@ -584,7 +590,7 @@
         </button>
         <div class="faq-a">
           <div class="faq-a-inner">
-            <p>O Lote 1 (promocional) encerra em <strong>11 de junho de 2026</strong>. A partir do dia <strong>12 de junho</strong>, os preços passam para <strong>R$ 200</strong> por dupla (Open, 40+, 50+, 60+) e <strong>R$ 120</strong> (Kids). Garanta sua vaga ainda no Lote 1!</p>
+            <p>O Lote 1 (promocional 20% OFF) encerra em <strong>10 de junho de 2026</strong>. A partir do dia <strong>11 de junho</strong>, os preços passam para <strong>R$ 200</strong> por dupla (Open, 40+, 50+, 60+) e <strong>R$ 120</strong> (Kids). Garanta sua vaga ainda no Lote 1!</p>
           </div>
         </div>
       </div>
@@ -717,7 +723,7 @@ var CATS=[
 ];
 
 var LOTE_ATUAL = 1;
-var LOTE1_END = new Date('2026-06-11T23:59:59-03:00').getTime();
+var LOTE1_END = new Date('2026-06-10T23:59:59-03:00').getTime();
 
 function precoFor(catId){
   var c=CATS.find(function(x){return x.id===catId;});
@@ -767,7 +773,7 @@ function renderStep1(){
   var loteBannerHtml = LOTE_ATUAL===1
     ? '<div class="lote-banner">'
       +'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold-700);flex-shrink:0"><path d="M8 21h8m-4-4v4M5 4h14l-1 7a6 6 0 0 1-12 0L5 4z"/><path d="M5 4H2v3a4 4 0 0 0 4 4M19 4h3v3a4 4 0 0 1-4 4"/></svg>'
-      +'<div><div class="label">Inscrições Lote 1</div><div class="desc">Preço promocional até <b>11 de junho</b> — economize por categoria.</div></div>'
+      +'<div><div class="label">Lote 1</div><div class="desc">Preço promocional <b>20% OFF</b> até o dia <b>10 de junho</b>.</div></div>'
       +'<div class="timer">'
       +'<div class="unit">'+pad(d)+'<small>DIAS</small></div>'
       +'<div class="unit">'+pad(h)+'<small>HORAS</small></div>'
@@ -825,8 +831,7 @@ function renderStep2(){
   var valid = p.name && p.email && p.gender;
 
   return stepperHtml(2)
-    + '<h3 style="font-family:\'Cinzel\',serif;color:var(--navy-900);margin:4px 0 4px;font-size:22px">Dados da inscrição</h3>'
-    + '<p style="font-family:\'Roboto\',serif;font-style:italic;color:var(--ink-soft);margin:0 0 14px">Quem é o responsável pela inscrição? Usaremos esse contato para confirmar o pagamento.</p>'
+    + '<h3 style="font-family:\'Cinzel\',serif;color:var(--navy-900);margin:4px 0 14px;font-size:22px">Dados da inscrição</h3>'
     + '<div class="form-grid">'
     + '<div class="field full"><label>Nome completo</label><input id="inp-name" type="text" value="'+p.name+'" placeholder="Seu nome completo"></div>'
     + '<div class="field"><label>E-mail</label><input id="inp-email" type="email" value="'+p.email+'" placeholder="voce@email.com"></div>'
@@ -900,7 +905,6 @@ function renderStep4(){
     + '</div>'
     + '<div class="step-nav">'
     + '<button class="ghost" id="btn-back4">← Voltar</button>'
-    + '<span style="font-family:\'Roboto\',serif;font-style:italic;color:var(--ink-faint);align-self:center">Pagamento processado por gateway seguro · SSL</span>'
     + '</div>';
 }
 
@@ -964,6 +968,11 @@ function render(){
   else if(state.step===5){ app.innerHTML = renderPayment(); initBricks(); }
   else if(state.step===6) app.innerHTML = renderSuccess();
   else app.innerHTML = renderPixConfirmed();
+
+  // Toggle brick-mode no signup container (remove moldura no mobile durante MP Brick)
+  var signup = app.closest('.signup');
+  if(signup) signup.classList.toggle('brick-mode', state.step === 5);
+
   bindEvents();
 }
 
