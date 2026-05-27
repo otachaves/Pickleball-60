@@ -318,11 +318,11 @@ function abrirModalLote() {
 
   document.getElementById('modal-prices').innerHTML =
     'Antes: ' + precoAntes + '<br>Depois: ' + precoDepois;
-  document.getElementById('modal-bg').classList.add('show');
+  document.getElementById('modal-lote').classList.add('show');
 }
 
 function fecharModalLote() {
-  document.getElementById('modal-bg').classList.remove('show');
+  document.getElementById('modal-lote').classList.remove('show');
   loteSwitchTarget = null;
 }
 

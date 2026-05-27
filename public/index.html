@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta property="og:title" content="Copa Imperial Duplas Mistas — Inscrições abertas!">
 <meta property="og:description" content="4 e 5 de julho de 2026 · Paróquia Santa Clara, Petrópolis. Categorias: Open, 40+, 50+, 60+ e Kids.">
-<meta property="og:image" content="https://copaimperial.online/og-image.jpg">
+<meta property="og:image" content="https://copaimperial.online/images/thumbnail.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:url" content="https://copaimperial.online">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
@@ -280,13 +282,50 @@
   }
   @media (max-width:600px){
     .utility nav{display:none}
-    .hero-frame{padding:24px 18px 24px}
-    .signup{padding:22px}
+    .hero{padding:18px 12px 30px}
+    .hero-frame{padding:24px 14px 22px}
+    .hero .h-copa{font-size:clamp(44px,12vw,72px)}
+    .hero .h-imperial{font-size:clamp(48px,13vw,86px);margin-top:-4px}
+    .hero .h-sub{font-size:clamp(26px,7vw,40px)}
+    .ribbon{font-size:10px;padding:7px 16px;letter-spacing:.2em;box-shadow:0 0 0 2px var(--navy-900), 0 0 0 3px var(--gold-600)}
+    .ribbon::before,.ribbon::after{display:none}
+    .tag{font-size:17px}
+    .hero-meta{margin-top:22px;gap:8px}
+    .meta-pill{padding:10px 14px;font-size:13px;gap:8px}
+    .signup{padding:22px 16px}
+    .signup::before{inset:6px}
     .carousel .frame{flex-basis:100%}
-    .sum-bar{flex-direction:column;align-items:stretch;text-align:center}
+    .sum-bar{flex-direction:column;align-items:stretch;text-align:center;padding:14px 16px}
     .sum-bar .submit{margin-left:0}
     .sum-bar .submit button{width:100%;justify-content:center}
-    .lote-banner .timer{margin-left:0;width:100%;justify-content:center}
+    .sum-bar .total{font-size:26px}
+    /* Lote banner — esconde no mobile (info já está no hero/footer) */
+    .lote-banner{display:none}
+    /* Cards de categoria — simplifica no mobile, remove emblema */
+    .cat-row{padding:14px 14px;gap:12px;flex-wrap:wrap}
+    .cat-emblem{display:none}
+    .cat-name{font-size:15px}
+    .cat-meta{font-size:14px;gap:8px}
+    .price .lote1{font-size:18px}
+    .price .lote2{font-size:12px}
+    /* Resumo final — quebra email longo */
+    .summary-row{flex-direction:column;align-items:flex-start;gap:4px;padding:12px 14px}
+    .summary-row span{word-break:break-word;overflow-wrap:anywhere;max-width:100%}
+    .summary-row strong{align-self:flex-end}
+    /* Form fields — ajusta espaço */
+    .field input,.field select{font-size:16px;padding:10px 12px}
+    .step-nav{flex-direction:column}
+    .step-nav .ghost,.step-nav .next{width:100%;justify-content:center}
+    /* Section padding */
+    .section{padding:48px 0}
+    .imperial-note{padding:12px 16px;font-size:15px}
+    .stepper{gap:4px}
+    .step{min-width:0;padding:8px 6px;font-size:9px;letter-spacing:.12em;gap:5px}
+    .step .num{width:16px;height:16px;font-size:9px}
+  }
+  @media (max-width:380px){
+    .hero .h-imperial{font-size:clamp(40px,11vw,72px)}
+    .hero .h-copa{font-size:clamp(38px,10vw,60px)}
   }
 
   @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
@@ -568,11 +607,11 @@
 // CONFIG — categorias e preços (sobrescritos por /api/admin)
 // ============================================================
 var CATS=[
-  {id:'open', label:'Dupla Mista — Open',           emblem:'O',  precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', vagasNum:12, esgotado:false, note:'Sem restrição de idade'},
-  {id:'40',   label:'Dupla Mista — 40+',            emblem:'IV', precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', vagasNum:12, esgotado:false},
-  {id:'50',   label:'Dupla Mista — 50+',            emblem:'V',  precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', vagasNum:12, esgotado:false},
-  {id:'60',   label:'Dupla Mista — 60+',            emblem:'VI', precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', vagasNum:12, esgotado:false},
-  {id:'kids', label:'Dupla Mista — Kids (10–14)',   emblem:'K',  precoLote1:98,  precoLote2:120, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', vagasNum:12, esgotado:false, note:'10 a 14 anos'},
+  {id:'open', label:'Dupla Mista — Open',           emblem:'O',  precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'Restam 12 vagas', vagasNum:12, esgotado:false, note:'Sem restrição de idade'},
+  {id:'40',   label:'Dupla Mista — 40+',            emblem:'IV', precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'Restam 12 vagas', vagasNum:12, esgotado:false},
+  {id:'50',   label:'Dupla Mista — 50+',            emblem:'V',  precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'Restam 12 vagas', vagasNum:12, esgotado:false},
+  {id:'60',   label:'Dupla Mista — 60+',            emblem:'VI', precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'Restam 12 vagas', vagasNum:12, esgotado:false},
+  {id:'kids', label:'Dupla Mista — Kids (10–14)',   emblem:'K',  precoLote1:98,  precoLote2:120, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'Restam 12 vagas', vagasNum:12, esgotado:false, note:'10 a 14 anos'},
 ];
 
 var LOTE_ATUAL = 1;
@@ -1003,7 +1042,7 @@ async function init(){
         var cc = cfg.categorias[c.id];
         if(cc){
           c.vagasNum = cc.vagas;
-          c.vagas = cc.vagas + ' vaga' + (cc.vagas===1?'':'s');
+          c.vagas = 'Restam ' + cc.vagas + ' vaga' + (cc.vagas===1?'':'s');
           c.esgotado = cc.esgotado || cc.vagas <= 0;
         }
       });

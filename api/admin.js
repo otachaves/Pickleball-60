@@ -106,14 +106,23 @@ module.exports = async (req, res) => {
         }
       }
 
-      const idx = rows.findIndex((r) => r[0] === key);
-      if (idx !== -1) {
-        await sheets.spreadsheets.values.update({
-          spreadsheetId: SHEET_ID,
-          range: `Config!B${idx + 1}`,
-          valueInputOption: "USER_ENTERED",
-          requestBody: { values: [[String(value)]] },
-        });
+      // Encontra TODAS as linhas com a mesma key e atualiza cada uma
+      // (resolve bug de duplicatas onde GET lia a última mas POST só
+      // atualizava a primeira)
+      const matchingIdxs = [];
+      for (let i = 0; i < rows.length; i++) {
+        if (rows[i][0] === key) matchingIdxs.push(i);
+      }
+
+      if (matchingIdxs.length > 0) {
+        for (const idx of matchingIdxs) {
+          await sheets.spreadsheets.values.update({
+            spreadsheetId: SHEET_ID,
+            range: `Config!B${idx + 1}`,
+            valueInputOption: "USER_ENTERED",
+            requestBody: { values: [[String(value)]] },
+          });
+        }
       } else {
         await sheets.spreadsheets.values.append({
           spreadsheetId: SHEET_ID,
