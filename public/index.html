@@ -976,6 +976,16 @@ function render(){
   bindEvents();
 }
 
+// Muda de step e rola suavemente para o topo da inscricao (evita que o FAQ apareça abaixo após shrink)
+function changeStep(n){
+  state.step = n;
+  render();
+  setTimeout(function(){
+    var el = document.getElementById('inscricao');
+    if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+  }, 30);
+}
+
 // ============================================================
 // MP Bricks
 // ============================================================
@@ -1071,7 +1081,7 @@ function bindEvents(){
     };
   });
   var b1 = document.getElementById('btn-to2');
-  if(b1) b1.onclick = function(){ state.step=2; render(); };
+  if(b1) b1.onclick = function(){ changeStep(2); };
 
   // Step 2
   var inN = document.getElementById('inp-name');
@@ -1081,9 +1091,9 @@ function bindEvents(){
   var inG = document.getElementById('inp-gender');
   if(inG) inG.onchange = function(e){ state.principal.gender = e.target.value; checkStep2Valid(); };
   var b2 = document.getElementById('btn-to3');
-  if(b2) b2.onclick = function(){ state.step=3; render(); };
+  if(b2) b2.onclick = function(){ changeStep(3); };
   var bk2 = document.getElementById('btn-back2');
-  if(bk2) bk2.onclick = function(){ state.step=1; render(); };
+  if(bk2) bk2.onclick = function(){ changeStep(1); };
 
   // Step 3
   document.querySelectorAll('.player-input').forEach(function(inp){
@@ -1093,13 +1103,13 @@ function bindEvents(){
     };
   });
   var b3 = document.getElementById('btn-to4');
-  if(b3) b3.onclick = function(){ state.step=4; render(); };
+  if(b3) b3.onclick = function(){ changeStep(4); };
   var bk3 = document.getElementById('btn-back3');
-  if(bk3) bk3.onclick = function(){ state.step=2; render(); };
+  if(bk3) bk3.onclick = function(){ changeStep(2); };
 
   // Step 4 (pay button creates preference and goes to step 5)
   var bk4 = document.getElementById('btn-back4');
-  if(bk4) bk4.onclick = function(){ state.step=3; render(); };
+  if(bk4) bk4.onclick = function(){ changeStep(3); };
   var bp = document.getElementById('btn-pay');
   if(bp) bp.onclick = async function(){
     bp.disabled = true;
@@ -1118,8 +1128,7 @@ function bindEvents(){
       var data = await res.json();
       if(data.preference_id){
         state.preferenceId = data.preference_id;
-        state.step = 5;
-        render();
+        changeStep(5);
       } else {
         alert('Erro ao iniciar pagamento. Tente novamente.');
         bp.disabled = false;
@@ -1135,7 +1144,7 @@ function bindEvents(){
 
   // Step 5 (MP brick)
   var bkp = document.getElementById('btn-back-pay');
-  if(bkp) bkp.onclick = function(){ state.step=4; render(); };
+  if(bkp) bkp.onclick = function(){ changeStep(4); };
 }
 
 // ============================================================
