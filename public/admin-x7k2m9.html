@@ -328,20 +328,21 @@ function fecharModalLote() {
 
 async function confirmarMudancaLote() {
   if (!loteSwitchTarget) return;
+  // BUG fix: captura o valor ANTES de fechar o modal (que zera loteSwitchTarget)
+  const target = loteSwitchTarget;
   fecharModalLote();
 
-  // Salva direto (sem precisar passar pelo save-bar)
   try {
     const r = await fetch('/api/admin', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ key: 'lote', value: loteSwitchTarget })
+      body: JSON.stringify({ key: 'lote', value: target })
     });
     if (!r.ok) throw new Error();
-    config.lote = loteSwitchTarget;
-    localConfig.lote = loteSwitchTarget;
+    config.lote = target;
+    localConfig.lote = target;
     render();
-    showToast(`✓ Lote ${loteSwitchTarget} ativado no site`);
+    showToast(`✓ Lote ${target} ativado no site`);
   } catch(e) {
     showToast('Erro ao mudar lote', true);
   }

@@ -79,7 +79,7 @@ module.exports = async (req, res) => {
 
   if (req.method === "POST") {
     const { key, value } = req.body || {};
-    if (!key || value === undefined) {
+    if (!key || value === undefined || value === null) {
       return res.status(400).json({ error: "key e value obrigatórios" });
     }
 

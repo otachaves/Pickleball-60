@@ -198,7 +198,7 @@
   .check{width:24px;height:24px;border:1.5px solid var(--gold-600);background:#fff;display:grid;place-items:center;flex:0 0 auto;color:transparent;transition:all .15s ease}
   .cat-row.selected .check{background:var(--navy-900);border-color:var(--navy-900);color:var(--gold-400)}
   .cat-emblem{display:none}
-  .cat-name{font-family:'Cinzel',serif;font-weight:700;color:var(--navy-900);font-size:18px;letter-spacing:.01em}
+  .cat-name{font-family:'Roboto',sans-serif;font-weight:600;color:var(--navy-900);font-size:17px;letter-spacing:0}
   .cat-meta{font-family:'Roboto',serif;font-style:italic;color:var(--ink-soft);font-size:16px;display:flex;gap:14px;margin-top:2px;flex-wrap:wrap}
   .cat-meta .vagas{color:var(--emerald);font-style:normal;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;letter-spacing:.04em}
   .cat-meta .vagas.zero{color:var(--wine)}
@@ -327,7 +327,7 @@
     .sum-bar .submit{margin-left:0}
     .sum-bar .submit button{width:100%;justify-content:center}
     .sum-bar .total{font-size:26px}
-    /* Lote banner mobile — versao azul navy, sem timer */
+    /* Lote banner mobile — versao azul navy, simplificada */
     .lote-banner{
       display:flex;
       background:linear-gradient(180deg,var(--navy-800),var(--navy-900));
@@ -335,8 +335,8 @@
       color:var(--gold-300);
       padding:14px 16px;
     }
-    .lote-banner > svg{color:var(--gold-400) !important}
-    .lote-banner .label{color:var(--gold-400)}
+    .lote-banner > svg{display:none}      /* esconde icone trofeu */
+    .lote-banner .label{display:none}     /* esconde "Lote 1" */
     .lote-banner .desc{color:var(--parchment-200)}
     .lote-banner .desc b{color:var(--gold-300)}
     .lote-banner .timer{display:none}
@@ -780,7 +780,7 @@ function renderStep1(){
       +'<div class="unit">'+pad(m)+'<small>MIN</small></div>'
       +'<div class="unit">'+pad(s)+'<small>SEG</small></div>'
       +'</div></div>'
-    : '<div class="lote-banner"><div><div class="label">Lote atual</div><div class="desc"><b>Lote 2</b> ativo</div></div></div>';
+    : '';
 
   var catsHtml = CATS.map(function(c){
     if(c.esgotado){
