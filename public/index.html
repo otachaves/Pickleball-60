@@ -427,6 +427,7 @@
 <div class="imperial-strip">
   <div class="imperial-strip-inner">
     <p>Um torneio para todas as idades. <strong>Venha jogar com seu par favorito.</strong></p>
+    <p style="font-family:'Cinzel',serif;font-size:12px;letter-spacing:.18em;color:var(--gold-400);text-transform:uppercase;margin-top:4px">⏰ Inscrições até <strong style="color:var(--gold-300)">29 de junho</strong></p>
   </div>
 </div>
 
@@ -513,7 +514,7 @@
         <div class="schedule-day">
           <div class="day-head">
             <span class="day-date">Sábado · 04/07</span>
-            <span class="day-hours">das 8h às 18h</span>
+            <span class="day-hours">das 8h às 20h</span>
           </div>
           <ul>
             <li>Duplas 60+</li>
@@ -524,7 +525,7 @@
         <div class="schedule-day">
           <div class="day-head">
             <span class="day-date">Domingo · 05/07</span>
-            <span class="day-hours">das 9h às 13h</span>
+            <span class="day-hours">das 9h às 15h</span>
           </div>
           <ul>
             <li>Duplas Kids (10–14 anos)</li>
@@ -585,12 +586,13 @@
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
           <span class="num">3</span>
-          <span>Quando vira o Lote 2 e quanto vai custar?</span>
+          <span>Quem faz a inscrição da dupla?</span>
           <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
         </button>
         <div class="faq-a">
           <div class="faq-a-inner">
-            <p>O Lote 1 (promocional 20% OFF) encerra em <strong>10 de junho de 2026</strong>. A partir do dia <strong>11 de junho</strong>, os preços passam para <strong>R$ 200</strong> por dupla (Open, 40+, 50+, 60+) e <strong>R$ 120</strong> (Kids). Garanta sua vaga ainda no Lote 1!</p>
+            <p>A inscrição é feita por <strong>uma única pessoa</strong> — o(a) <em>representante da dupla</em>. Esse(a) responsável preenche os dados de contato, paga e recebe as confirmações por e-mail. Não é necessário que os dois jogadores se cadastrem separadamente.</p>
+            <p style="margin-top:8px"><strong>Importante:</strong> as inscrições encerram no dia <strong>29 de junho de 2026</strong>. Garanta sua vaga antes!</p>
           </div>
         </div>
       </div>
@@ -831,7 +833,8 @@ function renderStep2(){
   var valid = p.name && p.email && p.gender;
 
   return stepperHtml(2)
-    + '<h3 style="font-family:\'Cinzel\',serif;color:var(--navy-900);margin:4px 0 14px;font-size:22px">Dados da inscrição</h3>'
+    + '<h3 style="font-family:\'Cinzel\',serif;color:var(--navy-900);margin:4px 0 6px;font-size:22px">Responsável pela inscrição</h3>'
+    + '<p style="font-family:\'Roboto\',sans-serif;color:var(--ink-soft);margin:0 0 14px;font-size:15px">Apenas <strong>um(a) representante da dupla</strong> faz a inscrição. Esse contato será usado para todas as confirmações.</p>'
     + '<div class="form-grid">'
     + '<div class="field full"><label>Nome completo</label><input id="inp-name" type="text" value="'+p.name+'" placeholder="Seu nome completo"></div>'
     + '<div class="field"><label>E-mail</label><input id="inp-email" type="email" value="'+p.email+'" placeholder="voce@email.com"></div>'
