@@ -202,6 +202,8 @@
   .cat-meta{font-family:'Roboto',serif;font-style:italic;color:var(--ink-soft);font-size:16px;display:flex;gap:14px;margin-top:2px;flex-wrap:wrap}
   .cat-meta .vagas{color:var(--emerald);font-style:normal;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;letter-spacing:.04em}
   .cat-meta .vagas.zero{color:var(--wine)}
+  .cat-meta .ultimas-vagas{color:#dc2626;font-weight:700;font-family:'Roboto',sans-serif;font-size:13px;letter-spacing:.02em;font-style:normal;animation:pulseRed 1.8s ease-in-out infinite}
+  @keyframes pulseRed{0%,100%{opacity:.85}50%{opacity:1}}
   .price{margin-left:auto;text-align:right}
   .price .lote1{font-family:'Cinzel',serif;font-weight:700;color:var(--navy-900);font-size:22px}
   .price .lote2{font-family:'Roboto',serif;font-style:italic;color:var(--ink-faint);font-size:14px}
@@ -717,11 +719,11 @@ function toggleFaq(btn){
 // CONFIG — categorias e preços (sobrescritos por /api/admin)
 // ============================================================
 var CATS=[
-  {id:'open', label:'Dupla Mista — Open',           emblem:'O',  precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'Restam 12 vagas', vagasNum:12, esgotado:false, note:'Sem restrição de idade'},
-  {id:'40',   label:'Dupla Mista — 40+',            emblem:'IV', precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'Restam 12 vagas', vagasNum:12, esgotado:false},
-  {id:'50',   label:'Dupla Mista — 50+',            emblem:'V',  precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'Restam 12 vagas', vagasNum:12, esgotado:false},
-  {id:'60',   label:'Dupla Mista — 60+',            emblem:'VI', precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'Restam 12 vagas', vagasNum:12, esgotado:false},
-  {id:'kids', label:'Dupla Mista — Kids',   emblem:'K',  precoLote1:98,  precoLote2:120, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'Restam 12 vagas', vagasNum:12, esgotado:false, note:'10 a 14 anos'},
+  {id:'open', label:'Dupla Mista — Open',           emblem:'O',  precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', vagasNum:12, esgotado:false, note:'Sem restrição de idade'},
+  {id:'40',   label:'Dupla Mista — 40+',            emblem:'IV', precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', vagasNum:12, esgotado:false},
+  {id:'50',   label:'Dupla Mista — 50+',            emblem:'V',  precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', vagasNum:12, esgotado:false},
+  {id:'60',   label:'Dupla Mista — 60+',            emblem:'VI', precoLote1:160, precoLote2:200, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', vagasNum:12, esgotado:false},
+  {id:'kids', label:'Dupla Mista — Kids',   emblem:'K',  precoLote1:98,  precoLote2:120, slots:2, genders:['M','F'], priceLabel:'por dupla', vagas:'12 vagas', vagasNum:12, esgotado:false, note:'10 a 14 anos'},
 ];
 
 var LOTE_ATUAL = 1;
@@ -801,11 +803,12 @@ function renderStep1(){
       ? '<div class="lote2">Lote 2: <b>'+fmt(c.precoLote2)+'</b></div>'
       : '';
     var noteHtml = c.note ? '<span class="cat-note-sep">·</span><span class="cat-note"><em>'+c.note+'</em></span>' : '';
+    var ultimasHtml = c.ultimasVagas ? '<span class="ultimas-vagas">(Últimas vagas 🔥)</span>' : '';
     return '<div class="cat-row '+(isSelected?'selected':'')+'" data-catid="'+c.id+'">'
       +'<div class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>'
       +'<div style="min-width:0;flex:1">'
       +'<div class="cat-name">'+c.label+'</div>'
-      +'<div class="cat-meta"><span class="vagas">'+c.vagas+'</span>'+noteHtml+'</div>'
+      +'<div class="cat-meta"><span class="vagas">'+c.vagas+'</span>'+ultimasHtml+noteHtml+'</div>'
       +'</div>'
       +'<div class="price"><div class="lote1">'+fmt(preco)+'</div>'+lote2Hint+'</div>'
       +'</div>';
@@ -1163,8 +1166,9 @@ async function init(){
         var cc = cfg.categorias[c.id];
         if(cc){
           c.vagasNum = cc.vagas;
-          c.vagas = 'Restam ' + cc.vagas + ' vaga' + (cc.vagas===1?'':'s');
+          // Display sempre "12 vagas" — quando admin reduzir para <=6, ativa "Últimas vagas"
           c.esgotado = cc.esgotado || cc.vagas <= 0;
+          c.ultimasVagas = !c.esgotado && cc.vagas <= 6;
         }
       });
     }
