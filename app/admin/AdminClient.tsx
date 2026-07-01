@@ -862,12 +862,12 @@ export default function AdminClient({
             {wildcardStatus?.empate && !chaveamentoGerado && (
               <div className="rounded-xl border border-amber-400 bg-amber-100 p-4">
                 <p className="text-amber-600 font-semibold text-sm mb-1">
-                  ⚠️ Empate nos wildcards
+                  ⚠️ Empate pela vaga de melhor 2º colocado
                 </p>
                 <p className="text-slate-600 text-xs mb-3">
                   {wildcardStatus.empate.tipo === 'tres'
-                    ? '3 terceiros colocados empatados. Será criado um mini rodízio entre eles.'
-                    : '2 terceiros colocados empatados. Será criado 1 jogo de desempate.'}
+                    ? '3 vice-líderes (2º colocados) empatados pela vaga. Será criado um mini rodízio entre eles.'
+                    : '2 vice-líderes (2º colocados) empatados pela vaga. Será criado 1 jogo de desempate.'}
                 </p>
                 <p className="text-xs text-slate-500 mb-3">
                   Times: {wildcardStatus.empate.times.map((t) => t.time.nome).join(' · ')}

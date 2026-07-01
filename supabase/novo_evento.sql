@@ -8,10 +8,10 @@
 --     Nada de código precisa ser alterado.
 --
 --  Esta versão já vem preenchida com o torneio DUPLA MISTA:
---    1. Open (9) → 3 grupos de 3 → Quartas + 2 wildcards
---    2. 40+  (8) → 2 grupos de 4 → Semifinal
---    3. 50+  (6) → 2 grupos de 3 → Semifinal
---    4. 60+  (9) → 3 grupos de 3 → Quartas + 2 wildcards
+--    1. Open (9) → 3 grupos de 3 → Semifinal (1º de cada + melhor 2º = 4)
+--    2. 40+  (8) → 2 grupos de 4 → Semifinal (top 2 de cada = 4)
+--    3. 50+  (6) → 2 grupos de 3 → Semifinal (top 2 de cada = 4)
+--    4. 60+  (9) → 3 grupos de 3 → Semifinal (1º de cada + melhor 2º = 4)
 --  Jogo: game único até 15 pontos.
 --  (A distribuição dos grupos é uma SUGESTÃO — ajuste se o sorteio mudar.)
 -- ═══════════════════════════════════════════════════════════════
@@ -38,10 +38,10 @@ where id = 1;
 
 -- ─── 2. Categorias (formato + horário) ─────────────────────────
 insert into categorias (id, nome, ordem, formato, horario) values
-  (1, 'Dupla Mista — Open', 1, 'quartas',   null),
+  (1, 'Dupla Mista — Open', 1, 'semifinal', null),
   (2, 'Dupla Mista — 40+',  2, 'semifinal', null),
   (3, 'Dupla Mista — 50+',  3, 'semifinal', null),
-  (4, 'Dupla Mista — 60+',  4, 'quartas',   null);
+  (4, 'Dupla Mista — 60+',  4, 'semifinal', null);
 
 -- ─── OPEN (cat 1) — 3 grupos de 3 ──────────────────────────────
 insert into grupos (id, nome, categoria_id) values

@@ -20,8 +20,12 @@ export interface WildcardStatus {
 
 export function getBracketConfig(grupos: Grupo[]): BracketConfig {
   const n = grupos.length
-  const wildcards = n === 3 ? 2 : 0
-  return { formato: 'quartas', classificadosDiretos: n * 2, wildcards }
+  // 3 grupos → 1º de cada grupo (3) + melhor 2º colocado (1) = 4 → Semifinal
+  if (n === 3) return { formato: 'semifinal', classificadosDiretos: 3, wildcards: 1 }
+  // 4+ grupos → top 2 de cada = quartas
+  if (n >= 4) return { formato: 'quartas', classificadosDiretos: n * 2, wildcards: 0 }
+  // 1-2 grupos → top 2 de cada = 4 → Semifinal
+  return { formato: 'semifinal', classificadosDiretos: n * 2, wildcards: 0 }
 }
 
 // ── Classificação helpers ─────────────────────────────────────
@@ -65,91 +69,68 @@ export function resolverWildcards(
   jogosGrupos: Jogo[],
   jogosWildcard: Jogo[]
 ): WildcardStatus {
-  const diretos: ClassificacaoRow[] = []
-  const terceiros: ClassificacaoRow[] = []
+  const diretos: ClassificacaoRow[] = []    // 1º de cada grupo
+  const candidatos: ClassificacaoRow[] = [] // 2º de cada grupo, disputando a(s) vaga(s)
 
   for (const grupo of grupos) {
     const t = times.filter((x) => x.grupo_id === grupo.id)
     const j = jogosGrupos.filter((x) => x.grupo_id === grupo.id)
     const rank = calcularClassificacao(t, j)
     if (rank[0]) diretos.push(rank[0])
-    if (rank[1]) diretos.push(rank[1])
-    if (rank[2]) terceiros.push(rank[2])
+    if (rank[1]) candidatos.push(rank[1])
   }
 
-  if (terceiros.length === 0) {
-    return { diretos, wildcardCandidatos: [], wildcardResolvidos: [], empate: null }
+  // Vagas de wildcard = quantas faltam para completar 4 classificados
+  const numWildcards = Math.max(0, 4 - grupos.length) // 3 grupos → 1
+
+  // Vagas suficientes para todos os vice-líderes → todos passam
+  if (candidatos.length <= numWildcards) {
+    return { diretos, wildcardCandidatos: candidatos, wildcardResolvidos: candidatos, empate: null }
   }
 
   const todosJogos = [...jogosGrupos, ...jogosWildcard]
-  const sorted3 = sortRows(terceiros, todosJogos)
+  const sorted = sortRows(candidatos, todosJogos)
 
-  if (sorted3.length < 2) {
-    return { diretos, wildcardCandidatos: sorted3, wildcardResolvidos: sorted3, empate: null }
-  }
+  const ultimoDentro = sorted[numWildcards - 1]
+  const primeiroFora = sorted[numWildcards]
 
-  const wc1 = sorted3[0]
-  const wc2 = sorted3[1]
-  const wc3 = sorted3[2] as ClassificacaoRow | undefined
-
-  if (wc3 && isTied(wc2, wc3, todosJogos)) {
-    if (isTied(wc1, wc2, todosJogos)) {
-      const wildcardGamesExist = jogosWildcard.some(
-        (j) =>
-          [wc1.time.id, wc2.time.id, wc3.time.id].includes(j.time_a_id) &&
-          [wc1.time.id, wc2.time.id, wc3.time.id].includes(j.time_b_id)
-      )
-      if (!wildcardGamesExist || jogosWildcard.some((j) => j.status !== 'encerrado')) {
-        return {
-          diretos,
-          wildcardCandidatos: [wc1, wc2, wc3],
-          wildcardResolvidos: [],
-          empate: { tipo: 'tres', times: [wc1, wc2, wc3] },
-        }
-      }
-      const rerank = sortRows([wc1, wc2, wc3], todosJogos)
-      if (isTied(rerank[1], rerank[2], todosJogos)) {
-        return {
-          diretos,
-          wildcardCandidatos: rerank,
-          wildcardResolvidos: rerank.slice(0, 2),
-          empate: null,
-        }
-      }
-      return {
-        diretos,
-        wildcardCandidatos: rerank,
-        wildcardResolvidos: rerank.slice(0, 2),
-        empate: null,
-      }
-    }
-
-    const wcGame = jogosWildcard.find(
-      (j) =>
-        ((j.time_a_id === wc2.time.id && j.time_b_id === wc3.time.id) ||
-          (j.time_a_id === wc3.time.id && j.time_b_id === wc2.time.id))
-    )
-    if (!wcGame || wcGame.status !== 'encerrado') {
-      return {
-        diretos,
-        wildcardCandidatos: sorted3,
-        wildcardResolvidos: [],
-        empate: { tipo: 'dois', times: [wc2, wc3] },
-      }
-    }
-    const rerank = sortRows([wc1, wc2, wc3], todosJogos)
+  // Sem empate na linha de corte → resolvido direto
+  if (!isTied(ultimoDentro, primeiroFora, todosJogos)) {
     return {
       diretos,
-      wildcardCandidatos: rerank,
-      wildcardResolvidos: rerank.slice(0, 2),
+      wildcardCandidatos: sorted,
+      wildcardResolvidos: sorted.slice(0, numWildcards),
       empate: null,
     }
   }
 
+  // Empate na linha de corte: todos os empatados nesse nível disputam a(s) vaga(s)
+  const empatados = sorted.filter((r) => isTied(r, ultimoDentro, todosJogos))
+  const tipo: 'dois' | 'tres' = empatados.length >= 3 ? 'tres' : 'dois'
+
+  const ids = empatados.map((e) => e.time.id)
+  const jogosDesempate = jogosWildcard.filter(
+    (j) => ids.includes(j.time_a_id) && ids.includes(j.time_b_id)
+  )
+  const esperados = tipo === 'tres' ? 3 : 1
+  const desempateResolvido =
+    jogosDesempate.length >= esperados && jogosDesempate.every((j) => j.status === 'encerrado')
+
+  if (!desempateResolvido) {
+    return {
+      diretos,
+      wildcardCandidatos: sorted,
+      wildcardResolvidos: [],
+      empate: { tipo, times: empatados },
+    }
+  }
+
+  // Desempate jogado → reordena com os jogos extras e resolve
+  const rerank = sortRows(candidatos, todosJogos)
   return {
     diretos,
-    wildcardCandidatos: sorted3,
-    wildcardResolvidos: [wc1, wc2],
+    wildcardCandidatos: rerank,
+    wildcardResolvidos: rerank.slice(0, numWildcards),
     empate: null,
   }
 }
