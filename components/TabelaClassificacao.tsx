@@ -8,7 +8,7 @@ interface Props {
 
 const MEDALHA = ['🥇', '🥈', '🥉']
 
-export default function TabelaClassificacao({ rows, classificados = 2, podio = false }: Props) {
+export default function TabelaClassificacao({ rows, podio = false }: Props) {
   return (
     <div className="overflow-x-auto rounded-xl border border-slate-300">
       <table className="w-full text-sm">
@@ -50,30 +50,11 @@ export default function TabelaClassificacao({ rows, classificados = 2, podio = f
               )
             }
 
-            // Modo classificação (padrão)
-            const isClassificado = i < classificados
-            const isWildcard = !isClassificado && i < classificados + 2
+            // Modo classificação (padrão) — sem realce de cor por posição
             return (
-              <tr
-                key={row.time.id}
-                className={`border-t border-slate-300 ${
-                  isClassificado
-                    ? 'bg-emerald-50'
-                    : isWildcard
-                    ? 'bg-amber-100'
-                    : ''
-                }`}
-              >
+              <tr key={row.time.id} className="border-t border-slate-300">
                 <td className="py-2 px-3">
-                  <span
-                    className={`inline-flex items-center justify-center w-5 h-5 rounded-full text-xs font-bold ${
-                      isClassificado
-                        ? 'bg-emerald-500 text-slate-900'
-                        : isWildcard
-                        ? 'bg-amber-500 text-slate-900'
-                        : 'text-slate-500'
-                    }`}
-                  >
+                  <span className="inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-slate-500">
                     {i + 1}
                   </span>
                 </td>
