@@ -3,9 +3,8 @@ import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabase'
 import { calcularClassificacao } from '@/lib/classificacao'
 import { getCodigoJogo } from '@/lib/codigos'
-import { getHorarioCategoria } from '@/lib/horarios'
 import { sortGamesRoundRobin } from '@/lib/scheduling'
-import { Categoria, Grupo, Jogo, Time } from '@/lib/types'
+import { Categoria, Evento, Grupo, Jogo, Time } from '@/lib/types'
 import CategoriaTabs from '@/components/CategoriaTabs'
 import TabelaClassificacao from '@/components/TabelaClassificacao'
 import CardJogo from '@/components/CardJogo'
@@ -14,6 +13,7 @@ import RegrasBox from '@/components/RegrasBox'
 import InfoEvento from '@/components/InfoEvento'
 
 interface Props {
+  evento: Evento
   categorias: Categoria[]
   grupos: Grupo[]
   times: Time[]
@@ -22,7 +22,7 @@ interface Props {
 
 type Aba = 'grupos' | 'chaveamento'
 
-export default function PublicoClient({ categorias, grupos, times, jogosIniciais }: Props) {
+export default function PublicoClient({ evento, categorias, grupos, times, jogosIniciais }: Props) {
   // categoriaAtiva: 0 = aba "Informações" (tela inicial), >0 = id da categoria
   const [categoriaAtiva, setCategoriaAtiva] = useState(0)
   const [jogos, setJogos] = useState<Jogo[]>(jogosIniciais)
@@ -67,16 +67,16 @@ export default function PublicoClient({ categorias, grupos, times, jogosIniciais
   return (
     <div className="min-h-screen bg-slate-50">
       <header className="bg-white border-b border-slate-300 px-4 py-4">
-        <h1 className="text-xl font-bold text-amber-600 mb-3">🏆 Copa Imperial</h1>
+        <h1 className="text-xl font-bold text-amber-600 mb-3">🏆 {evento.nome_curto}</h1>
         <CategoriaTabs
           categorias={categorias}
           ativa={categoriaAtiva}
           onChange={(id) => { setCategoriaAtiva(id); setAbaAtiva('grupos') }}
           showInfo
         />
-        {!mostrandoInfo && categoriaAtivaObj && getHorarioCategoria(categoriaAtivaObj.nome) && (
+        {!mostrandoInfo && categoriaAtivaObj?.horario && (
           <p className="text-xs text-amber-700/80 mt-2 font-medium">
-            🕗 {getHorarioCategoria(categoriaAtivaObj.nome)}
+            🕗 {categoriaAtivaObj.horario}
           </p>
         )}
 
@@ -98,7 +98,7 @@ export default function PublicoClient({ categorias, grupos, times, jogosIniciais
       </header>
 
       <main className={`px-4 py-6 mx-auto space-y-8 ${abaAtiva === 'chaveamento' ? 'max-w-6xl' : 'max-w-2xl'}`}>
-        {mostrandoInfo && <InfoEvento />}
+        {mostrandoInfo && <InfoEvento evento={evento} />}
 
         {!mostrandoInfo && abaAtiva === 'grupos' && categoriaAtivaObj && (
           <RegrasBox categoria={categoriaAtivaObj} numGrupos={gruposDaCategoria.length} />

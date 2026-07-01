@@ -1,11 +1,10 @@
 import { redirect } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
 import { getCodigoJogo } from '@/lib/codigos'
-import { getHorarioCategoria } from '@/lib/horarios'
 import { sortGamesRoundRobin } from '@/lib/scheduling'
 import { getRegras } from '@/lib/regras'
 import { calcularClassificacao } from '@/lib/classificacao'
-import { Categoria, Grupo, Jogo, Time } from '@/lib/types'
+import { Categoria, Evento, EVENTO_FALLBACK, Grupo, Jogo, Time } from '@/lib/types'
 import PrintButton from './PrintButton'
 
 interface Props {
@@ -18,8 +17,9 @@ export default async function ImprimirPage({ searchParams }: Props) {
   const { token } = await searchParams
   if (token !== process.env.ADMIN_TOKEN) redirect('/')
 
-  const [{ data: categorias }, { data: grupos }, { data: times }, { data: jogos }] =
+  const [{ data: evento }, { data: categorias }, { data: grupos }, { data: times }, { data: jogos }] =
     await Promise.all([
+      supabase.from('evento').select('*').limit(1).maybeSingle(),
       supabase.from('categorias').select('*').order('ordem'),
       supabase.from('grupos').select('*'),
       supabase.from('times').select('*'),
@@ -28,6 +28,7 @@ export default async function ImprimirPage({ searchParams }: Props) {
 
   return (
     <ImprimirView
+      evento={evento ?? EVENTO_FALLBACK}
       categorias={categorias ?? []}
       grupos={grupos ?? []}
       times={times ?? []}
@@ -37,13 +38,14 @@ export default async function ImprimirPage({ searchParams }: Props) {
 }
 
 interface ViewProps {
+  evento: Evento
   categorias: Categoria[]
   grupos: Grupo[]
   times: Time[]
   jogos: Jogo[]
 }
 
-function ImprimirView({ categorias, grupos, times, jogos }: ViewProps) {
+function ImprimirView({ evento, categorias, grupos, times, jogos }: ViewProps) {
   return (
     <div className="bg-white text-black min-h-screen">
       {/* Print styles */}
@@ -58,13 +60,13 @@ function ImprimirView({ categorias, grupos, times, jogos }: ViewProps) {
       `}</style>
 
       <div className="no-print bg-slate-100 border-b border-slate-300 p-4 flex items-center justify-between">
-        <h1 className="text-lg font-bold text-slate-900">📋 Versão Imprimível — Copa Imperial</h1>
+        <h1 className="text-lg font-bold text-slate-900">📋 Versão Imprimível — {evento.nome_curto}</h1>
         <PrintButton categorias={categorias} grupos={grupos} times={times} jogos={jogos} />
       </div>
 
       <div className="max-w-4xl mx-auto p-6 print:p-0">
         <header className="mb-8 text-center print:mb-6">
-          <h1 className="text-3xl font-black mb-1">🏆 COPA IMPERIAL</h1>
+          <h1 className="text-3xl font-black mb-1">🏆 {evento.nome_curto.toUpperCase()}</h1>
           <p className="text-sm text-slate-600">
             Tabela de Jogos · {new Date().toLocaleDateString('pt-BR')}
           </p>
@@ -86,9 +88,9 @@ function ImprimirView({ categorias, grupos, times, jogos }: ViewProps) {
               <h2 className="text-2xl font-black mb-1 pb-2 border-b-2 border-black uppercase">
                 {cat.nome}
               </h2>
-              {getHorarioCategoria(cat.nome) && (
+              {cat.horario && (
                 <p className="text-sm text-slate-700 mb-3 italic">
-                  🕗 {getHorarioCategoria(cat.nome)}
+                  🕗 {cat.horario}
                 </p>
               )}
 

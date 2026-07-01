@@ -1,7 +1,6 @@
 'use client'
 import { Categoria, Grupo, Jogo, Time } from '@/lib/types'
 import { getCodigoJogo } from '@/lib/codigos'
-import { getHorarioCategoria } from '@/lib/horarios'
 
 interface Props {
   categorias?: Categoria[]
@@ -46,7 +45,7 @@ function gerarCSV(
 
     const placeholder = j.time_a_id === j.time_b_id && j.rodada !== 'grupos'
 
-    const horario = cat ? getHorarioCategoria(cat.nome) ?? '' : ''
+    const horario = cat?.horario ?? ''
     const linha = [
       cat?.nome ?? '',
       horario,

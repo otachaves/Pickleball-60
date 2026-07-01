@@ -4,7 +4,6 @@ import { supabase } from '@/lib/supabase'
 import { Categoria, ClassificacaoRow, Grupo, Jogo, Time } from '@/lib/types'
 import { calcularClassificacao } from '@/lib/classificacao'
 import { getCodigoJogo } from '@/lib/codigos'
-import { getHorarioCategoria } from '@/lib/horarios'
 import { sortGamesRoundRobin } from '@/lib/scheduling'
 import {
   getBracketConfig,
@@ -643,9 +642,9 @@ export default function AdminClient({
             setAbaAtiva('jogos')
           }}
         />
-        {categoriaAtivaObj && getHorarioCategoria(categoriaAtivaObj.nome) && (
+        {categoriaAtivaObj?.horario && (
           <p className="text-xs text-amber-700/80 mt-2 font-medium">
-            🕗 {getHorarioCategoria(categoriaAtivaObj.nome)}
+            🕗 {categoriaAtivaObj.horario}
           </p>
         )}
         <div className="flex gap-1 mt-3">

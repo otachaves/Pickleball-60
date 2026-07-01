@@ -1,11 +1,13 @@
 import { supabase } from '@/lib/supabase'
+import { EVENTO_FALLBACK } from '@/lib/types'
 import PublicoClient from './PublicoClient'
 
 export const dynamic = 'force-dynamic'
 
 export default async function Home() {
-  const [{ data: categorias }, { data: grupos }, { data: times }, { data: jogos }] =
+  const [{ data: evento }, { data: categorias }, { data: grupos }, { data: times }, { data: jogos }] =
     await Promise.all([
+      supabase.from('evento').select('*').limit(1).maybeSingle(),
       supabase.from('categorias').select('*').order('ordem'),
       supabase.from('grupos').select('*'),
       supabase.from('times').select('*'),
@@ -18,6 +20,7 @@ export default async function Home() {
 
   return (
     <PublicoClient
+      evento={evento ?? EVENTO_FALLBACK}
       categorias={categorias ?? []}
       grupos={grupos ?? []}
       times={times ?? []}
