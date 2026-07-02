@@ -8,11 +8,11 @@
 --     Nada de código precisa ser alterado.
 --
 --  Esta versão já vem preenchida com o torneio DUPLA MISTA:
---    1. Open (9) → 3 grupos de 3 → Semifinal (1º de cada + melhor 2º = 4)
---    2. 40+  (8) → 2 grupos de 4 → Semifinal (top 2 de cada = 4)
---    3. 50+  (6) → 2 grupos de 3 → Semifinal (top 2 de cada = 4)
---    4. 60+  (9) → 3 grupos de 3 → Semifinal (1º de cada + melhor 2º = 4)
---  Jogo: game único até 15 pontos.
+--    1. Open (9) → 2 grupos (5 + 4) → Semifinal (top 2 de cada = 4)
+--    2. 40+  (8) → 2 grupos de 4    → Semifinal (top 2 de cada = 4)
+--    3. 50+  (6) → 1 grupo único    → SEM mata-mata (1º = mais pontos)
+--    4. 60+  (9) → 2 grupos (5 + 4) → Semifinal (top 2 de cada = 4)
+--  Jogo: game único até 15 pontos (vantagem de 2).
 --  (A distribuição dos grupos é uma SUGESTÃO — ajuste se o sorteio mudar.)
 -- ═══════════════════════════════════════════════════════════════
 
@@ -38,62 +38,66 @@ where id = 1;
 
 -- ─── 2. Categorias (formato + horário) ─────────────────────────
 insert into categorias (id, nome, ordem, formato, horario) values
-  (1, 'Dupla Mista — Open', 1, 'semifinal', null),
-  (2, 'Dupla Mista — 40+',  2, 'semifinal', null),
-  (3, 'Dupla Mista — 50+',  3, 'semifinal', null),
-  (4, 'Dupla Mista — 60+',  4, 'semifinal', null);
+  (1, 'Dupla Mista — Open', 1, 'semifinal',     null),
+  (2, 'Dupla Mista — 40+',  2, 'semifinal',     null),
+  (3, 'Dupla Mista — 50+',  3, 'grupos_apenas', null),
+  (4, 'Dupla Mista — 60+',  4, 'semifinal',     null);
 
--- ─── OPEN (cat 1) — 3 grupos de 3 ──────────────────────────────
+-- ─── OPEN (cat 1) — 2 grupos: A com 5, B com 4 ─────────────────
 insert into grupos (id, nome, categoria_id) values
-  (1, 'Grupo A', 1), (2, 'Grupo B', 1), (3, 'Grupo C', 1);
+  (1, 'Grupo A', 1), (2, 'Grupo B', 1);
 insert into times (nome, grupo_id) values
+  -- Grupo A (5)
   ('Otávio Chaves / Nathália Martins', 1),
+  ('Antônio Nóbrega / Larissa Damasceno Andrade', 1),
+  ('Bruno Barbosa Ramos / Claudia Junger', 1),
   ('Helios Pavese / Juliana Antunes', 1),
-  ('Maxwell Sousa / Mirian Tanus', 1),
-  ('Antônio Nóbrega / Larissa Damasceno Andrade', 2),
-  ('Javier Lago Alonso / Mariele Cristina Stamm', 2),
+  ('Javier Lago Alonso / Mariele Cristina Stamm', 1),
+  -- Grupo B (4)
+  ('Mauro Grillo / Roberta Barbosa', 2),
+  ('Maxwell Sousa / Mirian Tanus', 2),
   ('Pedro Jahara / Paula Jahara', 2),
-  ('Bruno Barbosa Ramos / Claudia Junger', 3),
-  ('Mauro Grillo / Roberta Barbosa', 3),
-  ('Rogerio Arongaus / Alexandra Nazario', 3);
+  ('Rogerio Arongaus / Alexandra Nazario', 2);
 
 -- ─── 40+ (cat 2) — 2 grupos de 4 ───────────────────────────────
 insert into grupos (id, nome, categoria_id) values
-  (4, 'Grupo A', 2), (5, 'Grupo B', 2);
+  (3, 'Grupo A', 2), (4, 'Grupo B', 2);
 insert into times (nome, grupo_id) values
-  ('Maria Clara / Padre Carlos', 4),
-  ('Humberto Medrado / Vanessa Quintanilha', 4),
-  ('Marcio Dos Santos Silva / Priscila Novaes dos Santos', 4),
-  ('Otavio Chaves / Cláudia Junger', 4),
-  ('Amaury Jr / Liliana Nogueira', 5),
-  ('Jonas Augusto de Souza Filho / Carla Lebre', 5),
-  ('Mauro Grillo / Ana Paula Neiva', 5),
-  ('Paulo Marcelo Montesanto / Mariele Cristina Stamm', 5);
+  ('Maria Clara / Padre Carlos', 3),
+  ('Humberto Medrado / Vanessa Quintanilha', 3),
+  ('Marcio Dos Santos Silva / Priscila Novaes dos Santos', 3),
+  ('Otavio Chaves / Cláudia Junger', 3),
+  ('Amaury Jr / Liliana Nogueira', 4),
+  ('Jonas Augusto de Souza Filho / Carla Lebre', 4),
+  ('Mauro Grillo / Ana Paula Neiva', 4),
+  ('Paulo Marcelo Montesanto / Mariele Cristina Stamm', 4);
 
--- ─── 50+ (cat 3) — 2 grupos de 3 ───────────────────────────────
+-- ─── 50+ (cat 3) — 1 grupo único (sem mata-mata) ───────────────
 insert into grupos (id, nome, categoria_id) values
-  (6, 'Grupo A', 3), (7, 'Grupo B', 3);
+  (5, 'Grupo Único', 3);
 insert into times (nome, grupo_id) values
-  ('Mauro Grillo / Maria Clara', 6),
+  ('Mauro Grillo / Maria Clara', 5),
+  ('Bruno Barros / Luciene Caruso', 5),
+  ('Fábio Calderano / Claudia Canavarro', 5),
+  ('Humberto Medrado / Monica Pope', 5),
+  ('Ricardo Monteiro / Patrícia Guyer', 5),
+  ('Rogerio Arongaus / Alexandra Nazario', 5);
+
+-- ─── 60+ (cat 4) — 2 grupos: A com 5, B com 4 ──────────────────
+insert into grupos (id, nome, categoria_id) values
+  (6, 'Grupo A', 4), (7, 'Grupo B', 4);
+insert into times (nome, grupo_id) values
+  -- Grupo A (5)
+  ('Amaury Jr / Miriam', 6),
   ('Fábio Calderano / Claudia Canavarro', 6),
-  ('Ricardo Monteiro / Patrícia Guyer', 6),
-  ('Bruno Barros / Luciene Caruso', 7),
-  ('Humberto Medrado / Monica Pope', 7),
-  ('Rogerio Arongaus / Alexandra Nazario', 7);
-
--- ─── 60+ (cat 4) — 3 grupos de 3 ───────────────────────────────
-insert into grupos (id, nome, categoria_id) values
-  (8, 'Grupo A', 4), (9, 'Grupo B', 4), (10, 'Grupo C', 4);
-insert into times (nome, grupo_id) values
-  ('Amaury Jr / Miriam', 8),
-  ('Julio Monteiro / Anna Tanaka', 8),
-  ('Mauro Grillo / Mônica', 8),
-  ('Fábio Calderano / Claudia Canavarro', 9),
-  ('Marcelo Barbieri Bastos / Lilian Maria Pessoa Barbieri Bastos', 9),
-  ('Paulo Marcelo Montesanto / Carla Lebre', 9),
-  ('Javier Lago Alonso / Eliane Lago Alonso', 10),
-  ('Mário Moreira / Walkiria', 10),
-  ('Ricardo Monteiro / Ana Paula Neiva', 10);
+  ('Javier Lago Alonso / Eliane Lago Alonso', 6),
+  ('Julio Monteiro / Anna Tanaka', 6),
+  ('Marcelo Barbieri Bastos / Lilian Maria Pessoa Barbieri Bastos', 6),
+  -- Grupo B (4)
+  ('Mário Moreira / Walkiria', 7),
+  ('Mauro Grillo / Mônica', 7),
+  ('Paulo Marcelo Montesanto / Carla Lebre', 7),
+  ('Ricardo Monteiro / Ana Paula Neiva', 7);
 
 -- ─── 3. Gerar jogos (round robin por grupo) ────────────────────
 insert into jogos (categoria_id, grupo_id, time_a_id, time_b_id)
