@@ -24,7 +24,13 @@ update evento set
   titulo                 = '🏆 Copa Imperial — Dupla Mista',
   subtitulo              = 'Torneio de Pickleball',
   formato_jogo           = 'Game único até 15 pontos, com vantagem de 2 (em caso de 14 a 14, segue até abrir 2 de diferença)',
-  programacao            = '[]'::jsonb,   -- preencha: [{"quando":"...","o_que":"...","detalhe":"..."}]
+  programacao            = '[
+    {"quando":"Sáb 8h",   "o_que":"Quadras abertas",                    "detalhe":""},
+    {"quando":"Sáb 9h",   "o_que":"Início do torneio — Categoria 60+",  "detalhe":""},
+    {"quando":"Sáb 11h30","o_que":"Categoria 50+",                      "detalhe":"horário aproximado"},
+    {"quando":"Sáb 14h",  "o_que":"Categoria 40+",                      "detalhe":""},
+    {"quando":"Dom 9h",   "o_que":"Categoria Open",                     "detalhe":""}
+  ]'::jsonb,
   local_nome             = 'Quadra Paróquia Santa Clara',
   local_endereco         = 'Tv. João Kneipp, 80 — Valparaíso',
   local_cidade           = 'Petrópolis, RJ — 25655-480',
@@ -37,10 +43,10 @@ where id = 1;
 
 -- ─── 2. Categorias (formato + horário) ─────────────────────────
 insert into categorias (id, nome, ordem, formato, horario) values
-  (1, 'Dupla Mista — Open', 1, 'semifinal',     null),
-  (2, 'Dupla Mista — 40+',  2, 'semifinal',     null),
-  (3, 'Dupla Mista — 50+',  3, 'grupos_apenas', null),
-  (4, 'Dupla Mista — 60+',  4, 'semifinal',     null);
+  (1, 'Dupla Mista — Open', 1, 'semifinal',     'Domingo · 9h'),
+  (2, 'Dupla Mista — 40+',  2, 'semifinal',     'Sábado · 14h'),
+  (3, 'Dupla Mista — 50+',  3, 'grupos_apenas', 'Sábado · ~11h30'),
+  (4, 'Dupla Mista — 60+',  4, 'semifinal',     'Sábado · 9h');
 
 -- ─── OPEN (cat 1) — sorteio: A com 5, B com 4 ──────────────────
 insert into grupos (id, nome, categoria_id) values
