@@ -624,7 +624,6 @@ footer::before{content:"";position:absolute;inset:3px 0 auto;height:1px;backgrou
     <div class="sec-head">
       <div class="sec-eyebrow">Inscreva-se</div>
       <h2 class="sec-title">Garanta sua <em>vaga</em></h2>
-      <p class="sec-sub">Doze vagas por categoria. Inscreva-se em mais de uma e jogue o fim de semana inteiro.</p>
     </div>
     <div class="signup">
       <div id="app">Carregando inscrições...</div>
@@ -880,7 +879,7 @@ function renderStep1(){
     return '<div class="cat-row '+(isSel?'selected':'')+'" data-catid="'+c.id+'">'
       +'<div class="check"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>'
       +'<div style="min-width:0;flex:1"><div class="cat-name">'+c.label+'</div>'
-      +'<div class="cat-meta"><span class="vagas">'+c.vagas+'</span>'+ultimasHtml+'<span>·</span><span>'+c.priceLabel+'</span>'+noteHtml+'</div></div>'
+      +'<div class="cat-meta"><span class="vagas">'+c.vagas+'</span>'+ultimasHtml+noteHtml+'</div></div>'
       +'<div class="price"><div class="lote1">'+fmt(precoFor(c.id))+'</div>'+lote2Hint+'</div></div>';
   }).join('');
 
