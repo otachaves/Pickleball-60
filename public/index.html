@@ -148,6 +148,13 @@ body::before{
 .fmt-points li{display:flex;gap:11px;align-items:flex-start;font-size:17px;color:var(--text);line-height:1.45;border-top:1px solid var(--line-strong);padding-top:14px}
 .fmt-points li svg{flex:0 0 auto;margin-top:3px;color:var(--accent)}
 
+/* ============ recap (video + texto) ============ */
+.recap-block{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:52px;align-items:center;margin-bottom:44px}
+.recap-video{position:relative;aspect-ratio:9/16;width:100%;max-width:340px;border:1px solid var(--line-strong);background:#000;overflow:hidden}
+.recap-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.recap-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;text-transform:uppercase;font-size:clamp(28px,3.6vw,42px);line-height:.98;color:var(--text);margin:12px 0 0;letter-spacing:-.005em}
+.recap-title em{font-style:normal;color:var(--accent)}
+
 /* ============ carousel ============ */
 .carousel{position:relative}
 .carousel-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px 2px 16px;scrollbar-width:none;-ms-overflow-style:none}
@@ -328,6 +335,8 @@ footer{margin-top:40px;border-top:1px solid var(--line);background:var(--bg-2);p
   .section{padding:56px 0}
   .signup{padding:20px 16px}
   .frame{flex-basis:100%}
+  .recap-block{grid-template-columns:1fr;gap:22px}
+  .recap-video{max-width:300px;margin:0 auto}
   .car-btn{display:none}
   .stepper{display:none}
   .map-stub{display:none}
@@ -542,6 +551,17 @@ footer::before{content:"";position:absolute;inset:3px 0 auto;height:1px;backgrou
     <div class="sec-head">
       <div class="sec-eyebrow">VOCÊ NA COPA IMPERIAL</div>
       <h2 class="sec-title">Viva Isso</h2>
+    </div>
+
+    <div class="recap-block">
+      <div class="recap-video">
+        <iframe src="https://www.youtube.com/embed/xT73j9jpu08" title="Vídeo Recap — Copa Imperial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="recap-text">
+        <div class="sec-eyebrow">Recap · Edições anteriores</div>
+        <h3 class="recap-title">Quem jogou <em>conta como foi</em></h3>
+        <p class="sec-sub">Copa Imperial não é só sobre quem vence. É sobre a energia, a alegria e o respeito dentro e fora da quadra. Aqui, todo mundo sai ganhando. 🏆</p>
+      </div>
     </div>
 
     <div class="carousel">
