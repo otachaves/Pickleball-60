@@ -842,7 +842,7 @@ var CATS=[
 ];
 
 // Lote 1 (promocional) vale ate a data abaixo; depois vira Lote 2 (normal) automaticamente.
-var LOTE1_END = new Date('2026-08-14T12:00:00-03:00').getTime();
+var LOTE1_END = new Date('2026-08-17T23:59:59-03:00').getTime();
 var LOTE_ATUAL = Date.now() < LOTE1_END ? 1 : 2;
 
 function precoFor(catId){
@@ -875,7 +875,7 @@ function renderStep1(){
   var loteBannerHtml = LOTE_ATUAL===1
     ? '<div class="lote-banner">'
       +'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>'
-      +'<div><div class="label">Lote 1</div><div class="desc">Preço promocional <b>20% OFF</b> até <b>14/08 às 12:00</b>.</div></div>'
+      +'<div><div class="label">Lote 1</div><div class="desc">Preço promocional <b>20% OFF</b> até <b>17/08 às 23:59</b>.</div></div>'
       +'<div class="timer">'
       +'<div class="unit">'+pad(d)+'<small>DIAS</small></div>'
       +'<div class="unit">'+pad(h)+'<small>HORAS</small></div>'
