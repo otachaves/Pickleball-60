@@ -26,13 +26,13 @@ update evento set
   subtitulo              = 'Torneio de Pickleball',
   formato_jogo           = 'Side-out score (só quem saca pontua) — partida única até 11 pontos, com vantagem de 2 (em caso de 10 a 10, segue até abrir 2 de diferença)',
   programacao            = '[
-    {"quando":"Sáb 8h",    "o_que":"Abertura oficial do torneio",     "detalhe":""},
-    {"quando":"Sáb 8h30",  "o_que":"Single Open",                     "detalhe":""},
-    {"quando":"Sáb 12h30", "o_que":"Dupla Mista 50+",                 "detalhe":"não antes desse horário"},
-    {"quando":"Sáb 15h",   "o_que":"Dupla Masculina 50+",             "detalhe":"não antes desse horário"},
-    {"quando":"Dom 9h",    "o_que":"Abertura oficial",                "detalhe":""},
-    {"quando":"Dom 9h30",  "o_que":"Dupla Mista Open",                "detalhe":""},
-    {"quando":"Dom 14h",   "o_que":"Dupla Masculina Open",            "detalhe":"não antes desse horário"}
+    {"quando":"Sáb 05/09 · 8h",    "o_que":"Abertura oficial do torneio",     "detalhe":""},
+    {"quando":"Sáb 05/09 · 8h30",  "o_que":"Single Open",                     "detalhe":""},
+    {"quando":"Sáb 05/09 · 12h30", "o_que":"Dupla Mista 50+",                 "detalhe":"não antes desse horário"},
+    {"quando":"Sáb 05/09 · 15h",   "o_que":"Dupla Masculina 50+",             "detalhe":"não antes desse horário"},
+    {"quando":"Dom 06/09 · 9h",    "o_que":"Abertura oficial",                "detalhe":""},
+    {"quando":"Dom 06/09 · 9h30",  "o_que":"Dupla Mista Open",                "detalhe":""},
+    {"quando":"Dom 06/09 · 14h",   "o_que":"Dupla Masculina Open",            "detalhe":"não antes desse horário"}
   ]'::jsonb,
   local_nome             = 'Arena Paróquia Santa Clara',
   local_endereco         = 'R. Cel. Veiga, 1130 — Cohab',
@@ -46,11 +46,11 @@ where id = 1;
 
 -- ─── 2. Categorias (formato + horário) ─────────────────────────
 insert into categorias (id, nome, ordem, formato, horario) values
-  (1, 'Single — Open',           1, 'semifinal',     'Sábado · 8h30'),
-  (2, 'Dupla Mista — 50+',       2, 'grupos_apenas', 'Sábado · ~12h30'),
-  (3, 'Dupla Masculina — 50+',   3, 'grupos_apenas', 'Sábado · ~15h'),
-  (4, 'Dupla Mista — Open',      4, 'semifinal',     'Domingo · 9h30'),
-  (5, 'Dupla Masculina — Open',  5, 'semifinal',     'Domingo · ~14h');
+  (1, 'Single — Open',           1, 'semifinal',     'Sábado 05/09 · 8h30'),
+  (2, 'Dupla Mista — 50+',       2, 'grupos_apenas', 'Sábado 05/09 · ~12h30'),
+  (3, 'Dupla Masculina — 50+',   3, 'grupos_apenas', 'Sábado 05/09 · ~15h'),
+  (4, 'Dupla Mista — Open',      4, 'semifinal',     'Domingo 06/09 · 9h30'),
+  (5, 'Dupla Masculina — Open',  5, 'semifinal',     'Domingo 06/09 · ~14h');
 
 -- ─── SINGLE OPEN (cat 1) — 2 grupos de 5 ───────────────────────
 insert into grupos (id, nome, categoria_id) values
