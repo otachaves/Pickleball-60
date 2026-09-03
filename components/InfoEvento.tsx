@@ -1,4 +1,4 @@
-import { Evento } from '@/lib/types'
+import { Evento, ProgramacaoItem } from '@/lib/types'
 
 interface Props {
   evento: Evento
@@ -28,15 +28,26 @@ export default function InfoEvento({ evento }: Props) {
           <h2 className="text-sm font-bold text-amber-600 uppercase tracking-widest mb-4">
             📅 Programação
           </h2>
-          <div className="space-y-3 text-sm text-slate-700">
-            {evento.programacao.map((item, i) => (
-              <div key={i} className="flex items-start gap-3">
-                <span className="text-slate-500 font-mono text-xs uppercase mt-0.5 w-20 flex-shrink-0">
-                  {item.quando}
-                </span>
-                <div>
-                  <p className="font-semibold text-slate-900">{item.o_que}</p>
-                  {item.detalhe && <p className="text-slate-600">{item.detalhe}</p>}
+          <div className="space-y-5 text-sm text-slate-700">
+            {agruparPorDia(evento.programacao).map((dia, i) => (
+              <div key={i}>
+                {dia.titulo && (
+                  <p className="text-xs font-bold text-slate-500 uppercase tracking-wider border-b border-slate-200 pb-1 mb-2">
+                    {dia.titulo}
+                  </p>
+                )}
+                <div className="space-y-2">
+                  {dia.itens.map((item, j) => (
+                    <div key={j} className="flex items-start gap-3">
+                      <span className="text-slate-500 font-mono text-xs uppercase mt-0.5 w-14 flex-shrink-0 whitespace-nowrap tabular-nums">
+                        {item.hora}
+                      </span>
+                      <div>
+                        <p className="font-semibold text-slate-900">{item.o_que}</p>
+                        {item.detalhe && <p className="text-slate-600">{item.detalhe}</p>}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             ))}
@@ -96,4 +107,26 @@ export default function InfoEvento({ evento }: Props) {
       </p>
     </div>
   )
+}
+
+// "Sáb 05/09 · 8h30" → dia "Sáb 05/09" + hora "8h30". Sem "·", tudo vira hora.
+interface DiaProgramacao {
+  titulo: string | null
+  itens: { hora: string; o_que: string; detalhe: string }[]
+}
+
+function agruparPorDia(itens: ProgramacaoItem[]): DiaProgramacao[] {
+  const dias: DiaProgramacao[] = []
+  for (const item of itens) {
+    const partes = item.quando.split('·').map((p) => p.trim())
+    const titulo = partes.length > 1 ? partes[0] : null
+    const hora = partes.length > 1 ? partes.slice(1).join(' · ') : item.quando
+    const ultimo = dias[dias.length - 1]
+    if (ultimo && ultimo.titulo === titulo) {
+      ultimo.itens.push({ hora, o_que: item.o_que, detalhe: item.detalhe })
+    } else {
+      dias.push({ titulo, itens: [{ hora, o_que: item.o_que, detalhe: item.detalhe }] })
+    }
+  }
+  return dias
 }
