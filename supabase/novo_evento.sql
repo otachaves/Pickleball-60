@@ -13,7 +13,7 @@
 --    3. Dupla Masculina 50+     (3) → 1 grupo único, DOIS TURNOS → SEM mata-mata
 --    4. Dupla Mista Open        (9) → 2 grupos (5 + 4) → Semifinal (top 2 de cada)
 --    5. Dupla Masculina Open    (9) → 2 grupos (5 + 4) → Semifinal (top 2 de cada)
---  Jogo: rally score, partida até 11 pontos, com vantagem de 2.
+--  Jogo: side-out score, partida até 11 pontos, com vantagem de 2.
 -- ═══════════════════════════════════════════════════════════════
 
 -- ─── 0. Limpar torneio anterior ────────────────────────────────
@@ -24,7 +24,7 @@ update evento set
   nome_curto             = 'Copa Imperial',
   titulo                 = '🏆 Copa Imperial 002',
   subtitulo              = 'Torneio de Pickleball',
-  formato_jogo           = 'Rally score — partida única até 11 pontos, com vantagem de 2 (em caso de 10 a 10, segue até abrir 2 de diferença)',
+  formato_jogo           = 'Side-out score (só quem saca pontua) — partida única até 11 pontos, com vantagem de 2 (em caso de 10 a 10, segue até abrir 2 de diferença)',
   programacao            = '[
     {"quando":"Sáb 8h",    "o_que":"Abertura oficial do torneio",     "detalhe":""},
     {"quando":"Sáb 8h30",  "o_que":"Single Open",                     "detalhe":""},
